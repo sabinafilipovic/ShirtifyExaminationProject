@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using ExaminationProject.View;
+using ExaminationProject.ViewModel;
+using Microsoft.Extensions.Logging;
 
 namespace ExaminationProject
 {
@@ -18,6 +20,12 @@ namespace ExaminationProject
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+
+            builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddSingleton<MainViewModel>();
+
+            builder.Services.AddTransient<Page1>();
+            builder.Services.AddTransient<Page1ViewModel>();
 
             return builder.Build();
         }

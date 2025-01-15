@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExaminationProject.View.Page1"
+             Title="🧺 Tvättråd">
+
+    <ScrollView>
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1000" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="100" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Image Margin="17" Source="maskintvatt_30_grader.png" />
+            <Label Grid.Column="1"
+               Text="Lufttorka"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+
+            <Image Margin="17" Grid.Row="1" Source="maskintvatt_1.png" />
+            <Label Grid.Row="1"
+                Grid.Column="1"
+               Text="2:a tvättregeln"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+
+            <Image Grid.Row="2" Source="torktumlas.png"/>
+            <Label Grid.Row="2"
+            Grid.Column="1"
+            Text="Tredje Tvättregeln"
+            HorizontalOptions="Center"
+            VerticalOptions="Center" />
+
+            <Image Grid.Row="3" Source="kemtvatt.png"/>
+            <Label Grid.Row="3"
+            Grid.Column="1"
+            Text="Fjärde Tvättregeln"
+            HorizontalOptions="Center"
+            VerticalOptions="Center" />
+
+            <Image Margin="17" Grid.Row="4" Source="strykjarn_tvattsymbol.png"/>
+            <Label Grid.Row="4"
+            Grid.Column="2"
+            Text="Femte Tvättregeln"
+            HorizontalOptions="Center"
+            VerticalOptions="Center" />
+
+            <Image Grid.Row="5" Source="lufttorka.png"/>
+            <Label Grid.Row="5"
+            Grid.Column="1"
+            Text="Sjätte Tvättregeln"
+            HorizontalOptions="Center"
+            VerticalOptions="Center" />
+
+            <Image Grid.Row="6" Source="tvattsymbol_alla_blekmedel.png"/>
+            <Label Grid.Row="6"
+            Grid.Column="1"
+            Text="7:e Tvättregeln"
+            HorizontalOptions="Center"
+            VerticalOptions="Center" />
+            
+            <Button Grid.Row="7"
+            Grid.ColumnSpan="2"
+            Margin="10"
+            Text="Tillbaka"
+            Command="{Binding GoToHomeCommand}" />
+
+        </Grid>
+    </ScrollView>
+    
+
+</ContentPage>

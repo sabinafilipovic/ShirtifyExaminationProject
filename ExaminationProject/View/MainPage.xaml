@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:ExaminationProject.ViewModel"
+             x:DataType="viewmodel:MainViewModel"
+             x:Class="ExaminationProject.MainPage"
+             >
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+
+            <Button Text="Tvättråd"
+                    Command="{Binding GoToPage1Command}" />
+
+            <Entry
+                Placeholder="Hur mår du?"
+                Text="{Binding Text}" >
+            </Entry>
+
+            <Button
+                Command="{Binding ClickButtonCommand}" 
+                Text="OK" >
+            </Button>
+
+            <CollectionView ItemsSource="{Binding Items}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type x:String}">
+                        <Label Text="{Binding .}" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
