@@ -4,25 +4,31 @@
              xmlns:viewmodel="clr-namespace:ExaminationProject.ViewModel"
              x:DataType="viewmodel:MainViewModel"
              x:Class="ExaminationProject.MainPage"
+             Title="Shirtify - Homepage"
              >
 
     <ScrollView>
         <VerticalStackLayout
-            Padding="30,0"
+            Padding="30, 0"
             Spacing="25">
 
-            <Button Text="Tvättråd"
-                    Command="{Binding GoToPage1Command}" />
+            <Button Text="🧺 - Tvättråd och skötsel"
+                    Command="{Binding GoToPage1Command}"
+                    Background="#b4d2de"
+                    FontFamily="Chewy"
+                    FontSize="20"/>
 
             <Entry
                 Placeholder="Hur mår du?"
-                Text="{Binding Text}" >
+                Text="{Binding Text}"
+                FontSize="20">
             </Entry>
 
             <Button
                 Command="{Binding ClickButtonCommand}" 
-                Text="OK" >
-            </Button>
+                Text="Lägg till.."
+                Background="#91b597"
+                FontSize="18" FontFamily="Chewy"/>
 
             <CollectionView ItemsSource="{Binding Items}">
                 <CollectionView.ItemTemplate>

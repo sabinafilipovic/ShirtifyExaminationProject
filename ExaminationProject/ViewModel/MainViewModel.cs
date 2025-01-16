@@ -38,6 +38,5 @@ namespace ExaminationProject.ViewModel
             AppShell.Current.GoToAsync("Page1");
         }
        
-
     }
 }
