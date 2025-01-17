@@ -7,91 +7,160 @@
     <ScrollView>
         <StackLayout Padding="0" Spacing="10">
 
-            <Grid Padding="10" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, 1*">
-
-                <StackLayout  Grid.ColumnSpan="2" VerticalOptions="Center"  Padding="10,0,0,0">
-
-
-                    <Label Text="Register Shirt" 
-                       HorizontalOptions="Center" 
+            <Grid 
+                Padding="0" 
+                RowDefinitions="Auto, Auto"
+                ColumnDefinitions="Auto, 1*"
+                  
+                  >
+                
+                <Label 
+                       Grid.Row="0"
+                       Grid.ColumnSpan="2"
+                       HorizontalOptions="Fill"
+                    
+                       Text="Register Shirt" 
+                    
+                       HorizontalTextAlignment="Center"
+                    
                        FontSize="23"
                        BackgroundColor="#dbf5ff" 
                        FontFamily="Chewy"
-                       Padding="10"/>
+                    
+                       Padding="10"/>       
+
+
+                <Grid 
+                   Grid.Row="1" 
+                   Padding="15" 
+                   RowDefinitions="Auto, Auto"
+                   ColumnDefinitions="auto, Auto">
+
+
+                    
 
                     <ImageButton 
-                     
-                        Margin="20"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        
+                        HorizontalOptions="Start"
+                        
+                        Margin="5"
                         BorderWidth="2" 
                         BorderColor="Black" 
                         HeightRequest="200" 
-                        WidthRequest="200" 
-                        Source="lufttorka.png"/>
+                        WidthRequest="200"
+                        
+                        Source="dotnet_bot.png"
+                        
+                        Background="Aquamarine"
+                        />
+                    
+                    <VerticalStackLayout 
+                        
 
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        VerticalOptions="End"
+                        Margin="1"
+                        >
+                        <Button
+                                Text="📷"
+                                FontSize="30"
+                                Padding="1"
+                                Margin="5"
+                                BackgroundColor="Transparent"
+                                />
+                        <Button
 
+                                Text="📂"
+                                FontSize="30"
+                                Padding="1"
+                                Margin="5"
+                                BackgroundColor="Transparent"
+                               />
 
-                </StackLayout>
+                    </VerticalStackLayout>
+                    
+
+                    </Grid>
 
 
             </Grid>
 
-            <Grid Padding="10" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, 1*">
+            <Grid 
+                Padding="10" 
+                RowDefinitions="Auto, Auto,auto" 
+                ColumnDefinitions="Auto, 1*"
+                Background="Gray"
+                >
 
                 <Label 
-                       Text="Färg:" 
-                       HorizontalOptions="Center" 
-                       FontSize="23"
-                       BackgroundColor="#dbf5ff" 
-                       FontFamily="Chewy"
-                       Padding="10"/>
-
-                <Label Grid.Column="1"
-                       Text="23" 
+                       Text="Färg:"
+                    
                        HorizontalOptions="Start" 
-                       FontSize="23"
-                       BackgroundColor="#dbf5ff" 
+                       FontSize="23"                        
                        FontFamily="Chewy"
                        Padding="10"/>
-            </Grid>
-
-            <Grid Padding="10" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, 1*">
 
                 <Label 
+                       Grid.Column="1"
+                    
+                       Text="Grön" 
+                    
+                       HorizontalOptions="Start" 
+                       FontSize="23" 
+                       FontFamily="Chewy"
+                       Padding="10"/>
+
+                <Label 
+                       Grid.Row="1"
+                    
                        Text="Kategori:" 
-                       HorizontalOptions="Center" 
-                       FontSize="23"
-                       BackgroundColor="#dbf5ff" 
-                       FontFamily="Chewy"
-                       Padding="10"/>
-
-                <Label     Grid.Column="1"
-                       Text="1" 
+                    
                        HorizontalOptions="Start" 
-                       FontSize="23"
-                       BackgroundColor="#dbf5ff" 
+                       FontSize="23"      
                        FontFamily="Chewy"
                        Padding="10"/>
-            </Grid>
-
-            <Grid Padding="10" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, 1*">
-
-                <Label 
-               Text="Senast använd:" 
-               HorizontalOptions="Center" 
-               FontSize="23"
-               BackgroundColor="#dbf5ff" 
-               FontFamily="Chewy"
-               Padding="10"/>
 
                 <Label     
-               Grid.Column="1"
-               Text="5151"
-               HorizontalOptions="Start" 
-               FontSize="23"
-               BackgroundColor="#dbf5ff" 
-               FontFamily="Chewy"
-               Padding="10"/>
+                       Grid.Row="1"
+                       Grid.Column="1"
+                    
+                       Text="Hoodie" 
+                    
+                       HorizontalOptions="Start" 
+                       FontSize="23"
+                       FontFamily="Chewy"
+                       Padding="10"/>
+                
+                <Label 
+                        Grid.Row="2"
+                        Grid.Column="0"
+                    
+                        Text="Senast använd:" 
+                    
+                        HorizontalOptions="Start" 
+                        FontSize="23"
+                        FontFamily="Chewy"
+                        Padding="10"/>
+                
+
+                <Label  
+                        Grid.Row="2"
+                        Grid.Column="1"
+                    
+                        Text="2/1 - 2025"
+                    
+                        HorizontalOptions="Start" 
+                        FontSize="23"
+                        FontFamily="Chewy"
+                        Padding="10"
+                    />
+
             </Grid>
+
+           
 
             <Grid Padding="0" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, 1*">
 
@@ -105,7 +174,8 @@
                         Text="Lägg till Tröja" 
                         Command="{Binding RegisterShirtCommand}" 
                         Margin="5" 
-                        BackgroundColor="#b4d2de" 
+                        BackgroundColor="#b4d2de"
+                        TextColor="Black"
                         FontSize="20" FontFamily="Chewy"/>
 
             </Grid>

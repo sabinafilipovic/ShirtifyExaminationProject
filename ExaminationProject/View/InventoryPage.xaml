@@ -59,13 +59,24 @@
 
                 </BoxView>
 
-                <Button WidthRequest="250" Text="Använd Tröja" Command="{Binding UseShirtCommand}" 
-         Margin="5" BackgroundColor="#b4d2de" 
-         FontSize="20" FontFamily="Chewy"/>
+                <Button WidthRequest="250" 
+                        Text="Använd Tröja" 
+                        Command="{Binding UseShirtCommand}" 
+                        Margin="5" 
+                        BackgroundColor="#b4d2de" 
+                        FontSize="20" 
+                        FontFamily="Chewy"/>
 
-                <Button Grid.Row="0" Grid.Column="1" Text="Garderob" Command="{Binding RegisterNewShirtCommand}" 
-         Margin="5" BackgroundColor="#b4d2de" 
-         FontSize="20" FontFamily="Chewy"/>
+                <Button 
+                    Grid.Row="0" 
+                    Grid.Column="1" 
+                    Text="Ny Tröja" 
+                    Command="{Binding RegisterNewShirtCommand}" 
+                    Margin="5" 
+                    BackgroundColor="Beige" 
+                    FontSize="20" 
+                    TextColor="Black"
+                    FontFamily="Chewy"/>
 
 
 
