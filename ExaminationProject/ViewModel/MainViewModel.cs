@@ -14,6 +14,9 @@ namespace ExaminationProject.ViewModel
         ObservableCollection<string> items = new ObservableCollection<string>();
 
         [ObservableProperty]
+        ImageSource savedImageSource;
+
+        [ObservableProperty]
         string text;
 
         [RelayCommand]
@@ -49,11 +52,13 @@ namespace ExaminationProject.ViewModel
                 {
                     string localFilePath = Path.Combine(FileSystem.AppDataDirectory, photo.FileName);
 
-                    using Stream sourceStream = await photo.OpenReadAsync();
-                    using FileStream localFileStream = File.OpenWrite(localFilePath);
                     System.Diagnostics.Debug.WriteLine($"✅ DITT FOTO HAR SPARATS SOM {photo.FileName} I {localFilePath}");
 
+                    using Stream sourceStream = await photo.OpenReadAsync();
+                    using FileStream localFileStream = File.OpenWrite(localFilePath);
                     await sourceStream.CopyToAsync(localFileStream);
+
+                    SavedImageSource = ImageSource.FromFile(localFilePath);
                     System.Diagnostics.Debug.WriteLine("✅ WE MADE IT");
                 }
             }

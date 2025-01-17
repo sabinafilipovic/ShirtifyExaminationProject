@@ -12,13 +12,16 @@
             Padding="30, 0"
             Spacing="25">
 
-            <Button Text="📸 - Ta Foto"
-                Command="{Binding TakePhotoCommand}"
-                Background="#b4d2de"
-                FontFamily="Chewy"
-                FontSize="20"
-                HorizontalOptions="Center"
-                VerticalOptions="CenterAndExpand"/>
+            <VerticalStackLayout>
+                <Button Text="📸 Ta Foto" Command="{Binding TakePhotoCommand}"
+                        Background="#b4d2de"
+                        FontFamily="Chewy"
+                        FontSize="20"
+                        HorizontalOptions="Center"
+                        VerticalOptions="CenterAndExpand"/>
+
+                <Image Source="{Binding SavedImageSource}"/>
+            </VerticalStackLayout>
 
 
             <Button Text="🧺 - Tvättråd och skötsel"
