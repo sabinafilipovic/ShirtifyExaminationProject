@@ -37,6 +37,14 @@ namespace ExaminationProject.ViewModel
         {
             AppShell.Current.GoToAsync("Page1");
         }
-       
+
+        [RelayCommand]
+        async void GoToDetailPage()
+        {
+            AppShell.Current.GoToAsync("DetailPage");
+        }
+
+
+
     }
 }

@@ -29,6 +29,17 @@ namespace ExaminationProject
             builder.Services.AddTransient<Page1>();
             builder.Services.AddTransient<Page1ViewModel>();
 
+            builder.Services.AddTransient<DetailPage>();
+            builder.Services.AddTransient<DetailViewModel>();
+
+            builder.Services.AddTransient<InventoryPage>();
+            builder.Services.AddTransient<InventoryViewModel>();
+
+            builder.Services.AddTransient<RegisterShirtPage>();
+            builder.Services.AddTransient<RegisterShirtViewModel>();
+
+
+
             return builder.Build();
         }
     }

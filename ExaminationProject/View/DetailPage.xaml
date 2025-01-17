@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExaminationProject.View.DetailPage"
+             Title="Detail Page">
+    <ScrollView>
+        <StackLayout Padding="0" Spacing="10">
+
+            <Grid Padding="10" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, 1*">
+
+                <StackLayout  Grid.ColumnSpan="2" VerticalOptions="Center"  Padding="10,0,0,0">
+
+
+                    <Label Text="Rekommenderad Tröja" 
+                           HorizontalOptions="Center" 
+                           FontSize="23"
+                           BackgroundColor="#dbf5ff" 
+                           FontFamily="Chewy"
+                           Padding="10"/>
+
+                    <ImageButton 
+                        Command="{Binding GoToInventoryCommand}" 
+                        Margin="20"
+                        BorderWidth="2" 
+                        BorderColor="Black" 
+                        HeightRequest="200" 
+                        WidthRequest="200" 
+                        Source="lufttorka.png"/>
+
+
+
+                </StackLayout>
+
+
+            </Grid>
+
+            <Grid Padding="10" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, 1*">
+
+                <Label 
+                           Text="Färg:" 
+                           HorizontalOptions="Center" 
+                           FontSize="23"
+                           BackgroundColor="#dbf5ff" 
+                           FontFamily="Chewy"
+                           Padding="10"/>
+
+                <Label Grid.Column="1"
+                           Text="{Binding Color}" 
+                           HorizontalOptions="Start" 
+                           FontSize="23"
+                           BackgroundColor="#dbf5ff" 
+                           FontFamily="Chewy"
+                           Padding="10"/>
+            </Grid>
+
+            <Grid Padding="10" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, 1*">
+
+                <Label 
+                           Text="Kategori:" 
+                           HorizontalOptions="Center" 
+                           FontSize="23"
+                           BackgroundColor="#dbf5ff" 
+                           FontFamily="Chewy"
+                           Padding="10"/>
+
+                <Label     Grid.Column="1"
+                           Text="{Binding Category}" 
+                           HorizontalOptions="Start" 
+                           FontSize="23"
+                           BackgroundColor="#dbf5ff" 
+                           FontFamily="Chewy"
+                           Padding="10"/>
+            </Grid>
+
+            <Grid Padding="10" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, 1*">
+
+                <Label 
+                   Text="Senast använd:" 
+                   HorizontalOptions="Center" 
+                   FontSize="23"
+                   BackgroundColor="#dbf5ff" 
+                   FontFamily="Chewy"
+                   Padding="10"/>
+
+                <Label     
+                   Grid.Column="1"
+                   Text="{Binding History}"
+                   HorizontalOptions="Start" 
+                   FontSize="23"
+                   BackgroundColor="#dbf5ff" 
+                   FontFamily="Chewy"
+                   Padding="10"/>
+            </Grid>
+
+            <Grid Padding="10" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, auto,1*">
+
+                <Label 
+                   
+                   Text="Använd:" 
+                   HorizontalOptions="Start" 
+                   FontSize="23"
+                   BackgroundColor="#dbf5ff" 
+                   FontFamily="Chewy"
+                   Padding="10"/>
+
+                <Label     
+                   Grid.Column="1"
+                   Text="10" 
+                   HorizontalOptions="Start" 
+                   FontSize="23"
+                   BackgroundColor="Green" 
+                   FontFamily="Chewy"
+                   Padding="10"/>
+                <Label 
+                   Grid.Column="2"
+                   Text="gånger" 
+                   HorizontalOptions="Start" 
+                   FontSize="23"
+                   BackgroundColor="#dbf5ff" 
+                   FontFamily="Chewy"
+                   Padding="10"/>
+            </Grid>
+
+
+
+            <Grid Padding="0" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, 1*">
+
+                <BoxView Grid.ColumnSpan="2" Color="DarkBlue">
+
+                </BoxView>
+
+                <Button WidthRequest="250" Text="Använd Tröja" Command="{Binding UseShirtCommand}" 
+                    Margin="5" BackgroundColor="#b4d2de" 
+                    FontSize="20" FontFamily="Chewy"/>
+
+                <Button Grid.Row="0" Grid.Column="1" Text="Garderob" Command="{Binding GoToInventoryCommand}" 
+                    Margin="5" BackgroundColor="#b4d2de" 
+                    FontSize="20" FontFamily="Chewy"/>
+
+
+
+
+            </Grid>
+
+
+        </StackLayout>
+    </ScrollView>
+
+
+</ContentPage>

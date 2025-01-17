@@ -15,8 +15,14 @@
             <Button Text="🧺 - Tvättråd och skötsel"
                     Command="{Binding GoToPage1Command}"
                     Background="#b4d2de"
-                    FontFamily="Chewy"
+                    FontFamily=""
                     FontSize="20"/>
+
+            <Button Text="To Detail Page"
+        Command="{Binding GoToDetailPageCommand}"
+        Background="#b4d2de"
+        
+        FontSize="20"/>
 
             <Entry
                 Placeholder="Hur mår du?"
