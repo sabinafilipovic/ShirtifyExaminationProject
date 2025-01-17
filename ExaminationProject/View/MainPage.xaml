@@ -43,8 +43,8 @@
                     <DataTemplate x:DataType="model:Shirt">
                         <VerticalStackLayout Padding="10" Spacing="10">
                             <Label Text="{Binding Id}" FontSize="20" />
-                            <Label Text="{Binding Name}" FontSize="20" />
-                            <Label Text="{Binding Color}" FontSize="16" TextColor="Gray"/>
+                            <Label Text="{Binding Brand}" FontSize="20" />
+                            <Label Text="{Binding Color_Id}" FontSize="16" TextColor="Gray"/>
                             
                             <Button Text="Delete" 
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}},Path=DeleteShirtCommand}" 

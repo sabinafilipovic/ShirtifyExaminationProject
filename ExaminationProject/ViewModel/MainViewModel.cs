@@ -69,7 +69,7 @@ namespace ExaminationProject.ViewModel
                 return;
             }
 
-            Shirt newShirt = new Shirt()
+            /*Shirt newShirt = new Shirt()
             {
                 Name = shirtName,
                 Color = "White"
@@ -77,7 +77,7 @@ namespace ExaminationProject.ViewModel
 
             //add our item
             DatabaseService.AddShirt(newShirt);
-            Shirts.Add(newShirt);
+            Shirts.Add(newShirt);*/
         }
 
         [RelayCommand]

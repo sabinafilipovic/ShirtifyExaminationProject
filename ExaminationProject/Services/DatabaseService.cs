@@ -13,9 +13,23 @@ public static class DatabaseService
             {
                 var dbPath = Path.Combine(FileSystem.AppDataDirectory, "shirts.db3");
                 database = new SQLiteConnection(dbPath);
-                database.CreateTable<Shirt>(); // Create the table if it doesn't exist
+                database.CreateTable<Shirt>();
+                database.CreateTable<History>();
+                database.CreateTable<Category>();
+                database.CreateTable<ExaminationProject.Model.Color>();
             }
             return database;
+        }
+    }
+
+    //Used when changes have been made to the tables and need a reset
+    public static void DeleteDatabase()
+    {
+        var dbPath = Path.Combine(FileSystem.AppDataDirectory, "shirts.db3");
+
+        if (File.Exists(dbPath))
+        {
+            File.Delete(dbPath);
         }
     }
 
@@ -50,5 +64,31 @@ public static class DatabaseService
     {
         // Update the shirt in the database
         Database.Update(updatedShirt);
+    }
+
+    // Category Operations
+    public static void AddCategory(Category category) => Database.Insert(category);
+    public static List<Category> GetCategories() => Database.Table<Category>().ToList();
+
+    // Color Operations
+    public static void AddColor(ExaminationProject.Model.Color color) => Database.Insert(color);
+    public static List<ExaminationProject.Model.Color> GetColors() => Database.Table<ExaminationProject.Model.Color>().ToList();
+
+    public static string GetCategoryNameById(int categoryId)
+    {
+        var category = Database.Table<Category>().FirstOrDefault(c => c.Id == categoryId);
+        return category?.Name ?? "Unknown";
+    }
+
+    public static string GetColorNameById(int colorId)
+    {
+        var color = Database.Table<ExaminationProject.Model.Color>().FirstOrDefault(c => c.Id == colorId);
+        return color?.Name ?? "Unknown";
+    }
+
+    public static string GetFilepathById(int pictureId)
+    {
+        var picture = Database.Table<Picture>().FirstOrDefault(p => p.Id == pictureId);
+        return picture?.Filepath ?? "Unknown";
     }
 }

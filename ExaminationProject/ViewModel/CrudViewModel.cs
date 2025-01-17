@@ -11,43 +11,90 @@ namespace ExaminationProject.ViewModel
         ObservableCollection<Shirt> shirts = new ObservableCollection<Shirt>();
 
         [ObservableProperty]
-        string shirtName;
+        ObservableCollection<Category> categories = new();
 
         [ObservableProperty]
-        string shirtColor;
+        ObservableCollection<Model.Color> colors = new();
+
+        [ObservableProperty]
+        string shirtBrand;
+
+        [ObservableProperty]
+        int shirtColor;
+
+        [ObservableProperty]
+        Category selectedCategory; // Selected Category Name
+
+        [ObservableProperty]
+        Model.Color selectedColor;    // Selected Color Name
 
         public CrudViewModel()
         {
-            LoadShirts();
+            LoadData();
         }
 
-        private void LoadShirts()
+        private void LoadData()
         {
+            // Load Shirts
             Shirts.Clear();
-            var shirtsFromDb = DatabaseService.GetShirts();
-            foreach (var shirt in shirtsFromDb)
-            {
+            foreach (var shirt in DatabaseService.GetShirts())
                 Shirts.Add(shirt);
-            }
+
+            // Load Categories
+            Categories.Clear();
+            foreach (var category in DatabaseService.GetCategories())
+                Categories.Add(category);
+
+            // Load Colors
+            Colors.Clear();
+            foreach (var color in DatabaseService.GetColors())
+                Colors.Add(color);
         }
 
         [RelayCommand]
         public void AddShirt()
         {
-            if (string.IsNullOrWhiteSpace(ShirtName) || string.IsNullOrWhiteSpace(ShirtColor))
+            Console.WriteLine($"Brand : {ShirtBrand}, Category: {selectedCategory}, Color: {selectedColor}");
+            if (string.IsNullOrWhiteSpace(ShirtBrand))
                 return;
+
+            // Find the corresponding IDs for the selected category and color
+            var categoryId = Categories.FirstOrDefault(c => c.Id == SelectedCategory.Id)?.Id ?? 0;
+            var colorId = Colors.FirstOrDefault(c => c.Id == SelectedColor.Id)?.Id ?? 0;
+
+            if (categoryId == 0 || colorId == 0) return;
 
             var newShirt = new Shirt
             {
-                Name = ShirtName,
-                Color = ShirtColor
+                Brand = ShirtBrand,
+                Category_Id = categoryId,
+                Color_Id = colorId
             };
 
             DatabaseService.AddShirt(newShirt);
-            LoadShirts();
+            Shirts.Add(newShirt);
+        }
 
-            ShirtName = string.Empty;
-            ShirtColor = string.Empty;
+        [RelayCommand]
+        public void AddCategory(string categoryName)
+        {
+            if (!string.IsNullOrWhiteSpace(categoryName))
+            {
+                var newCategory = new Category { Name = categoryName };
+                DatabaseService.AddCategory(newCategory);
+                Categories.Add(newCategory);
+            }
+        }
+
+        [RelayCommand]
+        public void AddColor(string colorName)
+        {
+            if (!string.IsNullOrWhiteSpace(colorName))
+            {
+                var newColor = new Model.Color { Name = colorName };
+                DatabaseService.AddColor(newColor);
+                Colors.Add(newColor);
+            }
         }
 
         [RelayCommand]
@@ -56,19 +103,20 @@ namespace ExaminationProject.ViewModel
             var shirtToEdit = DatabaseService.GetShirtById(shirtId);
             if (shirtToEdit != null)
             {
-                shirtToEdit.Name = ShirtName;
-                shirtToEdit.Color = ShirtColor;
+                shirtToEdit.Brand = ShirtBrand;
+                shirtToEdit.Color_Id = ShirtColor;
 
                 DatabaseService.UpdateShirt(shirtToEdit);
-                LoadShirts();
+                LoadData();
             }
         }
+
 
         [RelayCommand]
         public void DeleteShirt(int shirtId)
         {
             DatabaseService.RemoveShirt(shirtId);
-            LoadShirts();
+            LoadData();
         }
     }
 }

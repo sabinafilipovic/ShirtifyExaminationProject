@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace ExaminationProject.Model
 {
-    public class Category
+    public class Picture
     {
-
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public string Name { get; set; } = string.Empty;
+        public string Filepath { get; set; } = string.Empty;
     }
 }
