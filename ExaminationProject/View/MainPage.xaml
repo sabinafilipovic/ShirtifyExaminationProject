@@ -21,20 +21,45 @@
                         HorizontalOptions="Center"
                         VerticalOptions="CenterAndExpand"/>
 
-                <Image Source="{Binding SavedImageSource}"/>
+                <Image 
+                    Source="{Binding SavedImageSource}"
+                    HeightRequest="200"
+                    WidthRequest="200"
+                    Aspect="Fill"
+                    
+                    Margin="10"/>
+                
             </VerticalStackLayout>
+
+            <Label
+                Text="Dagens Tröja"
+                HorizontalTextAlignment="Center"
+                FontFamily="Chewy"
+                FontSize="20"
+                />
+            <Image
+                Source="dotnet_bot.png"
+                WidthRequest="200"
+                HeightRequest="200"
+                BackgroundColor="Aquamarine"
+               
+                
+                />
+
+
+
 
 
             <Button Text="🧺 - Tvättråd och skötsel"
                     Command="{Binding GoToPage1Command}"
                     Background="#b4d2de"
-                    FontFamily=""
+                    FontFamily="Chewy"
                     FontSize="20"/>
 
             <Button Text="To Detail Page"
         Command="{Binding GoToDetailPageCommand}"
         Background="#b4d2de"
-        
+        FontFamily="Chewy"
         FontSize="20"/>
 
             <Button
@@ -43,17 +68,7 @@
                 Background="#91b597"
                 FontSize="18" FontFamily="Chewy"/>
 
-            <Entry
-                Placeholder="Ge namnet på Tröja"
-                Text="{Binding ShirtName}"
-                FontSize="20">
-            </Entry>
-
-            <Button
-                Command="{Binding ClickButtonCommand}" 
-                Text="Lägg till.."
-                Background="#91b597"
-                FontSize="18" FontFamily="Chewy"/>
+            
 
             <!-- Corrected CollectionView for displaying shirts -->
             <CollectionView ItemsSource="{Binding Shirts}">

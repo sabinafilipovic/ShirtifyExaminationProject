@@ -52,7 +52,7 @@ namespace ExaminationProject.ViewModel
         }
 
         [RelayCommand]
-        public void AddShirt()
+        async public void AddShirt()
         {
             Console.WriteLine($"Brand : {ShirtBrand}, Category: {selectedCategory}, Color: {selectedColor}");
             if (string.IsNullOrWhiteSpace(ShirtBrand))
@@ -73,6 +73,8 @@ namespace ExaminationProject.ViewModel
 
             DatabaseService.AddShirt(newShirt);
             Shirts.Add(newShirt);
+
+            await AppShell.Current.GoToAsync("InventoryPage");
         }
 
         [RelayCommand]

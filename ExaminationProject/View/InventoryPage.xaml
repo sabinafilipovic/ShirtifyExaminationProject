@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ExaminationProject.View.InventoryPage"
+             xmlns:model="clr-namespace:ExaminationProject.Model"
              Title="Inventory Page">
     <ScrollView>
         <StackLayout Padding="0" Spacing="10">
@@ -77,6 +78,25 @@
                     FontSize="20" 
                     TextColor="Black"
                     FontFamily="Chewy"/>
+                
+                <!-- Shirt List -->
+                <Label 
+                    Grid.Row="1"
+                    Text="Shirts" 
+                    FontSize="20"/>
+                <CollectionView 
+                    Grid.Row="2"
+                    ItemsSource="{Binding Shirts}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Shirt">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Brand}" FontSize="16"/>
+                                <Label Text="{Binding Category_Name}" FontSize="16"/>
+                                <Label Text="{Binding Color_Name}" FontSize="16"/>
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
 
 

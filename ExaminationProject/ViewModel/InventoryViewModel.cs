@@ -17,10 +17,8 @@ namespace ExaminationProject.ViewModel
         {
             //send "current" shirt to database.
             //Set "current" shirt as your "Selected" shirt for today.
-            //Send user back to homepage
-            AppShell.Current.GoToAsync("..");
-
-
+            //Send user back to main page
+            await AppShell.Current.GoToAsync("//MainPage");
         }
 
         [RelayCommand]

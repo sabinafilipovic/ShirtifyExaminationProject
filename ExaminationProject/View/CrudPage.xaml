@@ -11,11 +11,20 @@
         <VerticalStackLayout Padding="20" Spacing="15">
 
             <!-- Shirt Name -->
-            <Entry Placeholder="Enter Shirt Brand" Text="{Binding ShirtBrand}" FontSize="18"/>
+            <Entry 
+                Placeholder="Enter Shirt Brand" 
+                Text="{Binding ShirtBrand}" 
+                FontSize="18"/>
 
             <!-- Category Picker -->
-            <Label Text="Select Category" FontSize="16"/>
-            <Picker Title="Category" ItemsSource="{Binding Categories}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedCategory}"/>
+            <Label 
+                Text="Select Category" 
+                FontSize="16"/>
+            <Picker 
+                Title="Category" 
+                ItemsSource="{Binding Categories}" 
+                ItemDisplayBinding="{Binding Name}" 
+                SelectedItem="{Binding SelectedCategory}"/>
 
             <!-- Color Picker -->
             <Label Text="Select Color" FontSize="16"/>
@@ -25,9 +34,19 @@
             <Button Text="Add Shirt" Command="{Binding AddShirtCommand}" BackgroundColor="#91b597" FontSize="18"/>
 
             <!-- Add New Category -->
-            <Label Text="Add New Category" FontSize="16"/>
-            <Entry Placeholder="New Category Name" x:Name="NewCategoryEntry" FontSize="18"/>
-            <Button Text="Add Category" Command="{Binding AddCategoryCommand}" CommandParameter="{Binding Text, Source={x:Reference NewCategoryEntry}}" BackgroundColor="#91b597" FontSize="18"/>
+            <Label 
+                Text="Add New Category" 
+                FontSize="16"/>
+            
+            <Entry 
+                Placeholder="New Category Name" 
+                x:Name="NewCategoryEntry" 
+                FontSize="18"/>
+            <Button 
+                Text="Add Category" 
+                Command="{Binding AddCategoryCommand}" 
+                CommandParameter="{Binding Text, Source={x:Reference NewCategoryEntry}}" 
+                BackgroundColor="#91b597" FontSize="18"/>
 
             <!-- Add New Color -->
             <Label Text="Add New Color" FontSize="16"/>
