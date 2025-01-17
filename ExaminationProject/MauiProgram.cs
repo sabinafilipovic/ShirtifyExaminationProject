@@ -40,6 +40,9 @@ namespace ExaminationProject
 
 
 
+            builder.Services.AddTransient<CrudPage>();
+            builder.Services.AddTransient<CrudViewModel>();
+
             return builder.Build();
         }
     }

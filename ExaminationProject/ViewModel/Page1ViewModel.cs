@@ -16,5 +16,6 @@ namespace ExaminationProject.ViewModel
         {
             AppShell.Current.GoToAsync("..");
         }
+
     }
 }

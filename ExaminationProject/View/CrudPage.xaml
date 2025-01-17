@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:ExaminationProject.ViewModel"
+             xmlns:model="clr-namespace:ExaminationProject.Model"
+             x:DataType="viewmodel:CrudViewModel"
+             x:Class="ExaminationProject.CrudPage"
+             Title="CRUD Operations">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <!-- Shirt Name -->
+            <Entry Placeholder="Enter Shirt Brand" Text="{Binding ShirtBrand}" FontSize="18"/>
+
+            <!-- Category Picker -->
+            <Label Text="Select Category" FontSize="16"/>
+            <Picker Title="Category" ItemsSource="{Binding Categories}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedCategory}"/>
+
+            <!-- Color Picker -->
+            <Label Text="Select Color" FontSize="16"/>
+            <Picker Title="Color" ItemsSource="{Binding Colors}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedColor}"/>
+
+            <!-- Add Shirt Button -->
+            <Button Text="Add Shirt" Command="{Binding AddShirtCommand}" BackgroundColor="#91b597" FontSize="18"/>
+
+            <!-- Add New Category -->
+            <Label Text="Add New Category" FontSize="16"/>
+            <Entry Placeholder="New Category Name" x:Name="NewCategoryEntry" FontSize="18"/>
+            <Button Text="Add Category" Command="{Binding AddCategoryCommand}" CommandParameter="{Binding Text, Source={x:Reference NewCategoryEntry}}" BackgroundColor="#91b597" FontSize="18"/>
+
+            <!-- Add New Color -->
+            <Label Text="Add New Color" FontSize="16"/>
+            <Entry Placeholder="New Color Name" x:Name="NewColorEntry" FontSize="18"/>
+            <Button Text="Add Color" Command="{Binding AddColorCommand}" CommandParameter="{Binding Text, Source={x:Reference NewColorEntry}}" BackgroundColor="#91b597" FontSize="18"/>
+
+            <!-- Shirt List -->
+            <Label Text="Shirts" FontSize="20"/>
+            <CollectionView ItemsSource="{Binding Shirts}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Shirt">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Brand}" FontSize="16"/>
+                            <Label Text="{Binding Category_Name}" FontSize="16"/>
+                            <Label Text="{Binding Color_Name}" FontSize="16"/>
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
