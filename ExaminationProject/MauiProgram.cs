@@ -1,4 +1,5 @@
-﻿using ExaminationProject.View;
+﻿using ExaminationProject.Services;
+using ExaminationProject.View;
 using ExaminationProject.ViewModel;
 using Microsoft.Extensions.Logging;
 
@@ -22,6 +23,7 @@ namespace ExaminationProject
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+            builder.Services.AddSingleton<PhotoService>();
 
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<MainViewModel>();
@@ -37,8 +39,6 @@ namespace ExaminationProject
 
             builder.Services.AddTransient<RegisterShirtPage>();
             builder.Services.AddTransient<RegisterShirtViewModel>();
-
-
 
             builder.Services.AddTransient<CrudPage>();
             builder.Services.AddTransient<CrudViewModel>();

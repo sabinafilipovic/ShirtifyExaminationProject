@@ -6,6 +6,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Threading.Tasks;
+using ExaminationProject.Services;
 
 namespace ExaminationProject.ViewModel
 {
@@ -20,6 +21,8 @@ namespace ExaminationProject.ViewModel
         [ObservableProperty]
         string text;
 
+        private readonly PhotoService _photoService = new PhotoService();
+
         [ObservableProperty]
         string shirtName;
 
@@ -32,7 +35,7 @@ namespace ExaminationProject.ViewModel
         [ObservableProperty]
         ObservableCollection<Shirt> shirts = new ObservableCollection<Shirt>();
 
-        public MainViewModel()
+        public MainViewModel(PhotoService photoService)
         {
             loadShirts();
         }
@@ -90,37 +93,38 @@ namespace ExaminationProject.ViewModel
             await AppShell.Current.GoToAsync("Page1");
         }
 
+        [RelayCommand]
+        public async void TakePhoto()
+        {
+            System.Diagnostics.Debug.WriteLine("✅ LYCKADES KALLA PÅ METOD 'TAKEPHOTO'");
+
+            try
+            {
+                string photoPath = await _photoService.CapturePhotoAsync();
+
+                if (!string.IsNullOrEmpty(photoPath))
+                {
+                    SavedImageSource = ImageSource.FromFile(photoPath);
+                    System.Diagnostics.Debug.WriteLine($"✅ FOTO SPARAT I {photoPath}");
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("⚠️ INGEN BILD TAGEN");
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"❌ Error capturing photo: {ex.Message}");
+            }
+        }
+
             [RelayCommand]
         async void GoToCrudPage()
             {
                 await AppShell.Current.GoToAsync(nameof(CrudPage));
             }
 
-        [RelayCommand]
-        public async void TakePhoto()
-        {
-            System.Diagnostics.Debug.WriteLine("✅ LYCKADES KALLA PÅ METOD");
-
-            if (MediaPicker.Default.IsCaptureSupported)
-            {
-                FileResult photo = await MediaPicker.Default.CapturePhotoAsync();
-                System.Diagnostics.Debug.WriteLine("✅ INGA KONSTIGHETER MED BEHÖRIGHET");
-
-                if (photo != null)
-                {
-                    string localFilePath = Path.Combine(FileSystem.AppDataDirectory, photo.FileName);
-
-                    System.Diagnostics.Debug.WriteLine($"✅ DITT FOTO HAR SPARATS SOM {photo.FileName} I {localFilePath}");
-
-                    using Stream sourceStream = await photo.OpenReadAsync();
-                    using FileStream localFileStream = File.OpenWrite(localFilePath);
-                    await sourceStream.CopyToAsync(localFileStream);
-
-                    SavedImageSource = ImageSource.FromFile(localFilePath);
-                    System.Diagnostics.Debug.WriteLine("✅ WE MADE IT");
-                }
-            }
-        }
+        
 
         [RelayCommand]
         async void GoToDetailPage()
