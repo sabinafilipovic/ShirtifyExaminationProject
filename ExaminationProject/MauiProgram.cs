@@ -29,6 +29,9 @@ namespace ExaminationProject
             builder.Services.AddTransient<Page1>();
             builder.Services.AddTransient<Page1ViewModel>();
 
+            builder.Services.AddTransient<CrudPage>();
+            builder.Services.AddTransient<CrudViewModel>();
+
             return builder.Build();
         }
     }

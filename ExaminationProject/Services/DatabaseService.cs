@@ -40,4 +40,15 @@ public static class DatabaseService
             Database.Delete(shirtToDelete);
         }
     }
+    public static Shirt GetShirtById(int shirtId)
+    {
+        // Retrieve the shirt by its ID
+        return Database.Table<Shirt>().FirstOrDefault(shirt => shirt.Id == shirtId);
+    }
+
+    public static void UpdateShirt(Shirt updatedShirt)
+    {
+        // Update the shirt in the database
+        Database.Update(updatedShirt);
+    }
 }

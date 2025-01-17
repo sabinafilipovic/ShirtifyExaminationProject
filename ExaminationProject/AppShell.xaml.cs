@@ -9,7 +9,7 @@ namespace ExaminationProject
             InitializeComponent();
             Routing.RegisterRoute(nameof(Page1), typeof(Page1));
             Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
-
+            Routing.RegisterRoute(nameof(CrudPage), typeof(CrudPage));
         }
     }
 }

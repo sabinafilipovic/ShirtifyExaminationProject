@@ -83,8 +83,14 @@ namespace ExaminationProject.ViewModel
         [RelayCommand]
         async void GoToPage1()
         {
-            AppShell.Current.GoToAsync("Page1");
+            await AppShell.Current.GoToAsync("Page1");
         }
-       
+
+        [RelayCommand]
+        async void GoToCrudPage()
+        {
+            await AppShell.Current.GoToAsync(nameof(CrudPage));
+        }
+
     }
 }
