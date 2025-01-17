@@ -17,6 +17,7 @@ public static class DatabaseService
                 database.CreateTable<History>();
                 database.CreateTable<Category>();
                 database.CreateTable<ExaminationProject.Model.Color>();
+                database.CreateTable<Picture>();
             }
             return database;
         }
@@ -64,6 +65,21 @@ public static class DatabaseService
     {
         // Update the shirt in the database
         Database.Update(updatedShirt);
+    }
+
+    public static void AddPicture(Picture picture)
+    {
+        Database.Insert(picture);
+    }
+
+    public static Picture GetPictureById(int pictureId)
+    {
+        return Database.Table<Picture>().FirstOrDefault(p => p.Id == pictureId);
+    }
+
+    public static List<Picture> GetAllPictures()
+    {
+        return Database.Table<Picture>().ToList();
     }
 
     // Category Operations

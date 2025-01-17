@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ExaminationProject.Model;
+using ExaminationProject.Services;
 using System.Collections.ObjectModel;
 
 namespace ExaminationProject.ViewModel
@@ -19,6 +20,8 @@ namespace ExaminationProject.ViewModel
         [ObservableProperty]
         string shirtBrand;
 
+        private readonly PhotoService _photoService;
+
         [ObservableProperty]
         int shirtColor;
 
@@ -28,8 +31,9 @@ namespace ExaminationProject.ViewModel
         [ObservableProperty]
         Model.Color selectedColor;    // Selected Color Name
 
-        public CrudViewModel()
+        public CrudViewModel(PhotoService photoservice)
         {
+            _photoService = photoservice;
             LoadData();
         }
 
@@ -52,27 +56,41 @@ namespace ExaminationProject.ViewModel
         }
 
         [RelayCommand]
-        public void AddShirt()
+        public async Task AddShirt()
         {
-            Console.WriteLine($"Brand : {ShirtBrand}, Category: {selectedCategory}, Color: {selectedColor}");
-            if (string.IsNullOrWhiteSpace(ShirtBrand))
-                return;
-
-            // Find the corresponding IDs for the selected category and color
-            var categoryId = Categories.FirstOrDefault(c => c.Id == SelectedCategory.Id)?.Id ?? 0;
-            var colorId = Colors.FirstOrDefault(c => c.Id == SelectedColor.Id)?.Id ?? 0;
-
-            if (categoryId == 0 || colorId == 0) return;
-
-            var newShirt = new Shirt
+            if (string.IsNullOrWhiteSpace(ShirtBrand) || SelectedCategory == null || SelectedColor == null)
             {
-                Brand = ShirtBrand,
-                Category_Id = categoryId,
-                Color_Id = colorId
-            };
+                return;
+            } 
 
-            DatabaseService.AddShirt(newShirt);
-            Shirts.Add(newShirt);
+            try
+            {
+                // Capture the photo using PhotoService
+                var pictureId = await _photoService.CapturePhotoAsync();
+
+                if (pictureId == 0)
+                {
+                    System.Diagnostics.Debug.WriteLine("⚠️ No photo was captured.");
+                    return;
+                }
+
+                // Create a new Shirt object
+                var newShirt = new Shirt
+                {
+                    Brand = ShirtBrand,
+                    Category_Id = SelectedCategory.Id,
+                    Color_Id = SelectedColor.Id,
+                    Picture_Id = pictureId
+                };
+
+                // Save to the database
+                DatabaseService.AddShirt(newShirt);
+                Shirts.Add(newShirt); // Update the UI collection
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"❌ Error adding shirt: {ex.Message}");
+            }
         }
 
         [RelayCommand]
@@ -111,10 +129,13 @@ namespace ExaminationProject.ViewModel
             }
         }
 
-
         [RelayCommand]
         public void DeleteShirt(int shirtId)
         {
+            if (shirtId == 0)
+            {
+                return;
+            }
             DatabaseService.RemoveShirt(shirtId);
             LoadData();
         }

@@ -52,21 +52,6 @@ namespace ExaminationProject.ViewModel
         }
 
         [RelayCommand]
-        public void DeleteShirt(int shirtId)
-        {
-            if (shirtId == 0)
-            {
-                return;
-            }
-
-
-            // Remove the shirt from the database
-            DatabaseService.RemoveShirt(shirtId);
-
-            loadShirts();
-        }
-
-        [RelayCommand]
         async void ClickButton()
         {
             if (string.IsNullOrEmpty(Text))
@@ -91,31 +76,6 @@ namespace ExaminationProject.ViewModel
         async void GoToPage1()
         {
             await AppShell.Current.GoToAsync("Page1");
-        }
-
-        [RelayCommand]
-        public async void TakePhoto()
-        {
-            System.Diagnostics.Debug.WriteLine("✅ LYCKADES KALLA PÅ METOD 'TAKEPHOTO'");
-
-            try
-            {
-                string photoPath = await _photoService.CapturePhotoAsync();
-
-                if (!string.IsNullOrEmpty(photoPath))
-                {
-                    SavedImageSource = ImageSource.FromFile(photoPath);
-                    System.Diagnostics.Debug.WriteLine($"✅ FOTO SPARAT I {photoPath}");
-                }
-                else
-                {
-                    System.Diagnostics.Debug.WriteLine("⚠️ INGEN BILD TAGEN");
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"❌ Error capturing photo: {ex.Message}");
-            }
         }
 
             [RelayCommand]

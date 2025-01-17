@@ -14,7 +14,7 @@
             Spacing="25">
 
             <VerticalStackLayout>
-                <Button Text="📸 Ta Foto" Command="{Binding TakePhotoCommand}"
+                <Button Text="📸 Ta Foto"
                         Background="#b4d2de"
                         FontFamily="Chewy"
                         FontSize="20"
@@ -63,12 +63,6 @@
                             <Label Text="{Binding Id}" FontSize="20" />
                             <Label Text="{Binding Brand}" FontSize="20" />
                             <Label Text="{Binding Color_Id}" FontSize="16" TextColor="Gray"/>
-                            
-                            <Button Text="Delete" 
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}},Path=DeleteShirtCommand}" 
-                                    CommandParameter="{Binding Id}" 
-                                    BackgroundColor="Red" 
-                                    TextColor="White"/>
                         </VerticalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
