@@ -1,10 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui.Storage;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace ExaminationProject.ViewModel
@@ -20,13 +19,11 @@ namespace ExaminationProject.ViewModel
         [RelayCommand]
         async void ClickButton()
         {
-
             if (string.IsNullOrEmpty(Text))
             {
                 return;
             }
 
-            //add our item
             Items.Add(Text);
 
             Text = string.Empty;
@@ -35,8 +32,31 @@ namespace ExaminationProject.ViewModel
         [RelayCommand]
         async void GoToPage1()
         {
-            AppShell.Current.GoToAsync("Page1");
+            await AppShell.Current.GoToAsync("Page1");
         }
-       
+
+        [RelayCommand]
+        public async void TakePhoto()
+        {
+            System.Diagnostics.Debug.WriteLine("✅ LYCKADES KALLA PÅ METOD");
+
+            if (MediaPicker.Default.IsCaptureSupported)
+            {
+                FileResult photo = await MediaPicker.Default.CapturePhotoAsync();
+                System.Diagnostics.Debug.WriteLine("✅ INGA KONSTIGHETER MED BEHÖRIGHET");
+
+                if (photo != null)
+                {
+                    string localFilePath = Path.Combine(FileSystem.AppDataDirectory, photo.FileName);
+
+                    using Stream sourceStream = await photo.OpenReadAsync();
+                    using FileStream localFileStream = File.OpenWrite(localFilePath);
+                    System.Diagnostics.Debug.WriteLine($"✅ DITT FOTO HAR SPARATS SOM {photo.FileName} I {localFilePath}");
+
+                    await sourceStream.CopyToAsync(localFileStream);
+                    System.Diagnostics.Debug.WriteLine("✅ WE MADE IT");
+                }
+            }
+        }
     }
 }
