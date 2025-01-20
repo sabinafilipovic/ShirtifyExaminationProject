@@ -25,10 +25,5 @@
             Text="Gå till Färger"
             Background="#91b597"
             FontSize="18" FontFamily="Chewy"/>
-
-        <Button Text="Go Back"
-            Command="{Binding GoBackCommand}"
-            FontSize="18"
-            BackgroundColor="#91b597" />
     </VerticalStackLayout>
 </ContentPage>

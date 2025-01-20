@@ -22,10 +22,6 @@ namespace ExaminationProject.ViewModel
             await AppShell.Current.GoToAsync(nameof(AdminColorsPage));
         }
 
-        [RelayCommand]
-        async Task GoBack()
-        {
-            await AppShell.Current.GoToAsync("///MainPage");
-        }
+        
     }
 }

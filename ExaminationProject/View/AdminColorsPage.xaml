@@ -12,7 +12,7 @@
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
 
-        <Button Text="Go Back"
+        <Button Text="Go to Home"
             Command="{Binding GoBackCommand}"
             FontSize="18"
             BackgroundColor="#91b597" />
