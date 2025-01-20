@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:ExaminationProject.ViewModel"
+             xmlns:model="clr-namespace:ExaminationProject.Model"
+             x:DataType="viewmodel:InventoryViewModel"
              x:Class="ExaminationProject.View.InventoryPage"
              Title="Inventory Page">
+    
     <ScrollView>
         <StackLayout Padding="0" Spacing="10">
             <Label Text="Garderob" 
@@ -13,7 +17,8 @@
                    Padding="10"/>
 
             <Grid Padding="10" HorizontalOptions="Center" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, auto, auto">
-                            
+                                
+                
                                 <ImageButton
                                     Margin="10"
                                     BorderWidth="2" 
@@ -46,14 +51,11 @@
                                     Source="torktumlas.png"
                                     BackgroundColor="LightBlue"
                                     />
-                           
-                       
-                    
-                
+
 
             </Grid>
             
-            <Grid Padding="0" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, 1*">
+            <Grid Padding="0" RowDefinitions="Auto, Auto, auto" ColumnDefinitions="Auto, 1*">
 
                 <BoxView Grid.ColumnSpan="2" Color="DarkBlue">
 
@@ -68,15 +70,67 @@
                         FontFamily="Chewy"/>
 
                 <Button 
-                    Grid.Row="0" 
-                    Grid.Column="1" 
-                    Text="Ny Tröja" 
-                    Command="{Binding RegisterNewShirtCommand}" 
-                    Margin="5" 
-                    BackgroundColor="Beige" 
-                    FontSize="20" 
-                    TextColor="Black"
-                    FontFamily="Chewy"/>
+                        Grid.Row="0" 
+                        Grid.Column="1" 
+                        Text="Ny Tröja" 
+                        Command="{Binding RegisterNewShirtCommand}" 
+                        Margin="5" 
+                        BackgroundColor="Beige" 
+                        FontSize="20" 
+                        TextColor="Black"
+                        FontFamily="Chewy"/>
+                
+                <!-- Shirt List 
+                Ska flyttas upp sen
+                -->
+                
+                <Label 
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        Text="Tröjor" 
+                        HorizontalOptions="Center" 
+                        FontSize="23"
+                        BackgroundColor="#dbf5ff" 
+                        FontFamily="Chewy"
+                        Padding="10"/>
+                
+                <CollectionView 
+                    Grid.Row="2"
+                    ItemsSource="{Binding Shirts}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Shirt">
+                            <VerticalStackLayout
+                                Margin="10"
+                                >
+                                
+                                <Label 
+                                    Text="{Binding Brand}"
+                                    FontSize="24" 
+                                    FontAttributes="Bold"/>
+                                
+                                <!-- Infoga bilden och ta bort labels under -->
+
+                                <Label 
+                                    Text="{Binding Category_Name, StringFormat='Kategori: {0}'}" 
+                                    FontSize="16"/>
+                                <Label 
+                                    Text="{Binding Color_Name, StringFormat='Färg: {0}'}" 
+                                    FontSize="16"/>
+                                <Button 
+                                    Text="Delete" 
+                                    Command="{Binding 
+                                    Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}},Path=DeleteShirtCommand}" 
+                                    CommandParameter="{Binding Id}" 
+                                    BackgroundColor="Red" 
+                                    TextColor="White"
+                                    WidthRequest="100"
+
+                                    HorizontalOptions="Start"/>
+                                
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
 
 

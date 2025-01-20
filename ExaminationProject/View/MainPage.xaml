@@ -14,32 +14,63 @@
             Spacing="25">
 
             <VerticalStackLayout>
-                <Button Text="📸 Ta Foto" Command="{Binding TakePhotoCommand}"
+                <Button Text="📸 Ta Foto"
                         Background="#b4d2de"
                         FontFamily="Chewy"
                         FontSize="20"
                         HorizontalOptions="Center"
                         VerticalOptions="CenterAndExpand"/>
 
-                <Image Source="{Binding SavedImageSource}"/>
+                <Image 
+                    Source="{Binding SavedImageSource}"
+                    HeightRequest="200"
+                    WidthRequest="200"
+                    Aspect="Fill"
+                    
+                    Margin="10"/>
+                
             </VerticalStackLayout>
+
+            <Label
+                Text="Dagens Tröja"
+                HorizontalTextAlignment="Center"
+                FontFamily="Chewy"
+                FontSize="20"
+                />
+            <Image
+                Source="dotnet_bot.png"
+                WidthRequest="200"
+                HeightRequest="200"
+                BackgroundColor="Aquamarine"
+               
+                
+                />
+
+
+
 
 
             <Button Text="🧺 - Tvättråd och skötsel"
                     Command="{Binding GoToPage1Command}"
                     Background="#b4d2de"
-                    FontFamily=""
+                    FontFamily="Chewy"
                     FontSize="20"/>
 
             <Button Text="To Detail Page"
         Command="{Binding GoToDetailPageCommand}"
         Background="#b4d2de"
-        
+        FontFamily="Chewy"
         FontSize="20"/>
 
             <Button
                 Command="{Binding GoToCrudPageCommand}" 
                 Text="Gå till CRUD"
+                Background="#91b597"
+                FontSize="18" FontFamily="Chewy"/>
+
+            <Button
+                Command="{Binding GoToAdminPageCommand}" 
+                Text="Gå till Admin vyn"
                 Background="#91b597"
                 FontSize="18" FontFamily="Chewy"/>
 
@@ -63,12 +94,6 @@
                             <Label Text="{Binding Id}" FontSize="20" />
                             <Label Text="{Binding Brand}" FontSize="20" />
                             <Label Text="{Binding Color_Id}" FontSize="16" TextColor="Gray"/>
-                            
-                            <Button Text="Delete" 
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}},Path=DeleteShirtCommand}" 
-                                    CommandParameter="{Binding Id}" 
-                                    BackgroundColor="Red" 
-                                    TextColor="White"/>
                         </VerticalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

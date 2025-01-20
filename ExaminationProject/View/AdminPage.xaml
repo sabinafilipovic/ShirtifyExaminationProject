@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:ExaminationProject.ViewModel"
+             xmlns:model="clr-namespace:ExaminationProject.Model"
+             x:Class="ExaminationProject.View.AdminPage"
+             x:DataType="viewmodel:AdminViewModel"
+             Title="AdminPage">
+    <VerticalStackLayout
+        Padding="30, 0"
+        Spacing="25">
+        <Label 
+            Text="Välj en modul att gå in i"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <Button
+            Command="{Binding GoToAdminCategoriesPageCommand}" 
+            Text="Gå till Kategorier"
+            Background="#91b597"
+            FontSize="18" FontFamily="Chewy"/>
+
+        <Button
+            Command="{Binding GoToAdminColorsPageCommand}" 
+            Text="Gå till Färger"
+            Background="#91b597"
+            FontSize="18" FontFamily="Chewy"/>
+
+        <Button Text="Go Back"
+            Command="{Binding GoBackCommand}"
+            FontSize="18"
+            BackgroundColor="#91b597" />
+    </VerticalStackLayout>
+</ContentPage>

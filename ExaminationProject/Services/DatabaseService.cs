@@ -17,6 +17,7 @@ public static class DatabaseService
                 database.CreateTable<History>();
                 database.CreateTable<Category>();
                 database.CreateTable<ExaminationProject.Model.Color>();
+                database.CreateTable<Picture>();
             }
             return database;
         }
@@ -56,19 +57,41 @@ public static class DatabaseService
     }
     public static Shirt GetShirtById(int shirtId)
     {
-        // Retrieve the shirt by its ID
         return Database.Table<Shirt>().FirstOrDefault(shirt => shirt.Id == shirtId);
     }
 
     public static void UpdateShirt(Shirt updatedShirt)
     {
-        // Update the shirt in the database
         Database.Update(updatedShirt);
+    }
+
+    public static void AddPicture(Picture picture)
+    {
+        Database.Insert(picture);
+    }
+
+    public static Picture GetPictureById(int pictureId)
+    {
+        return Database.Table<Picture>().FirstOrDefault(p => p.Id == pictureId);
+    }
+
+    public static List<Picture> GetAllPictures()
+    {
+        return Database.Table<Picture>().ToList();
     }
 
     // Category Operations
     public static void AddCategory(Category category) => Database.Insert(category);
     public static List<Category> GetCategories() => Database.Table<Category>().ToList();
+
+    public static void DeleteCategory(int categoryId)
+    {
+        var category = Database.Table<Category>().FirstOrDefault(c => c.Id == categoryId);
+        if (category != null)
+        {
+            Database.Delete(category);
+        }
+    }
 
     // Color Operations
     public static void AddColor(ExaminationProject.Model.Color color) => Database.Insert(color);
@@ -77,18 +100,18 @@ public static class DatabaseService
     public static string GetCategoryNameById(int categoryId)
     {
         var category = Database.Table<Category>().FirstOrDefault(c => c.Id == categoryId);
-        return category?.Name ?? "Unknown";
+        return category?.Name ?? "Saknar kategori";
     }
 
     public static string GetColorNameById(int colorId)
     {
         var color = Database.Table<ExaminationProject.Model.Color>().FirstOrDefault(c => c.Id == colorId);
-        return color?.Name ?? "Unknown";
+        return color?.Name ?? "Saknar färg";
     }
 
     public static string GetFilepathById(int pictureId)
     {
         var picture = Database.Table<Picture>().FirstOrDefault(p => p.Id == pictureId);
-        return picture?.Filepath ?? "Unknown";
+        return picture?.Filepath ?? "Saknar bild";
     }
 }

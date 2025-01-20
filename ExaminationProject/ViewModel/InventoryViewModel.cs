@@ -7,26 +7,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using ExaminationProject.Services;
+
 
 namespace ExaminationProject.ViewModel
 {
-    public partial class InventoryViewModel : ObservableObject
+    public partial class InventoryViewModel : CrudViewModel
     {
+        private readonly PhotoService _photoService;
+
+        public InventoryViewModel(PhotoService photoService) : base(photoService)
+        {
+            _photoService = photoService;
+        }
+
         [RelayCommand]
         async void UseShirt()
         {
             //send "current" shirt to database.
             //Set "current" shirt as your "Selected" shirt for today.
-            //Send user back to homepage
-            AppShell.Current.GoToAsync("..");
-
-
+            //Send user back to main page
+            await AppShell.Current.GoToAsync("//MainPage");
         }
 
         [RelayCommand]
         async void RegisterNewShirt()
         {
-            AppShell.Current.GoToAsync("RegisterShirtPage");
+            await AppShell.Current.GoToAsync("RegisterShirtPage");
         }
     }
 

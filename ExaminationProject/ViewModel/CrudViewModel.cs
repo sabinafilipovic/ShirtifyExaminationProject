@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ExaminationProject.Model;
+using ExaminationProject.Services;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,6 +22,8 @@ namespace ExaminationProject.ViewModel
         [ObservableProperty]
         string shirtBrand;
 
+        private readonly PhotoService _photoService;
+
         [ObservableProperty]
         int shirtColor;
 
@@ -30,8 +33,9 @@ namespace ExaminationProject.ViewModel
         [ObservableProperty]
         Model.Color selectedColor;
 
-        public CrudViewModel()
+        public CrudViewModel(PhotoService photoservice)
         {
+            _photoService = photoservice;
             LoadData();
         }
 
@@ -51,24 +55,68 @@ namespace ExaminationProject.ViewModel
         }
 
         [RelayCommand]
-        public async Task AddShirt()
+        async public Task AddShirt()
         {
-            if (string.IsNullOrWhiteSpace(ShirtBrand)) return;
-
-            var categoryId = Categories.FirstOrDefault(c => c.Id == SelectedCategory?.Id)?.Id ?? 0;
-            var colorId = Colors.FirstOrDefault(c => c.Id == SelectedColor?.Id)?.Id ?? 0;
-
-            if (categoryId == 0 || colorId == 0) return;
-
-            var newShirt = new Shirt
+            //Console.WriteLine($"Brand : {ShirtBrand}, Category: {selectedCategory}, Color: {selectedColor}");
+            
+            if (string.IsNullOrWhiteSpace(ShirtBrand))
             {
-                Brand = ShirtBrand,
-                Category_Id = categoryId,
-                Color_Id = colorId
-            };
+                await App.Current.MainPage.DisplayAlert("Error", "Beskriv tröjan.", "OK");
+                return;
+                
+            }
+            
+            if (SelectedCategory == null || SelectedColor == null)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "Välj kategori och färg.", "OK");
+                return;
+            } 
 
-            DatabaseService.AddShirt(newShirt);
-            Shirts.Add(newShirt);
+        
+
+            // Find the corresponding IDs for the selected category and color
+            var categoryId = Categories.FirstOrDefault(c => c.Id == SelectedCategory.Id)?.Id ?? 0;
+            var colorId = Colors.FirstOrDefault(c => c.Id == SelectedColor.Id)?.Id ?? 0;
+            try
+            
+        {
+                // Capture the photo using PhotoService
+                var pictureId = await _photoService.CapturePhotoAsync();
+
+            if (categoryId == 0 || colorId == 0)
+            {
+                
+                return;
+
+                
+            }
+                
+                if (pictureId == 0)
+                {
+                    System.Diagnostics.Debug.WriteLine("⚠️ No photo was captured.");
+                    return;
+                }
+
+                // Create a new Shirt object
+                var newShirt = new Shirt
+                {
+                    Brand = ShirtBrand,
+                    Category_Id = SelectedCategory.Id,
+                    Color_Id = SelectedColor.Id,
+                    Picture_Id = pictureId
+                };
+
+                // Save to the database
+                DatabaseService.AddShirt(newShirt);
+                Shirts.Add(newShirt); // Update the UI collection
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"❌ Error adding shirt: {ex.Message}");
+            }
+           
+
+            await AppShell.Current.GoToAsync("InventoryPage");
         }
 
         [RelayCommand]
@@ -94,7 +142,7 @@ namespace ExaminationProject.ViewModel
         }
 
         [RelayCommand]
-        public async Task EditShirt(int shirtId)
+        public void EditShirt(int shirtId)
         {
             var shirtToEdit = DatabaseService.GetShirtById(shirtId);
             if (shirtToEdit != null)
@@ -108,8 +156,12 @@ namespace ExaminationProject.ViewModel
         }
 
         [RelayCommand]
-        public async Task DeleteShirt(int shirtId)
+        public void DeleteShirt(int shirtId)
         {
+            if (shirtId == 0)
+            {
+                return;
+            }
             DatabaseService.RemoveShirt(shirtId);
             LoadData();
         }

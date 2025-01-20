@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Threading.Tasks;
 using ExaminationProject.Services;
+using ExaminationProject.View;
 
 namespace ExaminationProject.ViewModel
 {
@@ -52,20 +53,6 @@ namespace ExaminationProject.ViewModel
         }
 
         [RelayCommand]
-        public void DeleteShirt(int shirtId)
-        {
-            if (shirtId == 0)
-            {
-                return;
-            }
-
-            // Remove the shirt from the database
-            DatabaseService.RemoveShirt(shirtId);
-
-            loadShirts();
-        }
-
-        [RelayCommand]
         async void ClickButton()
         {
             if (string.IsNullOrEmpty(Text))
@@ -93,28 +80,9 @@ namespace ExaminationProject.ViewModel
         }
 
         [RelayCommand]
-        public async Task TakePhoto()
+        async Task GoToAdminPage()
         {
-            System.Diagnostics.Debug.WriteLine("✅ LYCKADES KALLA PÅ METOD 'TAKEPHOTO'");
-
-            try
-            {
-                string photoPath = await _photoService.CapturePhotoAsync();
-
-                if (!string.IsNullOrEmpty(photoPath))
-                {
-                    SavedImageSource = ImageSource.FromFile(photoPath);
-                    System.Diagnostics.Debug.WriteLine($"✅ FOTO SPARAT I {photoPath}");
-                }
-                else
-                {
-                    System.Diagnostics.Debug.WriteLine("⚠️ INGEN BILD TAGEN");
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"❌ Error capturing photo: {ex.Message}");
-            }
+            await AppShell.Current.GoToAsync(nameof(AdminPage));
         }
 
         [RelayCommand]

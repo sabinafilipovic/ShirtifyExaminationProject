@@ -1,22 +1,27 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CommunityToolkit.Mvvm.Input;
+using ExaminationProject.Services;
+
+
+
 
 namespace ExaminationProject.ViewModel
 {
-   public partial class RegisterShirtViewModel : ObservableObject
+    public partial class RegisterShirtViewModel : CrudViewModel
     {
-        [RelayCommand]
-        async Task RegisterShirt()
+        private readonly PhotoService _photoService;
+
+        public RegisterShirtViewModel(PhotoService photoService) : base(photoService)
         {
-            //send shirt to database
-            //send user back to inventory
-            await AppShell.Current.GoToAsync("InventoryPage");
+            _photoService = photoService;
         }
 
+        [RelayCommand]
+        async void GoBack()
+        {
+            if (Shell.Current.Navigation.NavigationStack.Count > 1)
+            {
+                await Shell.Current.Navigation.PopAsync();
+            }
+        }
     }
 }
