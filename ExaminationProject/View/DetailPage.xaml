@@ -11,7 +11,7 @@
                 <StackLayout  Grid.ColumnSpan="2" VerticalOptions="Center"  Padding="10,0,0,0">
 
 
-                    <Label Text="Rekommenderad Tröja" 
+                    <Label Text="Info om Tröja" 
                            HorizontalOptions="Center" 
                            FontSize="23"
                            BackgroundColor="#dbf5ff" 

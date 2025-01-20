@@ -3,17 +3,16 @@
 
 namespace ExaminationProject.ViewModel
 {
-   public partial class RegisterShirtViewModel : CrudViewModel
+    public partial class RegisterShirtViewModel : CrudViewModel
     {
         
-
         [RelayCommand]
-        async void RegisterShirt()
+        async void GoBack()
         {
-            //send shirt to database
-            //send user back to inventory
-            await AppShell.Current.GoToAsync("InventoryPage");
+            if (Shell.Current.Navigation.NavigationStack.Count > 1)
+            {
+                await Shell.Current.Navigation.PopAsync();
+            }
         }
-
     }
 }

@@ -31,7 +31,11 @@
             <Picker Title="Color" ItemsSource="{Binding Colors}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedColor}"/>
 
             <!-- Add Shirt Button -->
-            <Button Text="Add Shirt" Command="{Binding AddShirtCommand}" BackgroundColor="#91b597" FontSize="18"/>
+            <Button 
+                Text="Add Shirt" 
+                Command="{Binding AddShirtCommand}" 
+                BackgroundColor="#91b597" 
+                FontSize="18"/>
 
             <!-- Add New Category -->
             <Label 
@@ -46,12 +50,18 @@
                 Text="Add Category" 
                 Command="{Binding AddCategoryCommand}" 
                 CommandParameter="{Binding Text, Source={x:Reference NewCategoryEntry}}" 
-                BackgroundColor="#91b597" FontSize="18"/>
+                BackgroundColor="DarkOrange" 
+                FontSize="18"/>
 
             <!-- Add New Color -->
             <Label Text="Add New Color" FontSize="16"/>
             <Entry Placeholder="New Color Name" x:Name="NewColorEntry" FontSize="18"/>
-            <Button Text="Add Color" Command="{Binding AddColorCommand}" CommandParameter="{Binding Text, Source={x:Reference NewColorEntry}}" BackgroundColor="#91b597" FontSize="18"/>
+            <Button 
+                Text="Add Color" 
+                Command="{Binding AddColorCommand}" 
+                CommandParameter="{Binding Text, Source={x:Reference NewColorEntry}}" 
+                BackgroundColor="DarkOrange" 
+                FontSize="18"/>
 
             <!-- Shirt List -->
             <Label Text="Shirts" FontSize="20"/>
@@ -59,7 +69,10 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Shirt">
                         <VerticalStackLayout>
-                            <Label Text="{Binding Brand}" FontSize="16"/>
+                            <Label Text="{Binding Brand}" 
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   />
                             <Label Text="{Binding Category_Name}" FontSize="16"/>
                             <Label Text="{Binding Color_Name}" FontSize="16"/>
                         </VerticalStackLayout>

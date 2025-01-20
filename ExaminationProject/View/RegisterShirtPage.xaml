@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ExaminationProject.View.RegisterShirtPage"
              
+             
+             
              Title="Register Shirt Page">
 
     <ScrollView>
@@ -20,7 +22,7 @@
                        Grid.ColumnSpan="2"
                        HorizontalOptions="Fill"
                     
-                       Text="Register Shirt" 
+                       Text="Registrera Tröja" 
                     
                        HorizontalTextAlignment="Center"
                     
@@ -142,7 +144,7 @@
                 <Label 
                        Grid.Row="2"
     
-                       Text="Namn:" 
+                       Text="Beskrivning:" 
     
                        HorizontalOptions="Start" 
                        FontSize="23"      
@@ -151,7 +153,7 @@
                 <Entry 
                        Grid.Row="2"
                        Grid.Column="1"
-                       Placeholder="Skriv Namnet" 
+                       Placeholder="Bästa tröjan.." 
                        Text="{Binding ShirtBrand}" 
                        
                        HorizontalOptions="Start" 
@@ -169,6 +171,15 @@
                 <BoxView Grid.ColumnSpan="2" Color="DarkBlue">
 
                 </BoxView>
+                <Button 
+                        Grid.Column="0"
+                        HorizontalOptions="Center"
+                        Text="Garderob" 
+                        Command="{Binding GoBackCommand}" 
+                        Margin="5" 
+                        BackgroundColor="#b4d2de"
+                        TextColor="Black"
+                        FontSize="20" FontFamily="Chewy"/>
 
                 <Button Grid.Column="1"
                         WidthRequest="250" 
@@ -180,9 +191,12 @@
                         TextColor="Black"
                         FontSize="20" FontFamily="Chewy"/>
 
+                
+
             </Grid>
+
             
-            
+
 
         </StackLayout>
     </ScrollView>

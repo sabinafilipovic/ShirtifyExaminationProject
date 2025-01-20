@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace ExaminationProject.ViewModel
 {
-    public partial class InventoryViewModel : ObservableObject
+    public partial class InventoryViewModel : CrudViewModel
     {
         [RelayCommand]
         async void UseShirt()

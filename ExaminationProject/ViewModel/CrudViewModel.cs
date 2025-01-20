@@ -52,17 +52,36 @@ namespace ExaminationProject.ViewModel
         }
 
         [RelayCommand]
-        async public void AddShirt()
+        async public Task AddShirt()
         {
-            Console.WriteLine($"Brand : {ShirtBrand}, Category: {selectedCategory}, Color: {selectedColor}");
+            //Console.WriteLine($"Brand : {ShirtBrand}, Category: {selectedCategory}, Color: {selectedColor}");
+            
             if (string.IsNullOrWhiteSpace(ShirtBrand))
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "Beskriv tröjan.", "OK");
                 return;
+                
+            }
+            
+            if (SelectedCategory == null || SelectedColor == null)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "Välj kategori och färg.", "OK");
+                return;
+
+            }
 
             // Find the corresponding IDs for the selected category and color
             var categoryId = Categories.FirstOrDefault(c => c.Id == SelectedCategory.Id)?.Id ?? 0;
             var colorId = Colors.FirstOrDefault(c => c.Id == SelectedColor.Id)?.Id ?? 0;
 
-            if (categoryId == 0 || colorId == 0) return;
+            if (categoryId == 0 || colorId == 0)
+            {
+                
+                return;
+
+                
+            }
+                
 
             var newShirt = new Shirt
             {
