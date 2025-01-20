@@ -1,15 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using ExaminationProject;
 using ExaminationProject.Model;
-using ExaminationProject.View;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ExaminationProject.ViewModel
+namespace ExaminationProject.ViewModel 
 {
     public partial class AdminCategoriesViewModel : ObservableObject
     {
@@ -22,10 +17,21 @@ namespace ExaminationProject.ViewModel
         [ObservableProperty]
         string editCategoryName;
 
-        [ObservableProperty]
-        Category selectedCategory;
+        private Category selectedCategory;
+        public Category SelectedCategory
+        {
+            get => selectedCategory;
+            set
+            {
+                if (SetProperty(ref selectedCategory, value))
+                {
+                    // Automatically update the EditCategoryName field when selection changes
+                    editCategoryName = selectedCategory?.Name;
+                }
+            }
+        }
 
-        public AdminCategoriesViewModel() 
+        public AdminCategoriesViewModel()
         {
             LoadData();
         }
@@ -56,19 +62,17 @@ namespace ExaminationProject.ViewModel
             if (SelectedCategory == null || string.IsNullOrWhiteSpace(EditCategoryName)) return;
 
             SelectedCategory.Name = EditCategoryName;
-            DatabaseService.AddCategory(SelectedCategory); // Update in DB
+            DatabaseService.UpdateCategory(SelectedCategory); // Update in DB
             LoadData(); // Refresh the list
 
             EditCategoryName = string.Empty; // Clear the input
         }
 
         [RelayCommand]
-        void DeleteCategory()
+        void DeleteCategory(Category category)
         {
-            if (SelectedCategory == null) return;
-
-            DatabaseService.DeleteCategory(SelectedCategory.Id);
-            Categories.Remove(SelectedCategory);
+            DatabaseService.DeleteCategory(category.Id);
+            Categories.Remove(category);
         }
 
         [RelayCommand]
@@ -76,7 +80,5 @@ namespace ExaminationProject.ViewModel
         {
             await AppShell.Current.GoToAsync("///MainPage");
         }
-
-        
     }
 }

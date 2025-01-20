@@ -84,6 +84,19 @@ public static class DatabaseService
     public static void AddCategory(Category category) => Database.Insert(category);
     public static List<Category> GetCategories() => Database.Table<Category>().ToList();
 
+    public static string GetCategoryNameById(int categoryId)
+    {
+        var category = Database.Table<Category>().FirstOrDefault(c => c.Id == categoryId);
+        return category?.Name ?? "Saknar kategori";
+    }
+
+    // Method to update an existing category in the database
+    public static void UpdateCategory(Category category)
+    {
+        if (category == null) throw new ArgumentNullException(nameof(category));
+        Database.Update(category);
+    }
+
     public static void DeleteCategory(int categoryId)
     {
         var category = Database.Table<Category>().FirstOrDefault(c => c.Id == categoryId);
@@ -97,17 +110,13 @@ public static class DatabaseService
     public static void AddColor(ExaminationProject.Model.Color color) => Database.Insert(color);
     public static List<ExaminationProject.Model.Color> GetColors() => Database.Table<ExaminationProject.Model.Color>().ToList();
 
-    public static string GetCategoryNameById(int categoryId)
-    {
-        var category = Database.Table<Category>().FirstOrDefault(c => c.Id == categoryId);
-        return category?.Name ?? "Saknar kategori";
-    }
-
     public static string GetColorNameById(int colorId)
     {
         var color = Database.Table<ExaminationProject.Model.Color>().FirstOrDefault(c => c.Id == colorId);
         return color?.Name ?? "Saknar färg";
     }
+
+    //FILEPATH
 
     public static string GetFilepathById(int pictureId)
     {
