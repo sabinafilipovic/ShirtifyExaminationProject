@@ -73,13 +73,14 @@ namespace ExaminationProject.ViewModel
                 return;
             } 
 
-            }
+        
 
             // Find the corresponding IDs for the selected category and color
             var categoryId = Categories.FirstOrDefault(c => c.Id == SelectedCategory.Id)?.Id ?? 0;
             var colorId = Colors.FirstOrDefault(c => c.Id == SelectedColor.Id)?.Id ?? 0;
             try
-            {
+            
+        {
                 // Capture the photo using PhotoService
                 var pictureId = await _photoService.CapturePhotoAsync();
 
@@ -114,8 +115,7 @@ namespace ExaminationProject.ViewModel
             {
                 System.Diagnostics.Debug.WriteLine($"❌ Error adding shirt: {ex.Message}");
             }
-            DatabaseService.AddShirt(newShirt);
-            Shirts.Add(newShirt);
+           
 
             await AppShell.Current.GoToAsync("InventoryPage");
         }

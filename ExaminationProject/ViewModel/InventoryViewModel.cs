@@ -7,11 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using ExaminationProject.Services;
+
 
 namespace ExaminationProject.ViewModel
 {
     public partial class InventoryViewModel : CrudViewModel
     {
+        private readonly PhotoService _photoService;
+
+        public InventoryViewModel(PhotoService photoService) : base(photoService)
+        {
+            _photoService = photoService;
+        }
+
         [RelayCommand]
         async void UseShirt()
         {
@@ -24,7 +33,7 @@ namespace ExaminationProject.ViewModel
         [RelayCommand]
         async void RegisterNewShirt()
         {
-            AppShell.Current.GoToAsync("RegisterShirtPage");
+            await AppShell.Current.GoToAsync("RegisterShirtPage");
         }
     }
 
