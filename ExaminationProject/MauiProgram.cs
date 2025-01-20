@@ -43,6 +43,15 @@ namespace ExaminationProject
             builder.Services.AddTransient<CrudPage>();
             builder.Services.AddTransient<CrudViewModel>();
 
+            builder.Services.AddTransient<AdminPage>();
+            builder.Services.AddTransient<AdminViewModel>();
+
+            builder.Services.AddTransient<AdminCategoriesPage>();
+            builder.Services.AddTransient<AdminCategoriesViewModel>();
+
+            builder.Services.AddTransient<AdminColorsPage>();
+            builder.Services.AddTransient<AdminColorsViewModel>();
+
             return builder.Build();
         }
     }

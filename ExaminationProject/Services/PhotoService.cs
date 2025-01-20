@@ -38,10 +38,9 @@ namespace ExaminationProject.Services
                             Filepath = galleryPath
                         };
 
-                        DatabaseService.AddPicture(picture); // Save picture info to the database
+                        DatabaseService.AddPicture(picture); 
 
-
-                        return picture.Id; // Return the gallery path
+                        return picture.Id; // Return the gallery paths ID
                     }
                 }
                 catch (Exception ex)

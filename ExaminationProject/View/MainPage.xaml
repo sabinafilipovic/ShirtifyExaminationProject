@@ -43,6 +43,12 @@
                 Background="#91b597"
                 FontSize="18" FontFamily="Chewy"/>
 
+            <Button
+                Command="{Binding GoToAdminPageCommand}" 
+                Text="Gå till Admin vyn"
+                Background="#91b597"
+                FontSize="18" FontFamily="Chewy"/>
+
             <Entry
                 Placeholder="Ge namnet på Tröja"
                 Text="{Binding ShirtName}"

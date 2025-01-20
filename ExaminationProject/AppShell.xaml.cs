@@ -12,13 +12,13 @@ namespace ExaminationProject
             Routing.RegisterRoute(nameof(InventoryPage), typeof(InventoryPage));
             Routing.RegisterRoute(nameof(RegisterShirtPage), typeof(RegisterShirtPage));
 
-
-
-
-
             Routing.RegisterRoute(nameof(Page1), typeof(Page1));
             Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
             Routing.RegisterRoute(nameof(CrudPage), typeof(CrudPage));
+            
+            Routing.RegisterRoute(nameof(AdminPage), typeof(AdminPage));
+            Routing.RegisterRoute(nameof(AdminCategoriesPage), typeof(AdminCategoriesPage));
+            Routing.RegisterRoute(nameof(AdminColorsPage), typeof(AdminColorsPage));
         }
     }
 }

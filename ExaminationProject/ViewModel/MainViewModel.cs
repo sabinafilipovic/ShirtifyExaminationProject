@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Threading.Tasks;
 using ExaminationProject.Services;
+using ExaminationProject.View;
 
 namespace ExaminationProject.ViewModel
 {
@@ -78,7 +79,13 @@ namespace ExaminationProject.ViewModel
             await AppShell.Current.GoToAsync("Page1");
         }
 
-            [RelayCommand]
+        [RelayCommand]
+        async Task GoToAdminPage()
+        {
+            await AppShell.Current.GoToAsync(nameof(AdminPage));
+        }
+
+        [RelayCommand]
         async void GoToCrudPage()
             {
                 await AppShell.Current.GoToAsync(nameof(CrudPage));
