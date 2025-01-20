@@ -2,6 +2,8 @@
 using CommunityToolkit.Mvvm.Input;
 using ExaminationProject.Model;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ExaminationProject.ViewModel
 {
@@ -23,10 +25,10 @@ namespace ExaminationProject.ViewModel
         int shirtColor;
 
         [ObservableProperty]
-        Category selectedCategory; // Selected Category Name
+        Category selectedCategory;
 
         [ObservableProperty]
-        Model.Color selectedColor;    // Selected Color Name
+        Model.Color selectedColor;
 
         public CrudViewModel()
         {
@@ -35,32 +37,26 @@ namespace ExaminationProject.ViewModel
 
         private void LoadData()
         {
-            // Load Shirts
             Shirts.Clear();
             foreach (var shirt in DatabaseService.GetShirts())
                 Shirts.Add(shirt);
 
-            // Load Categories
             Categories.Clear();
             foreach (var category in DatabaseService.GetCategories())
                 Categories.Add(category);
 
-            // Load Colors
             Colors.Clear();
             foreach (var color in DatabaseService.GetColors())
                 Colors.Add(color);
         }
 
         [RelayCommand]
-        public void AddShirt()
+        public async Task AddShirt()
         {
-            Console.WriteLine($"Brand : {ShirtBrand}, Category: {selectedCategory}, Color: {selectedColor}");
-            if (string.IsNullOrWhiteSpace(ShirtBrand))
-                return;
+            if (string.IsNullOrWhiteSpace(ShirtBrand)) return;
 
-            // Find the corresponding IDs for the selected category and color
-            var categoryId = Categories.FirstOrDefault(c => c.Id == SelectedCategory.Id)?.Id ?? 0;
-            var colorId = Colors.FirstOrDefault(c => c.Id == SelectedColor.Id)?.Id ?? 0;
+            var categoryId = Categories.FirstOrDefault(c => c.Id == SelectedCategory?.Id)?.Id ?? 0;
+            var colorId = Colors.FirstOrDefault(c => c.Id == SelectedColor?.Id)?.Id ?? 0;
 
             if (categoryId == 0 || colorId == 0) return;
 
@@ -76,7 +72,7 @@ namespace ExaminationProject.ViewModel
         }
 
         [RelayCommand]
-        public void AddCategory(string categoryName)
+        public async Task AddCategory(string categoryName)
         {
             if (!string.IsNullOrWhiteSpace(categoryName))
             {
@@ -87,7 +83,7 @@ namespace ExaminationProject.ViewModel
         }
 
         [RelayCommand]
-        public void AddColor(string colorName)
+        public async Task AddColor(string colorName)
         {
             if (!string.IsNullOrWhiteSpace(colorName))
             {
@@ -98,7 +94,7 @@ namespace ExaminationProject.ViewModel
         }
 
         [RelayCommand]
-        public void EditShirt(int shirtId)
+        public async Task EditShirt(int shirtId)
         {
             var shirtToEdit = DatabaseService.GetShirtById(shirtId);
             if (shirtToEdit != null)
@@ -111,9 +107,8 @@ namespace ExaminationProject.ViewModel
             }
         }
 
-
         [RelayCommand]
-        public void DeleteShirt(int shirtId)
+        public async Task DeleteShirt(int shirtId)
         {
             DatabaseService.RemoveShirt(shirtId);
             LoadData();

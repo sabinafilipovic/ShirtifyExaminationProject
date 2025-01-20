@@ -59,7 +59,6 @@ namespace ExaminationProject.ViewModel
                 return;
             }
 
-
             // Remove the shirt from the database
             DatabaseService.RemoveShirt(shirtId);
 
@@ -87,14 +86,14 @@ namespace ExaminationProject.ViewModel
             Items.Add(Text);
         }
 
-            [RelayCommand]
+        [RelayCommand]
         async void GoToPage1()
         {
             await AppShell.Current.GoToAsync("Page1");
         }
 
         [RelayCommand]
-        public async void TakePhoto()
+        public async Task TakePhoto()
         {
             System.Diagnostics.Debug.WriteLine("✅ LYCKADES KALLA PÅ METOD 'TAKEPHOTO'");
 
@@ -118,21 +117,16 @@ namespace ExaminationProject.ViewModel
             }
         }
 
-            [RelayCommand]
+        [RelayCommand]
         async void GoToCrudPage()
             {
                 await AppShell.Current.GoToAsync(nameof(CrudPage));
             }
-
-        
 
         [RelayCommand]
         async void GoToDetailPage()
         {
             AppShell.Current.GoToAsync("DetailPage");
         }
-
-
-
     }
 }

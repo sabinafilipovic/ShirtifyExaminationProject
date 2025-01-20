@@ -13,7 +13,6 @@ namespace ExaminationProject.ViewModel
     {
         [ObservableProperty]
         public string color;
-        
 
         [ObservableProperty]
         public string category;
@@ -24,10 +23,6 @@ namespace ExaminationProject.ViewModel
 
         [ObservableProperty]
         public int amountUsed;
-
-
-
-
 
         [RelayCommand]
         async void GoToInventory()
@@ -43,10 +38,7 @@ namespace ExaminationProject.ViewModel
             //Send user back to homepage
             AppShell.Current.GoToAsync("..");
 
-
         }
-
-
 
     }
 }

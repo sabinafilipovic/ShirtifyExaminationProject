@@ -11,7 +11,7 @@ namespace ExaminationProject.ViewModel
    public partial class RegisterShirtViewModel : ObservableObject
     {
         [RelayCommand]
-        async void RegisterShirt()
+        async Task RegisterShirt()
         {
             //send shirt to database
             //send user back to inventory
