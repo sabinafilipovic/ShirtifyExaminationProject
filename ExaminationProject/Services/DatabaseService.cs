@@ -116,6 +116,23 @@ public static class DatabaseService
         return color?.Name ?? "Saknar färg";
     }
 
+    // Update an existing color
+    public static void UpdateColor(ExaminationProject.Model.Color color)
+    {
+        Database.Update(color);
+    }
+
+    public static void DeleteColor(int colorId)
+    {
+        var color = Database.Table<ExaminationProject.Model.Color>().FirstOrDefault(c => c.Id == colorId);
+        if (color != null)
+        {
+            Database.Delete(color);
+        }
+    }
+
+    
+
     //FILEPATH
 
     public static string GetFilepathById(int pictureId)

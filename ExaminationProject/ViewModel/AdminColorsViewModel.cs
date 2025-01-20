@@ -1,13 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ExaminationProject.Model;
-using ExaminationProject.View;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ExaminationProject.ViewModel
 {
@@ -16,11 +10,66 @@ namespace ExaminationProject.ViewModel
         [ObservableProperty]
         ObservableCollection<Model.Color> colors = new();
 
+        [ObservableProperty]
+        string newColorName;
+
+        [ObservableProperty]
+        string editColorName;
+
+        private Model.Color selectedColor;
+        public Model.Color SelectedColor
+        {
+            get => selectedColor;
+            set
+            {
+                if (SetProperty(ref selectedColor, value))
+                {
+                    editColorName = selectedColor?.Name;
+                }
+            }
+        }
+
+        public AdminColorsViewModel()
+        {
+            LoadData();
+        }
+
+        private void LoadData()
+        {
+            Colors.Clear();
+            foreach (var color in DatabaseService.GetColors())
+                Colors.Add(color);
+        }
 
         [RelayCommand]
-        async Task GoBack()
+        void AddColor()
         {
-            await AppShell.Current.GoToAsync("///MainPage");
+            if (string.IsNullOrWhiteSpace(NewColorName)) return;
+
+            var newColor = new Model.Color { Name = NewColorName };
+            DatabaseService.AddColor(newColor);
+            Colors.Add(newColor);
+
+            NewColorName = string.Empty; // Clear the input
+        }
+
+        [RelayCommand]
+        void EditColor()
+        {
+            if (SelectedColor == null || string.IsNullOrWhiteSpace(EditColorName)) return;
+
+            SelectedColor.Name = EditColorName;
+            DatabaseService.UpdateColor(SelectedColor); // Update in DB
+            LoadData(); // Refresh the list
+
+            EditColorName = string.Empty; // Clear the input
+        }
+
+        [RelayCommand]
+        void DeleteColor(Model.Color color)
+        {
+            DatabaseService.DeleteColor(color.Id);
+            Colors.Remove(color);
         }
     }
 }

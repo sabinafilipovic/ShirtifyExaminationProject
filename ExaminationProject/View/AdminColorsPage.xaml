@@ -5,16 +5,37 @@
              xmlns:model="clr-namespace:ExaminationProject.Model"
              x:Class="ExaminationProject.View.AdminColorsPage"
              x:DataType="viewmodel:AdminColorsViewModel"
-             Title="AdminColorsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to Colors"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+             Title="Admin Colors">
 
-        <Button Text="Go to Home"
-            Command="{Binding GoBackCommand}"
-            FontSize="18"
-            BackgroundColor="#91b597" />
+    <VerticalStackLayout Padding="20" Spacing="15">
+
+        <!-- Add New Color -->
+        <Entry Placeholder="New Color Name"
+               Text="{Binding NewColorName}" />
+        <Button Text="Add Color"
+                Command="{Binding AddColorCommand}" />
+
+        <!-- Edit Selected Color -->
+        <Entry Placeholder="Edit Selected Color Name"
+               Text="{Binding EditColorName}" />
+        <Button Text="Edit Selected Color"
+                Command="{Binding EditColorCommand}" />
+
+        <!-- Colors List -->
+        <Label Text="Colors" FontSize="20" />
+        <CollectionView ItemsSource="{Binding Colors}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedColor}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Color">
+                    <HorizontalStackLayout Padding="10" Spacing="10">
+                        <Label Text="{Binding Name}" VerticalOptions="Center" />
+                        <Button Text="Delete"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:AdminColorsViewModel}}, Path=DeleteColorCommand}"
+                                CommandParameter="{Binding .}" />
+                    </HorizontalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </VerticalStackLayout>
 </ContentPage>
