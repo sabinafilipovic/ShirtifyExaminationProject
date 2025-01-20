@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:ExaminationProject.ViewModel"
+             xmlns:model="clr-namespace:ExaminationProject.Model"
+             x:Class="ExaminationProject.View.AdminCategoriesPage"
+             x:DataType="viewmodel:AdminCategoriesViewModel"
+             Title="Admin Categories">
+
+    <VerticalStackLayout Padding="20" Spacing="15">
+
+        <!-- Add New Category -->
+        <Entry Placeholder="New Category Name"
+               Text="{Binding NewCategoryName}" />
+        <Button Text="Add Category"
+                Command="{Binding AddCategoryCommand}" />
+
+        <!-- Edit Selected Category -->
+        <Entry Placeholder="Edit Selected Category Name"
+               Text="{Binding EditCategoryName}" />
+        <Button Text="Edit Selected Category"
+                Command="{Binding EditCategoryCommand}" />
+
+        <!-- Categories List -->
+        <Label Text="Categories" FontSize="20" />
+        <CollectionView ItemsSource="{Binding Categories}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedCategory}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Category">
+                    <HorizontalStackLayout Padding="10" Spacing="10">
+                        <Label Text="{Binding Name}" VerticalOptions="Center" />
+                        <Button Text="Delete"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:AdminCategoriesViewModel}}, Path=DeleteCategoryCommand}"
+                                CommandParameter="{Binding .}" />
+                    </HorizontalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Go Back -->
+        <Button Text="Go Back"
+                Command="{Binding GoBackCommand}" />
+    </VerticalStackLayout>
+</ContentPage>

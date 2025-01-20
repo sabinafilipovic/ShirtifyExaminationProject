@@ -69,12 +69,16 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Shirt">
                         <VerticalStackLayout>
-                            <Label Text="{Binding Brand}" 
-                                   FontSize="24"
-                                   FontAttributes="Bold"
-                                   />
+                            <Image Source="{Binding Picture_Filepath}" HeightRequest="100" WidthRequest="100" 
+                                   Aspect="AspectFill"/>
+                            <Label Text="{Binding Brand}" FontSize="16"/>
                             <Label Text="{Binding Category_Name}" FontSize="16"/>
                             <Label Text="{Binding Color_Name}" FontSize="16"/>
+                            <Button Text="Delete" 
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CrudViewModel}},Path=DeleteShirtCommand}" 
+                            CommandParameter="{Binding Id}" 
+                            BackgroundColor="Red" 
+                            TextColor="White"/>
                         </VerticalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
