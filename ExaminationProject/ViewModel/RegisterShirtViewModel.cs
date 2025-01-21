@@ -44,5 +44,19 @@ namespace ExaminationProject.ViewModel
             // Update the page
             OnPropertyChanged(nameof(PictureFilepath));
         }
+
+        [RelayCommand]
+        async void SelectPhoto()
+        {
+            var selectedFilePath = await _photoService.SelectPhotoFromGalleryAsync();
+            
+            pictureId = selectedFilePath.Id;
+
+            if (!string.IsNullOrEmpty(selectedFilePath.Filepath))
+            {
+                pictureFilepath = selectedFilePath.Filepath;
+                OnPropertyChanged(nameof(PictureFilepath));
+            }
+        }
     }
 }
