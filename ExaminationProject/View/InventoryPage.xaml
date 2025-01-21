@@ -96,7 +96,9 @@
                 
                 <CollectionView 
                     Grid.Row="2"
-                    ItemsSource="{Binding Shirts}">
+                    ItemsSource="{Binding Shirts}"
+                    SelectionMode="Single"
+                    SelectedItem="{Binding SelectedPicture}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:Shirt">
                             <VerticalStackLayout
@@ -107,15 +109,15 @@
                                     Text="{Binding Brand}"
                                     FontSize="24" 
                                     FontAttributes="Bold"/>
-                                
+
+                                <Image 
+                                    Source="{Binding Picture_Filepath}" 
+                                    HeightRequest="100" 
+                                    WidthRequest="100" 
+                                    Aspect="AspectFill"/>
+
                                 <!-- Infoga bilden och ta bort labels under -->
 
-                                <Label 
-                                    Text="{Binding Category_Name, StringFormat='Kategori: {0}'}" 
-                                    FontSize="16"/>
-                                <Label 
-                                    Text="{Binding Color_Name, StringFormat='Färg: {0}'}" 
-                                    FontSize="16"/>
                                 <Button 
                                     Text="Delete" 
                                     Command="{Binding 

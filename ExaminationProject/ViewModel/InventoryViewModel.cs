@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using ExaminationProject.Services;
+using ExaminationProject.Model;
 
 
 namespace ExaminationProject.ViewModel
@@ -20,6 +21,12 @@ namespace ExaminationProject.ViewModel
         {
             _photoService = photoService;
         }
+
+        [ObservableProperty]
+        public Shirt selectedPicture;
+        
+        
+        
 
         [RelayCommand]
         async void UseShirt()

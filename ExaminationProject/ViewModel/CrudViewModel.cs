@@ -11,7 +11,7 @@ namespace ExaminationProject.ViewModel
     public partial class CrudViewModel : ObservableObject
     {
         [ObservableProperty]
-        ObservableCollection<Shirt> shirts = new ObservableCollection<Shirt>();
+         ObservableCollection<Shirt> shirts = new ObservableCollection<Shirt>();
 
         [ObservableProperty]
         ObservableCollection<Category> categories = new();
