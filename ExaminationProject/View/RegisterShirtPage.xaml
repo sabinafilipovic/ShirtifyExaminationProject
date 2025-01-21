@@ -78,6 +78,7 @@
                                 Padding="1"
                                 Margin="5"
                                 BackgroundColor="Transparent"
+                                Command="{Binding SelectPhotoCommand}"
                                />
 
                     </VerticalStackLayout>

@@ -52,6 +52,42 @@ namespace ExaminationProject.Services
             return 0; // Return null if no photo was captured or an error occurred
         }
 
+        public async Task<Picture> SelectPhotoFromGalleryAsync()
+        {
+            try
+            {
+                // Open the gallery picker
+                FileResult photo = await MediaPicker.Default.PickPhotoAsync();
+
+                if (photo != null)
+                {
+                    // Save the selected photo temporarily in AppDataDirectory
+                    string fileName = photo.FileName;
+                    string localFilePath = Path.Combine(FileSystem.AppDataDirectory, fileName);
+
+                    using (Stream sourceStream = await photo.OpenReadAsync())
+                    using (FileStream localFileStream = File.OpenWrite(localFilePath))
+                    {
+                        await sourceStream.CopyToAsync(localFileStream);
+                    }
+
+                    var newPicture = new Picture
+                    {
+                        Filepath = localFilePath
+                    };
+                    DatabaseService.AddPicture(newPicture);
+
+                    return newPicture; // Return the local file path of the selected photo
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"❌ Error selecting photo: {ex.Message}");
+            }
+
+            return null; // Return null if no photo was selected or an error occurred
+        }
+
         private async Task<string> SaveToGalleryAsync(string fileName, string sourceFilePath)
         {
 #if ANDROID
