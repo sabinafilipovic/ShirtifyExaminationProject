@@ -15,6 +15,8 @@ namespace ExaminationProject.ViewModel
 {
     public partial class InventoryViewModel : CrudViewModel
     {
+        public ShirtService ShirtService => ShirtService.Instance;
+
         private readonly PhotoService _photoService;
 
         public InventoryViewModel(PhotoService photoService) : base(photoService)
@@ -31,10 +33,12 @@ namespace ExaminationProject.ViewModel
         
 
         [RelayCommand]
-        async void UseShirt()
+        async void UseShirt(Shirt selectedShirt)
         {
-            
+            if (selectedShirt == null)
+                return;
 
+            ShirtService.CurrentShirt = selectedShirt;
 
             await AppShell.Current.GoToAsync("DetailPage");
         }
