@@ -22,7 +22,8 @@ namespace ExaminationProject.ViewModel
         [ObservableProperty]
         string text;
 
-        private readonly PhotoService _photoService = new PhotoService();
+        [ObservableProperty]
+        Shirt dailyShirt;
 
         [ObservableProperty]
         string shirtName;
@@ -36,9 +37,23 @@ namespace ExaminationProject.ViewModel
         [ObservableProperty]
         ObservableCollection<Shirt> shirts = new ObservableCollection<Shirt>();
 
-        public MainViewModel(PhotoService photoService)
+        public MainViewModel()
         {
             loadShirts();
+            randomizeShirt();
+        }
+
+        public Shirt getDailyShirt() 
+        {
+            return dailyShirt;
+        }
+
+        public void randomizeShirt()
+        {
+            Random rand = new Random();
+            int randIndex = rand.Next(Shirts.Count);
+
+            dailyShirt = Shirts[randIndex];
         }
 
         public void loadShirts() 
