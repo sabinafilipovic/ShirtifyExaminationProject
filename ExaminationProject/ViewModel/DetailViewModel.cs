@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using ExaminationProject.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ExaminationProject.ViewModel
 {
-    public partial class DetailViewModel : ObservableObject
+    public partial class DetailViewModel : MainViewModel
     {
         [ObservableProperty]
         public string color;
@@ -23,6 +24,14 @@ namespace ExaminationProject.ViewModel
 
         [ObservableProperty]
         public int amountUsed;
+
+        [ObservableProperty]
+        public Shirt dailyShirt;
+
+        public DetailViewModel() 
+        {
+            dailyShirt = getDailyShirt();
+        }
 
         [RelayCommand]
         async void GoToInventory()

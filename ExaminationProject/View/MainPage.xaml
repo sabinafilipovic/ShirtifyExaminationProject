@@ -13,42 +13,21 @@
             Padding="30, 0"
             Spacing="25">
 
-            <VerticalStackLayout>
-                <Button Text="📸 Ta Foto"
-                        Background="#b4d2de"
-                        FontFamily="Chewy"
-                        FontSize="20"
-                        HorizontalOptions="Center"
-                        VerticalOptions="CenterAndExpand"/>
-
-                <Image 
-                    Source="{Binding SavedImageSource}"
-                    HeightRequest="200"
-                    WidthRequest="200"
-                    Aspect="Fill"
-                    
-                    Margin="10"/>
-                
-            </VerticalStackLayout>
-
             <Label
                 Text="Dagens Tröja"
                 HorizontalTextAlignment="Center"
                 FontFamily="Chewy"
                 FontSize="20"
                 />
-            <Image
-                Source="dotnet_bot.png"
+
+            <ImageButton
+                Source="{Binding DailyShirt.Picture_Filepath}"
                 WidthRequest="200"
                 HeightRequest="200"
-                BackgroundColor="Aquamarine"
-               
-                
+                BackgroundColor="Aquamarine" 
+                Command="{Binding GoToDetailPageCommand}"
+                CommandParameter="{Binding .}"                
                 />
-
-
-
-
 
             <Button Text="🧺 - Tvättråd och skötsel"
                     Command="{Binding GoToPage1Command}"
