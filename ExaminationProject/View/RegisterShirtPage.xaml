@@ -5,7 +5,7 @@
              
              
              
-             Title="Register Shirt Page">
+             Title="Registrera Tröja">
 
     <ScrollView>
         <StackLayout Padding="0" Spacing="10">
@@ -29,7 +29,6 @@
                        FontSize="23"
                        BackgroundColor="#dbf5ff" 
                        FontFamily="Chewy"
-                    
                        Padding="10"/>       
 
 
@@ -37,28 +36,23 @@
                        Grid.Row="1" 
                        Padding="15" 
                        RowDefinitions="Auto, Auto"
-                       ColumnDefinitions="auto, Auto">
-
-                   
-
+                       ColumnDefinitions="auto, Auto"
+                        >
 
 
-
-                    <ImageButton 
+                    <Image 
                         Grid.Row="0"
                         Grid.Column="0"
                         
                         HorizontalOptions="Start"
                         
-                        Margin="5"
-                        BorderWidth="2" 
-                        BorderColor="Black" 
+                        Margin="5" 
                         HeightRequest="200" 
                         WidthRequest="200"
                         
-                        Source="dotnet_bot.png"
+                        Source="{Binding PictureFilepath}"
                         
-                        Background="Aquamarine"
+                        
                         />
                     
                     <VerticalStackLayout 
@@ -75,6 +69,7 @@
                                 Padding="1"
                                 Margin="5"
                                 BackgroundColor="Transparent"
+                                Command="{Binding CapturePhotoCommand}"
                                 />
                         <Button
 
@@ -154,7 +149,8 @@
                        Grid.Row="2"
                        Grid.Column="1"
                        Placeholder="Bästa tröjan.." 
-                       Text="{Binding ShirtBrand}" 
+                       Text="{Binding ShirtBrand}"
+                    
                        
                        HorizontalOptions="Start" 
                        FontSize="23"      
@@ -185,7 +181,9 @@
                         WidthRequest="250" 
                         HorizontalOptions="Center"
                         Text="Lägg till Tröja" 
-                        Command="{Binding AddShirtCommand}" 
+                        Command="{Binding AddShirtCommand}"
+                        CommandParameter="{Binding PictureId}"
+                        
                         Margin="5" 
                         BackgroundColor="#b4d2de"
                         TextColor="Black"
@@ -194,8 +192,8 @@
                 
 
             </Grid>
+             
 
-            
 
 
         </StackLayout>

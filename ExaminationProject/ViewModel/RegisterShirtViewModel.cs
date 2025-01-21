@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using ExaminationProject.Services;
 
 
@@ -22,6 +23,26 @@ namespace ExaminationProject.ViewModel
             {
                 await Shell.Current.Navigation.PopAsync();
             }
+        }
+
+        [ObservableProperty]
+        string pictureFilepath;
+
+        
+
+        [RelayCommand]
+        async void CapturePhoto()
+        {
+            
+
+            pictureId = await _photoService.CapturePhotoAsync();
+
+
+            pictureFilepath = DatabaseService.GetFilepathById(pictureId);
+
+
+            // Update the page
+            OnPropertyChanged(nameof(PictureFilepath));
         }
     }
 }
