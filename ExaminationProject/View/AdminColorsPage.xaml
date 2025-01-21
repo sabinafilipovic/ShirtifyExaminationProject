@@ -37,5 +37,8 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <!-- Go Back -->
+        <Button Text="Go to Home"
+        Command="{Binding GoBackCommand}" />
     </VerticalStackLayout>
 </ContentPage>

@@ -71,5 +71,11 @@ namespace ExaminationProject.ViewModel
             DatabaseService.DeleteColor(color.Id);
             Colors.Remove(color);
         }
+
+        [RelayCommand]
+        async Task GoBack()
+        {
+            await AppShell.Current.GoToAsync("///MainPage");
+        }
     }
 }
