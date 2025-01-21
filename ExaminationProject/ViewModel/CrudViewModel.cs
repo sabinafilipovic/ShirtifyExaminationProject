@@ -11,7 +11,10 @@ namespace ExaminationProject.ViewModel
     public partial class CrudViewModel : ObservableObject
     {
         [ObservableProperty]
-        ObservableCollection<Shirt> shirts = new ObservableCollection<Shirt>();
+        public int pictureId = 0;
+
+        [ObservableProperty]
+         ObservableCollection<Shirt> shirts = new ObservableCollection<Shirt>();
 
         [ObservableProperty]
         ObservableCollection<Category> categories = new();
@@ -81,9 +84,11 @@ namespace ExaminationProject.ViewModel
             
         {
                 // Capture the photo using PhotoService
-                var pictureId = await _photoService.CapturePhotoAsync();
+                //var pictureId = await _photoService.CapturePhotoAsync();
 
-            if (categoryId == 0 || colorId == 0)
+                
+
+                if (categoryId == 0 || colorId == 0)
             {
                 
                 return;
@@ -93,7 +98,7 @@ namespace ExaminationProject.ViewModel
                 
                 if (pictureId == 0)
                 {
-                    System.Diagnostics.Debug.WriteLine("⚠️ No photo was captured.");
+                    System.Diagnostics.Debug.WriteLine("⚠️ Bild Saknas");
                     return;
                 }
 

@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ExaminationProject.Model;
+using ExaminationProject.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,8 +11,10 @@ using System.Threading.Tasks;
 
 namespace ExaminationProject.ViewModel
 {
-    public partial class DetailViewModel : MainViewModel
+    public partial class DetailViewModel : ObservableObject
     {
+        public ShirtService ShirtService => ShirtService.Instance;
+
         [ObservableProperty]
         public string color;
 
@@ -30,7 +33,7 @@ namespace ExaminationProject.ViewModel
 
         public DetailViewModel() 
         {
-            dailyShirt = getDailyShirt();
+            dailyShirt = ShirtService.CurrentShirt;
         }
 
         [RelayCommand]

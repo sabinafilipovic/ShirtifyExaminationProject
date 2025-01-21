@@ -13,6 +13,8 @@ namespace ExaminationProject.ViewModel
 {
     public partial class MainViewModel : ObservableObject
     {
+        public ShirtService ShirtService => ShirtService.Instance;
+
         [ObservableProperty]
         ObservableCollection<string> items = new ObservableCollection<string>();
 
@@ -37,23 +39,28 @@ namespace ExaminationProject.ViewModel
         [ObservableProperty]
         ObservableCollection<Shirt> shirts = new ObservableCollection<Shirt>();
 
+        private bool isShirtRandomized = false;
+
+        public Shirt CurrentShirt
+        {
+            get => ShirtService.CurrentShirt;
+            set
+            {
+                ShirtService.SetCurrentShirt(value);
+                OnPropertyChanged(nameof(CurrentShirt));
+            }
+        }
+
         public MainViewModel()
         {
-            loadShirts();
-            randomizeShirt();
+            // Ensure shirts are loaded and a shirt is randomized on startup
+            ShirtService.LoadShirts();
+            dailyShirt = ShirtService.CurrentShirt;
         }
 
         public Shirt getDailyShirt() 
         {
             return dailyShirt;
-        }
-
-        public void randomizeShirt()
-        {
-            Random rand = new Random();
-            int randIndex = rand.Next(Shirts.Count);
-
-            dailyShirt = Shirts[randIndex];
         }
 
         public void loadShirts() 

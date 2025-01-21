@@ -5,72 +5,128 @@
              xmlns:model="clr-namespace:ExaminationProject.Model"
              x:DataType="viewmodel:InventoryViewModel"
              x:Class="ExaminationProject.View.InventoryPage"
-             Title="Inventory Page">
+             Title="Garderob">
     
     <ScrollView>
         <StackLayout Padding="0" Spacing="10">
             <Label Text="Garderob" 
                    HorizontalOptions="Center" 
                    FontSize="23"
-                   BackgroundColor="#dbf5ff" 
+                   
                    FontFamily="Chewy"
                    Padding="10"/>
-
+<!--
             <Grid Padding="10" HorizontalOptions="Center" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, auto, auto">
-                                
-                
-                                <ImageButton
-                                    Margin="10"
-                                    BorderWidth="2" 
-                                    BorderColor="Black" 
-                                    HeightRequest="100" 
-                                    WidthRequest="100" 
-                                    Source="lufttorka.png"
-                                    BackgroundColor="LightBlue"
-                                    />
-                                
-                                <ImageButton 
-                                    Grid.Column="1"
-                                    
-                                    Margin="10"
-                                    BorderWidth="2" 
-                                    BorderColor="Black" 
-                                    HeightRequest="100" 
-                                    WidthRequest="100" 
-                                    Source="maskintvatt_1.png"
-                                    BackgroundColor="LightBlue"
-                                    />
-                                <ImageButton 
-                                    Grid.Column="2"
-                                    
-                                    Margin="10"
-                                    BorderWidth="2" 
-                                    BorderColor="Black" 
-                                    HeightRequest="100" 
-                                    WidthRequest="100" 
-                                    Source="torktumlas.png"
-                                    BackgroundColor="LightBlue"
-                                    />
+                    
+    
+                    <ImageButton
+                        Margin="10"
+                        BorderWidth="2" 
+                        BorderColor="Black" 
+                        HeightRequest="100" 
+                        WidthRequest="100" 
+                        Source="lufttorka.png"
+                        BackgroundColor="LightBlue"
+                        />
+                    
+                    <ImageButton 
+                        Grid.Column="1"
+                        
+                        Margin="10"
+                        BorderWidth="2" 
+                        BorderColor="Black" 
+                        HeightRequest="100" 
+                        WidthRequest="100" 
+                        Source="maskintvatt_1.png"
+                        BackgroundColor="LightBlue"
+                        />
+                    <ImageButton 
+                        Grid.Column="2"
+                        
+                        Margin="10"
+                        BorderWidth="2" 
+                        BorderColor="Black" 
+                        HeightRequest="100" 
+                        WidthRequest="100" 
+                        Source="torktumlas.png"
+                        BackgroundColor="LightBlue"
+                        />
 
 
-            </Grid>
+</Grid>
+            -->
             
-            <Grid Padding="0" RowDefinitions="Auto, Auto, auto" ColumnDefinitions="Auto, 1*">
+            
+            <Grid Padding="10" RowDefinitions="Auto, Auto, auto" ColumnDefinitions="Auto, 1*">
 
-                <BoxView Grid.ColumnSpan="2" Color="DarkBlue">
+                <CollectionView 
+                        Grid.Row="0"
+                        Grid.ColumnSpan="2"
+                        HorizontalOptions="Center"
+                    
+                        ItemsSource="{Binding Shirts}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedItem}">
+                    
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Shirt" >
+                            <VerticalStackLayout 
+
+
+                                BackgroundColor="AntiqueWhite"
+                                Margin="10" >
+
+                                <Label 
+                                        Text="{Binding Brand}"
+                                        FontSize="24" 
+                                        FontAttributes="Bold"
+                                    HorizontalTextAlignment="Center"
+                                    Margin="10"/>
+
+                                <Image 
+                                        Source="{Binding Picture_Filepath}" 
+                                        HeightRequest="200" 
+                                        WidthRequest="200" 
+                                        Aspect="AspectFill"/>
+
+                                <!-- Infoga bilden och ta bort labels under -->
+
+                                <Button 
+                                        Text="Delete" 
+                                        Command="{Binding 
+                                        Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}},Path=DeleteShirtCommand}" 
+                                        CommandParameter="{Binding Id}" 
+                                        BackgroundColor="Red" 
+                                        TextColor="White"
+                                        WidthRequest="100"
+                                        Margin="5"
+
+                                        HorizontalOptions="Center"/>
+
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                
+                <BoxView
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2" Color="DarkBlue">
 
                 </BoxView>
 
-                <Button WidthRequest="250" 
+                <Button 
+                        Grid.Row="2" 
+                        WidthRequest="250" 
                         Text="Använd Tröja" 
                         Command="{Binding UseShirtCommand}" 
+                        CommandParameter="{Binding SelectedItem}"
                         Margin="5" 
                         BackgroundColor="#b4d2de" 
                         FontSize="20" 
                         FontFamily="Chewy"/>
 
                 <Button 
-                        Grid.Row="0" 
+                        Grid.Row="2" 
                         Grid.Column="1" 
                         Text="Ny Tröja" 
                         Command="{Binding RegisterNewShirtCommand}" 
@@ -84,53 +140,7 @@
                 Ska flyttas upp sen
                 -->
                 
-                <Label 
-                        Grid.Row="1"
-                        Grid.ColumnSpan="2"
-                        Text="Tröjor" 
-                        HorizontalOptions="Center" 
-                        FontSize="23"
-                        BackgroundColor="#dbf5ff" 
-                        FontFamily="Chewy"
-                        Padding="10"/>
                 
-                <CollectionView 
-                    Grid.Row="2"
-                    ItemsSource="{Binding Shirts}">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="model:Shirt">
-                            <VerticalStackLayout
-                                Margin="10"
-                                >
-                                
-                                <Label 
-                                    Text="{Binding Brand}"
-                                    FontSize="24" 
-                                    FontAttributes="Bold"/>
-                                
-                                <!-- Infoga bilden och ta bort labels under -->
-
-                                <Label 
-                                    Text="{Binding Category_Name, StringFormat='Kategori: {0}'}" 
-                                    FontSize="16"/>
-                                <Label 
-                                    Text="{Binding Color_Name, StringFormat='Färg: {0}'}" 
-                                    FontSize="16"/>
-                                <Button 
-                                    Text="Delete" 
-                                    Command="{Binding 
-                                    Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}},Path=DeleteShirtCommand}" 
-                                    CommandParameter="{Binding Id}" 
-                                    BackgroundColor="Red" 
-                                    TextColor="White"
-                                    WidthRequest="100"
-
-                                    HorizontalOptions="Start"/>
-                                
-                            </VerticalStackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
 
 
 

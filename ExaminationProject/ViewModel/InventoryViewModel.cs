@@ -8,12 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using ExaminationProject.Services;
+using ExaminationProject.Model;
 
 
 namespace ExaminationProject.ViewModel
 {
     public partial class InventoryViewModel : CrudViewModel
     {
+        public ShirtService ShirtService => ShirtService.Instance;
+
         private readonly PhotoService _photoService;
 
         public InventoryViewModel(PhotoService photoService) : base(photoService)
@@ -21,13 +24,23 @@ namespace ExaminationProject.ViewModel
             _photoService = photoService;
         }
 
+
+
+        [ObservableProperty]
+        public Shirt selectedItem;
+        
+        
+        
+
         [RelayCommand]
-        async void UseShirt()
+        async void UseShirt(Shirt selectedShirt)
         {
-            //send "current" shirt to database.
-            //Set "current" shirt as your "Selected" shirt for today.
-            //Send user back to main page
-            await AppShell.Current.GoToAsync("//MainPage");
+            if (selectedShirt == null)
+                return;
+
+            ShirtService.CurrentShirt = selectedShirt;
+
+            await AppShell.Current.GoToAsync("DetailPage");
         }
 
         [RelayCommand]

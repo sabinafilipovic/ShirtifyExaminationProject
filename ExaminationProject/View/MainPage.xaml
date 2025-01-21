@@ -33,23 +33,11 @@
                 CommandParameter="{Binding .}"                
                 />
 
-            <Button Text="🧺 - Tvättråd och skötsel"
-                    Command="{Binding GoToPage1Command}"
+            <Button Text="To Detail Page"
+                    Command="{Binding GoToDetailPageCommand}"
                     Background="#b4d2de"
                     FontFamily="Chewy"
                     FontSize="20"/>
-
-            <Button Text="To Detail Page"
-        Command="{Binding GoToDetailPageCommand}"
-        Background="#b4d2de"
-        FontFamily="Chewy"
-        FontSize="20"/>
-
-            <Button
-                Command="{Binding GoToCrudPageCommand}" 
-                Text="Gå till CRUD"
-                Background="#91b597"
-                FontSize="18" FontFamily="Chewy"/>
 
             <Button
                 Command="{Binding GoToAdminPageCommand}" 
@@ -57,30 +45,13 @@
                 Background="#91b597"
                 FontSize="18" FontFamily="Chewy"/>
 
-            <Entry
-                Placeholder="Ge namnet på Tröja"
-                Text="{Binding ShirtName}"
-                FontSize="20">
-            </Entry>
 
-            <Button
-                Command="{Binding ClickButtonCommand}" 
-                Text="Lägg till.."
-                Background="#91b597"
-                FontSize="18" FontFamily="Chewy"/>
-
-            <!-- Corrected CollectionView for displaying shirts -->
-            <CollectionView ItemsSource="{Binding Shirts}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:Shirt">
-                        <VerticalStackLayout Padding="10" Spacing="10">
-                            <Label Text="{Binding Id}" FontSize="20" />
-                            <Label Text="{Binding Brand}" FontSize="20" />
-                            <Label Text="{Binding Color_Id}" FontSize="16" TextColor="Gray"/>
-                        </VerticalStackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+            <Button Text="🧺"
+                    Command="{Binding GoToPage1Command}"
+                    Background="#b4d2de"
+                    FontFamily="Chewy"
+                    FontSize="20"
+                    WidthRequest="50"/>
 
 
         </VerticalStackLayout>
