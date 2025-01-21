@@ -64,6 +64,7 @@
                 <Button WidthRequest="250" 
                         Text="Använd Tröja" 
                         Command="{Binding UseShirtCommand}" 
+                        CommandParameter="{Binding SelectedItem}"
                         Margin="5" 
                         BackgroundColor="#b4d2de" 
                         FontSize="20" 
@@ -98,7 +99,7 @@
                     Grid.Row="2"
                     ItemsSource="{Binding Shirts}"
                     SelectionMode="Single"
-                    SelectedItem="{Binding SelectedPicture}">
+                    SelectedItem="{Binding SelectedItem}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:Shirt">
                             <VerticalStackLayout

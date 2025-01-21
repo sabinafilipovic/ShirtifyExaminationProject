@@ -22,8 +22,10 @@ namespace ExaminationProject.ViewModel
             _photoService = photoService;
         }
 
+
+
         [ObservableProperty]
-        public Shirt selectedPicture;
+        public Shirt selectedItem;
         
         
         
@@ -31,10 +33,10 @@ namespace ExaminationProject.ViewModel
         [RelayCommand]
         async void UseShirt()
         {
-            //send "current" shirt to database.
-            //Set "current" shirt as your "Selected" shirt for today.
-            //Send user back to main page
-            await AppShell.Current.GoToAsync("//MainPage");
+            
+
+
+            await AppShell.Current.GoToAsync("DetailPage");
         }
 
         [RelayCommand]

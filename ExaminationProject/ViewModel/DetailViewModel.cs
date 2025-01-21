@@ -32,6 +32,10 @@ namespace ExaminationProject.ViewModel
         {
             dailyShirt = getDailyShirt();
         }
+        public DetailViewModel(Shirt shirt)
+        {
+            dailyShirt = shirt;
+        }
 
         [RelayCommand]
         async void GoToInventory()
