@@ -13,6 +13,10 @@
             Padding="30, 0"
             Spacing="25">
 
+            <Entry x:Name="CityEntry" Placeholder="Skriv in stad"/>
+            <Button Text="Få väder" Clicked="OnWeatherClicked"/>
+            <Label x:Name="WeatherLabel" FontSize="18"/>
+
             <Label
                 Text="Dagens Tröja"
                 HorizontalTextAlignment="Center"

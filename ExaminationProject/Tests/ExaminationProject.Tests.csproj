@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Moq" Version="4.20.72" />
+		<PackageReference Include="xunit" Version="2.9.3" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="3.0.1" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- Lägg till referens till din huvudprojekt-fil -->
+		<ProjectReference Include="..\MAUI\ExaminationProject.csproj" />
+	</ItemGroup>
+
+</Project>
