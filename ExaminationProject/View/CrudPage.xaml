@@ -27,6 +27,16 @@
             <Button Text="Add Shirt"
                     Command="{Binding AddShirtCommand}" />
 
+            <!--Picture elements for both adding shirt and edit shirt-->
+            <Image Source="{Binding SelectedShirt.Picture_Filepath}" HeightRequest="100" WidthRequest="100" Aspect="AspectFit" />
+
+            <HorizontalStackLayout Spacing="10">
+                <Button Text="📷 Take Photo"
+            Command="{Binding CapturePhotoCommand}" />
+                <Button Text="📂 Choose from Gallery"
+            Command="{Binding SelectPhotoCommand}" />
+            </HorizontalStackLayout>
+
             <!-- Edit Selected Shirt -->
             <Entry Placeholder="Edit Selected Shirt Name"
                    Text="{Binding SelectedShirt.Brand}" />
@@ -41,14 +51,7 @@
                     ItemDisplayBinding="{Binding Name}"
                     SelectedItem="{Binding SelectedColor}" />
 
-            <Image Source="{Binding SelectedShirt.Picture_Filepath}" HeightRequest="100" WidthRequest="100" Aspect="AspectFit" />
-
-            <HorizontalStackLayout Spacing="10">
-                <Button Text="📷 Take Photo"
-                        Command="{Binding CapturePhotoCommand}" />
-                <Button Text="📂 Choose from Gallery"
-                        Command="{Binding SelectPhotoCommand}" />
-            </HorizontalStackLayout>
+            
 
             <Button Text="Edit Selected Shirt"
                     Command="{Binding EditShirtCommand}" />
