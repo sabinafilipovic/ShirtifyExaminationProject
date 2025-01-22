@@ -16,6 +16,9 @@ namespace ExaminationProject.ViewModel
         public ShirtService ShirtService => ShirtService.Instance;
 
         [ObservableProperty]
+        public Shirt selectedShirt;
+
+        [ObservableProperty]
         public string color;
 
         [ObservableProperty]
@@ -23,7 +26,6 @@ namespace ExaminationProject.ViewModel
 
         [ObservableProperty]
         public string history;
-        //behöver vara en klass som innehåller en string för datum och en string för färgen på skjortan.
 
         [ObservableProperty]
         public int amountUsed;
@@ -31,26 +33,22 @@ namespace ExaminationProject.ViewModel
         [ObservableProperty]
         public Shirt dailyShirt;
 
-        public DetailViewModel() 
+        public DetailViewModel()
         {
             dailyShirt = ShirtService.CurrentShirt;
         }
 
         [RelayCommand]
-        async void GoToInventory()
+        async Task GoToInventory()
         {
-            AppShell.Current.GoToAsync("InventoryPage");
+            await AppShell.Current.GoToAsync("InventoryPage");
         }
 
         [RelayCommand]
-        async void UseShirt()
+        async Task UseShirt()
         {
-            //send "current" shirt to database.
-            //Set "current" shirt as your "Selected" shirt for today.
-            //Send user back to homepage
-            AppShell.Current.GoToAsync("..");
-
+            ShirtService.SetCurrentShirt(dailyShirt);
+            await AppShell.Current.GoToAsync("///MainPage");
         }
-
     }
 }

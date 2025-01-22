@@ -8,21 +8,30 @@ namespace ExaminationProject.Services
     public class ShirtService
     {
         private static readonly Lazy<ShirtService> instance = new(() => new ShirtService());
-
         public static ShirtService Instance => instance.Value;
 
-        private ShirtService()
-        {
-            LoadShirts();
-            RandomizeShirt();
-        }
+        private ShirtService() { }
 
         public ObservableCollection<Shirt> Shirts { get; private set; } = new ObservableCollection<Shirt>();
+        private Shirt _currentShirt;
+        public Shirt CurrentShirt
+        {
+            get => _currentShirt;
+            set
+            {
+                if (_currentShirt != value)
+                {
+                    _currentShirt = value;
+                    CurrentShirtChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
 
-        public Shirt CurrentShirt { get; set; }
+        public event EventHandler CurrentShirtChanged;
 
         public void LoadShirts()
         {
+            /* Implementation */
             Shirts.Clear();
             var shirtsFromDatabase = DatabaseService.GetShirts();
             foreach (var shirt in shirtsFromDatabase)
@@ -31,8 +40,8 @@ namespace ExaminationProject.Services
             }
         }
 
-        public void RandomizeShirt()
-        {
+        public void RandomizeShirt() {
+            /* Implementation */
             if (Shirts.Count == 0)
                 return;
 
@@ -40,7 +49,6 @@ namespace ExaminationProject.Services
             int randIndex = rand.Next(Shirts.Count);
             CurrentShirt = Shirts[randIndex];
         }
-
         public void SetCurrentShirt(Shirt newShirt)
         {
             CurrentShirt = newShirt;

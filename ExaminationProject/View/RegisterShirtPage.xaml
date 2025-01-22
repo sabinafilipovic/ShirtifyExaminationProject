@@ -2,200 +2,146 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ExaminationProject.View.RegisterShirtPage"
-             
-             
-             
              Title="Registrera Tröja">
 
-    <ScrollView>
-        <StackLayout Padding="0" Spacing="10">
+    <AbsoluteLayout>
+        <!-- Scrollbart -->
+        <ScrollView AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                    AbsoluteLayout.LayoutFlags="All">
+            
+            <StackLayout 
+                         Padding="0" 
+                         Spacing="10">
 
-            <Grid 
-                Padding="0" 
-                RowDefinitions="Auto, Auto"
-                ColumnDefinitions="Auto, 1*"
-                  
-                  >
-                
-                <Label 
-                       Grid.Row="0"
-                       Grid.ColumnSpan="2"
-                       HorizontalOptions="Fill"
+                <Grid Padding="0" 
+                      RowDefinitions="Auto, Auto" 
+                      ColumnDefinitions="Auto, 1*">
                     
-                       Text="Registrera Tröja" 
-                    
-                       HorizontalTextAlignment="Center"
-                    
-                       FontSize="23"
-                       BackgroundColor="#dbf5ff" 
-                       FontFamily="Chewy"
-                       Padding="10"/>       
+                    <Label Grid.Row="0" 
+                           Grid.ColumnSpan="2" 
+                           HorizontalOptions="Fill"
+                           Text="Registrera Tröja" 
+                           HorizontalTextAlignment="Center"
+                           FontSize="23" 
+                           BackgroundColor="#dbf5ff" 
+                           FontFamily="Chewy" 
+                           Padding="10" />
 
-
-                <Grid 
-                       Grid.Row="1" 
-                       Padding="15" 
-                       RowDefinitions="Auto, Auto"
-                       ColumnDefinitions="auto, Auto"
-                        >
-
-
-                    <Image 
-                        Grid.Row="0"
-                        Grid.Column="0"
+                    <Grid Grid.Row="1" 
+                          Padding="15" 
+                          RowDefinitions="Auto, Auto" 
+                          ColumnDefinitions="auto, Auto">
                         
-                        HorizontalOptions="Start"
-                        
-                        Margin="5" 
-                        HeightRequest="200" 
-                        WidthRequest="200"
-                        
-                        Source="{Binding PictureFilepath}"
-                        
-                        
-                        />
-                    
-                    <VerticalStackLayout 
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        VerticalOptions="End"
-                        Margin="1"
-                        >
-                        <Button
-                                Text="📷"
-                                FontSize="30"
-                                Padding="1"
-                                Margin="5"
-                                BackgroundColor="Transparent"
-                                Command="{Binding CapturePhotoCommand}"
-                                />
-                        <Button
+                        <Image Grid.Row="0" 
+                               Grid.Column="0" 
+                               HorizontalOptions="Start" 
+                               Margin="5" HeightRequest="200"
+                               WidthRequest="200"
+                               Source="{Binding PictureFilepath}" />
 
-                                Text="📂"
-                                FontSize="30"
-                                Padding="1"
-                                Margin="5"
-                                BackgroundColor="Transparent"
-                                Command="{Binding SelectPhotoCommand}"
-                               />
-
-                    </VerticalStackLayout>
-                    
-
+                        <VerticalStackLayout Grid.Row="0" 
+                                             Grid.Column="1" 
+                                             VerticalOptions="End" 
+                                             Margin="1">
+                            
+                            <Button Text="📷" 
+                                    FontSize="30" Padding="1" 
+                                    Margin="5" 
+                                    BackgroundColor="Transparent" 
+                                    Command="{Binding CapturePhotoCommand}" />
+                            
+                            <Button Text="📂" 
+                                    FontSize="30" 
+                                    Padding="1" 
+                                    Margin="5"
+                                    BackgroundColor="Transparent"
+                                    Command="{Binding SelectPhotoCommand}" />
+                            
+                        </VerticalStackLayout>
                     </Grid>
+                </Grid>
 
-
-            </Grid>
-
-            <Grid 
-                Padding="10" 
-                RowDefinitions="Auto, Auto,auto" 
-                ColumnDefinitions="Auto, 1*"
-                Background="Gray"
-                >
-
-                <Label 
-                       Text="Färg:"
+                <Grid Padding="10" 
+                      RowDefinitions="Auto, Auto, Auto" 
+                      ColumnDefinitions="Auto, 1*" 
+                      Background="Gray">
                     
-                       HorizontalOptions="Start" 
-                       FontSize="23"                        
-                       FontFamily="Chewy"
-                       Padding="10"/>
-                 
-                        <Picker
-                            Grid.Column="1"
+                    <Label Text="Färg:" 
+                           HorizontalOptions="Start" 
+                           FontSize="23" 
+                           FontFamily="Chewy" 
+                           Padding="10"/>
+                    
+                    <Picker Grid.Column="1" 
                             Title="Färger.." 
                             ItemsSource="{Binding Colors}" 
-                            ItemDisplayBinding="{Binding Name}" 
-                            SelectedItem="{Binding SelectedColor}"
-                            HorizontalOptions="Start"
-                            FontSize="23"      
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedItem="{Binding SelectedColor}" 
+                            HorizontalOptions="Start" 
+                            FontSize="23" 
                             FontFamily="Chewy"/>
+
+                    <Label Grid.Row="1" 
+                           Text="Kategori:" 
+                           HorizontalOptions="Start" 
+                           FontSize="23" 
+                           FontFamily="Chewy" 
+                           Padding="10"/>
                     
-                
-                <Label 
-                       Grid.Row="1"
+                    <Picker Grid.Row="1" 
+                            Grid.Column="1" 
+                            Title="Kategorier.." 
+                            ItemsSource="{Binding Categories}" 
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedItem="{Binding SelectedCategory}" 
+                            HorizontalOptions="Start" 
+                            FontSize="23" 
+                            FontFamily="Chewy" />
+
+                    <Label Grid.Row="2" 
+                           Text="Beskrivning:" 
+                           HorizontalOptions="Start" 
+                           FontSize="23"
+                           FontFamily="Chewy" 
+                           Padding="10"/>
                     
-                       Text="Kategori:" 
-                    
-                       HorizontalOptions="Start" 
-                       FontSize="23"      
-                       FontFamily="Chewy"
-                       Padding="10"/>
+                    <Entry 
+                        Grid.Row="2" 
+                        Grid.Column="1" 
+                        Placeholder="Bästa tröjan.." 
+                        Text="{Binding ShirtBrand}" 
+                        HorizontalOptions="Start" 
+                        FontSize="23" 
+                        FontFamily="Chewy"/>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
 
-                <Picker 
-                        Grid.Row="1"
-                        Grid.Column="1"
-                    
-                        Title="Kategorier.." 
-                        ItemsSource="{Binding Categories}" 
-                        ItemDisplayBinding="{Binding Name}" 
-                        SelectedItem="{Binding SelectedCategory}"
-                        HorizontalOptions="Start"
-                        FontSize="23"      
-                        FontFamily="Chewy"
-                        />
-                <Label 
-                       Grid.Row="2"
-    
-                       Text="Beskrivning:" 
-    
-                       HorizontalOptions="Start" 
-                       FontSize="23"      
-                       FontFamily="Chewy"
-                       Padding="10"/>
-                <Entry 
-                       Grid.Row="2"
-                       Grid.Column="1"
-                       Placeholder="Bästa tröjan.." 
-                       Text="{Binding ShirtBrand}"
-                    
-                       
-                       HorizontalOptions="Start" 
-                       FontSize="23"      
-                       FontFamily="Chewy"/>
-
-
-
-            </Grid>
-
-           
-
-            <Grid Padding="0" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, 1*">
-
-                <BoxView Grid.ColumnSpan="2" Color="DarkBlue">
-
-                </BoxView>
-                <Button 
-                        Grid.Column="0"
-                        HorizontalOptions="Center"
-                        Text="Garderob" 
-                        Command="{Binding GoBackCommand}" 
-                        Margin="5" 
-                        BackgroundColor="#b4d2de"
-                        TextColor="Black"
-                        FontSize="20" FontFamily="Chewy"/>
-
-                <Button Grid.Column="1"
-                        WidthRequest="250" 
-                        HorizontalOptions="Center"
-                        Text="Lägg till Tröja" 
-                        Command="{Binding AddShirtCommand}"
-                        CommandParameter="{Binding PictureId}"
-                        
-                        Margin="5" 
-                        BackgroundColor="#b4d2de"
-                        TextColor="Black"
-                        FontSize="20" FontFamily="Chewy"/>
-
-                
-
-            </Grid>
-             
-
-
-
+        <!-- Dockade knappar längst ner -->
+        <StackLayout AbsoluteLayout.LayoutBounds="0, 1, 1, AutoSize"
+                     AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional" 
+                     Orientation="Horizontal" 
+                     HorizontalOptions="FillAndExpand" 
+                     Padding="10" 
+                     Spacing="10"
+                     BackgroundColor="Blue">
+            
+            <Button Text="Garderob" 
+                    Command="{Binding GoBackCommand}" 
+                    Margin="5" 
+                    BackgroundColor="#b4d2de"
+                    TextColor="Black" 
+                    FontSize="20" 
+                    FontFamily="Chewy"/>
+            <Button Text="Lägg till Tröja" 
+                    Command="{Binding AddShirtCommand}" 
+                    CommandParameter="{Binding PictureId}"
+                    Margin="5" 
+                    BackgroundColor="#b4d2de" 
+                    TextColor="Black" 
+                    FontSize="20" 
+                    FontFamily="Chewy"/>
         </StackLayout>
-    </ScrollView>
 
+    </AbsoluteLayout>
 </ContentPage>
