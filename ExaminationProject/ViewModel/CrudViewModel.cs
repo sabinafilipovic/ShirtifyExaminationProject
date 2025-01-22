@@ -207,10 +207,12 @@ namespace ExaminationProject.ViewModel
             // Reload the data to reflect changes
             LoadData();
 
-            // Update the selected shirt references to reflect changes in the UI
+
+            //Commented out the lines so that when the edit changes button is pressed it empties the entrys
+            /*// Update the selected shirt references to reflect changes in the UI
             SelectedCategory = Categories.FirstOrDefault(c => c.Id == SelectedShirt.Category_Id);
             SelectedColor = Colors.FirstOrDefault(c => c.Id == SelectedShirt.Color_Id);
-            ShirtBrand = SelectedShirt.Brand;
+            ShirtBrand = SelectedShirt.Brand;*/
         }
 
         [RelayCommand]
