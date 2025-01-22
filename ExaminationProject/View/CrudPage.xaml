@@ -3,88 +3,65 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel="clr-namespace:ExaminationProject.ViewModel"
              xmlns:model="clr-namespace:ExaminationProject.Model"
-             x:DataType="viewmodel:CrudViewModel"
              x:Class="ExaminationProject.CrudPage"
-             Title="CRUD Operations">
+             x:DataType="viewmodel:CrudViewModel"
+             Title="Manage Shirts">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="15">
+    <VerticalStackLayout Padding="20" Spacing="15">
 
-            <!-- Shirt Name -->
-            <Entry 
-                Placeholder="Enter Shirt Brand" 
-                Text="{Binding ShirtBrand}" 
-                FontSize="18"/>
+        <!-- Add New Shirt -->
+        <Entry Placeholder="New Shirt Name"
+               Text="{Binding ShirtBrand}" />
 
-            <!-- Category Picker -->
-            <Label 
-                Text="Select Category" 
-                FontSize="16"/>
-            <Picker 
-                Title="Category" 
-                ItemsSource="{Binding Categories}" 
-                ItemDisplayBinding="{Binding Name}" 
-                SelectedItem="{Binding SelectedCategory}"/>
+        <Picker Title="Select Category"
+                ItemsSource="{Binding Categories}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedItem="{Binding SelectedCategory}" />
 
-            <!-- Color Picker -->
-            <Label Text="Select Color" FontSize="16"/>
-            <Picker Title="Color" ItemsSource="{Binding Colors}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedColor}"/>
+        <Picker Title="Select Color"
+                ItemsSource="{Binding Colors}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedItem="{Binding SelectedColor}" />
 
-            <!-- Add Shirt Button -->
-            <Button 
-                Text="Add Shirt" 
-                Command="{Binding AddShirtCommand}" 
-                BackgroundColor="#91b597" 
-                FontSize="18"/>
+        <Button Text="Add Shirt"
+                Command="{Binding AddShirtCommand}" />
 
-            <!-- Add New Category -->
-            <Label 
-                Text="Add New Category" 
-                FontSize="16"/>
-            
-            <Entry 
-                Placeholder="New Category Name" 
-                x:Name="NewCategoryEntry" 
-                FontSize="18"/>
-            <Button 
-                Text="Add Category" 
-                Command="{Binding AddCategoryCommand}" 
-                CommandParameter="{Binding Text, Source={x:Reference NewCategoryEntry}}" 
-                BackgroundColor="DarkOrange" 
-                FontSize="18"/>
+        <!-- Edit Selected Shirt -->
+        <Entry Placeholder="Edit Selected Shirt Name"
+               Text="{Binding SelectedShirt.Brand}" />
+        <Picker Title="Edit Category"
+                ItemsSource="{Binding Categories}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedItem="{Binding SelectedCategory}" />
+        <Picker Title="Edit Color"
+                ItemsSource="{Binding Colors}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedItem="{Binding SelectedColor}" />
+        <Image Source="{Binding SelectedShirt.Picture_Filepath}" HeightRequest="100" WidthRequest="100" Aspect="AspectFit" />
+        <Button Text="Edit Selected Shirt"
+                Command="{Binding EditShirtCommand}" />
 
-            <!-- Add New Color -->
-            <Label Text="Add New Color" FontSize="16"/>
-            <Entry Placeholder="New Color Name" x:Name="NewColorEntry" FontSize="18"/>
-            <Button 
-                Text="Add Color" 
-                Command="{Binding AddColorCommand}" 
-                CommandParameter="{Binding Text, Source={x:Reference NewColorEntry}}" 
-                BackgroundColor="DarkOrange" 
-                FontSize="18"/>
+        <!-- Shirts List -->
+        <Label Text="Shirts" FontSize="20" />
+        <CollectionView ItemsSource="{Binding Shirts}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedShirt}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Shirt">
+                    <HorizontalStackLayout Padding="10" Spacing="10">
+                        <Label Text="{Binding Brand}" VerticalOptions="Center" />
+                        <Label Text="{Binding Category_Name}" VerticalOptions="Center" />
+                        <Label Text="{Binding Color_Name}" VerticalOptions="Center" />
+                        <Button Text="Delete"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CrudViewModel}}, Path=DeleteShirtCommand}"
+                                CommandParameter="{Binding .}" />
+                    </HorizontalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
-            <!-- Shirt List -->
-            <Label Text="Shirts" FontSize="20"/>
-            <CollectionView ItemsSource="{Binding Shirts}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:Shirt">
-                        <VerticalStackLayout>
-                            <Image Source="{Binding Picture_Filepath}" HeightRequest="100" WidthRequest="100" 
-                                   Aspect="AspectFill"/>
-                            <Label Text="{Binding Brand}" FontSize="16"/>
-                            <Label Text="{Binding Category_Name}" FontSize="16"/>
-                            <Label Text="{Binding Color_Name}" FontSize="16"/>
-                            <Button Text="Delete" 
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CrudViewModel}},Path=DeleteShirtCommand}" 
-                            CommandParameter="{Binding Id}" 
-                            BackgroundColor="Red" 
-                            TextColor="White"/>
-                        </VerticalStackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-
-        </VerticalStackLayout>
-    </ScrollView>
-
+        <!-- Go Back -->
+        <Button Text="Go to Home"
+                Command="{Binding GoBackCommand}" />
+    </VerticalStackLayout>
 </ContentPage>

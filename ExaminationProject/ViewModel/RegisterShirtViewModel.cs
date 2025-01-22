@@ -16,14 +16,6 @@ namespace ExaminationProject.ViewModel
             _photoService = photoService;
         }
 
-        [RelayCommand]
-        async void GoBack()
-        {
-            if (Shell.Current.Navigation.NavigationStack.Count > 1)
-            {
-                await Shell.Current.Navigation.PopAsync();
-            }
-        }
 
         [ObservableProperty]
         string pictureFilepath;        

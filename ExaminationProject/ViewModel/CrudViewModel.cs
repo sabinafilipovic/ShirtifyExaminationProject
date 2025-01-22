@@ -14,7 +14,7 @@ namespace ExaminationProject.ViewModel
         public int pictureId = 0;
 
         [ObservableProperty]
-         ObservableCollection<Shirt> shirts = new ObservableCollection<Shirt>();
+        ObservableCollection<Shirt> shirts = new ObservableCollection<Shirt>();
 
         [ObservableProperty]
         ObservableCollection<Category> categories = new();
@@ -31,6 +31,9 @@ namespace ExaminationProject.ViewModel
         int shirtColor;
 
         [ObservableProperty]
+        Shirt selectedShirt;
+
+        [ObservableProperty]
         Category selectedCategory;
 
         [ObservableProperty]
@@ -44,18 +47,23 @@ namespace ExaminationProject.ViewModel
 
         private void LoadData()
         {
+            // Load Shirts
             Shirts.Clear();
             foreach (var shirt in DatabaseService.GetShirts())
                 Shirts.Add(shirt);
 
+            // Load Categories
             Categories.Clear();
             foreach (var category in DatabaseService.GetCategories())
                 Categories.Add(category);
 
+            // Load Colors
             Colors.Clear();
             foreach (var color in DatabaseService.GetColors())
                 Colors.Add(color);
         }
+
+
 
         [RelayCommand]
         async public Task AddShirt()
@@ -125,50 +133,47 @@ namespace ExaminationProject.ViewModel
         }
 
         [RelayCommand]
-        public async Task AddCategory(string categoryName)
+        public void EditShirt()
         {
-            if (!string.IsNullOrWhiteSpace(categoryName))
-            {
-                var newCategory = new Category { Name = categoryName };
-                DatabaseService.AddCategory(newCategory);
-                Categories.Add(newCategory);
-            }
-        }
-
-        [RelayCommand]
-        public async Task AddColor(string colorName)
-        {
-            if (!string.IsNullOrWhiteSpace(colorName))
-            {
-                var newColor = new Model.Color { Name = colorName };
-                DatabaseService.AddColor(newColor);
-                Colors.Add(newColor);
-            }
-        }
-
-        [RelayCommand]
-        public void EditShirt(int shirtId)
-        {
-            var shirtToEdit = DatabaseService.GetShirtById(shirtId);
-            if (shirtToEdit != null)
-            {
-                shirtToEdit.Brand = ShirtBrand;
-                shirtToEdit.Color_Id = ShirtColor;
-
-                DatabaseService.UpdateShirt(shirtToEdit);
-                LoadData();
-            }
-        }
-
-        [RelayCommand]
-        public void DeleteShirt(int shirtId)
-        {
-            if (shirtId == 0)
-            {
+            if (SelectedShirt == null)
                 return;
-            }
-            DatabaseService.RemoveShirt(shirtId);
+
+            // Update the selected shirt's properties
+            if (!string.IsNullOrWhiteSpace(ShirtBrand))
+                SelectedShirt.Brand = ShirtBrand;
+
+            if (SelectedCategory != null)
+                SelectedShirt.Category_Id = SelectedCategory.Id;
+
+            if (SelectedColor != null)
+                SelectedShirt.Color_Id = SelectedColor.Id;
+
+            // Update the database
+            DatabaseService.UpdateShirt(SelectedShirt);
+
+            // Reload the data to reflect changes
             LoadData();
+
+            // Update the selected shirt references to reflect changes in the UI
+            SelectedCategory = Categories.FirstOrDefault(c => c.Id == SelectedShirt.Category_Id);
+            SelectedColor = Colors.FirstOrDefault(c => c.Id == SelectedShirt.Color_Id);
+            ShirtBrand = SelectedShirt.Brand;
+        }
+
+        [RelayCommand]
+        public void DeleteShirt()
+        {
+            if (SelectedShirt == null)
+                return;
+
+            DatabaseService.RemoveShirt(SelectedShirt.Id);
+            Shirts.Remove(SelectedShirt);
+        }
+
+        [RelayCommand]
+        async Task GoBack()
+        {
+            await AppShell.Current.GoToAsync("///MainPage");
         }
     }
 }
