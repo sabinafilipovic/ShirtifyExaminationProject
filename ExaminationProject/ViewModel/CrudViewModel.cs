@@ -25,6 +25,9 @@ namespace ExaminationProject.ViewModel
         [ObservableProperty]
         string shirtBrand;
 
+        [ObservableProperty]
+        string pictureFilepath;
+
         private readonly PhotoService _photoService;
 
         [ObservableProperty]
@@ -61,6 +64,34 @@ namespace ExaminationProject.ViewModel
             Colors.Clear();
             foreach (var color in DatabaseService.GetColors())
                 Colors.Add(color);
+        }
+
+        [RelayCommand]
+        async Task CapturePhoto()
+        {
+            pictureId = await _photoService.CapturePhotoAsync();
+            pictureFilepath = DatabaseService.GetFilepathById(pictureId);
+            OnPropertyChanged(nameof(PictureFilepath));
+        }
+
+        [RelayCommand]
+        async Task SelectPhoto()
+        {
+            var selectedFilePath = await _photoService.SelectPhotoFromGalleryAsync();
+
+            if (selectedFilePath == null)
+            {
+                System.Diagnostics.Debug.WriteLine("No photo was selected or the operation was canceled.");
+                return;
+            }
+
+            pictureId = selectedFilePath.Id;
+
+            if (!string.IsNullOrEmpty(selectedFilePath.Filepath))
+            {
+                PictureFilepath = selectedFilePath.Filepath;
+                OnPropertyChanged(nameof(PictureFilepath));
+            }
         }
 
 

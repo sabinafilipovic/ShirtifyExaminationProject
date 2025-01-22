@@ -20,35 +20,6 @@ namespace ExaminationProject.ViewModel
         [ObservableProperty]
         string pictureFilepath;        
 
-        [RelayCommand]
-        async void CapturePhoto()
-        {
-            pictureId = await _photoService.CapturePhotoAsync();
-
-            pictureFilepath = DatabaseService.GetFilepathById(pictureId);
-
-
-            // Update the page
-            OnPropertyChanged(nameof(PictureFilepath));
-        }
-
-        [RelayCommand]
-        async void SelectPhoto()
-        {
-            var selectedFilePath = await _photoService.SelectPhotoFromGalleryAsync();
-
-            if (selectedFilePath == null) 
-            {
-                System.Diagnostics.Debug.WriteLine("No photo was selected or the operation was canceled.");
-                return; // Exit the method gracefully
-            }
-            pictureId = selectedFilePath.Id;
-
-            if (!string.IsNullOrEmpty(selectedFilePath.Filepath))
-            {
-                pictureFilepath = selectedFilePath.Filepath;
-                OnPropertyChanged(nameof(PictureFilepath));
-            }
-        }
+        
     }
 }
