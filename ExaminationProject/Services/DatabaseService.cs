@@ -140,4 +140,10 @@ public static class DatabaseService
         var picture = Database.Table<Picture>().FirstOrDefault(p => p.Id == pictureId);
         return picture?.Filepath ?? "Saknar bild";
     }
+
+    public static int GetIdByFilepath(string pictureFilepath)
+    {
+        var picture = Database.Table<Picture>().FirstOrDefault(p => p.Filepath == pictureFilepath);
+        return picture?.Id ?? 0;
+    }
 }

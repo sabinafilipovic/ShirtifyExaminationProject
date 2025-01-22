@@ -10,6 +10,8 @@ namespace ExaminationProject.ViewModel
 {
     public partial class CrudViewModel : ObservableObject
     {
+        public ShirtService ShirtService => ShirtService.Instance;
+
         [ObservableProperty]
         public int pictureId = 0;
 
@@ -94,6 +96,17 @@ namespace ExaminationProject.ViewModel
             }
         }
 
+        partial void OnSelectedShirtChanged(Shirt value)
+        {
+            if (value != null)
+            {
+                // Update related elements when a shirt is selected
+                ShirtBrand = value.Brand;
+                SelectedCategory = Categories.FirstOrDefault(c => c.Id == value.Category_Id);
+                SelectedColor = Colors.FirstOrDefault(c => c.Id == value.Color_Id);
+                PictureFilepath = value.Picture_Filepath;
+            }
+        }
 
 
         [RelayCommand]
@@ -179,8 +192,17 @@ namespace ExaminationProject.ViewModel
             if (SelectedColor != null)
                 SelectedShirt.Color_Id = SelectedColor.Id;
 
+            if (pictureFilepath != null)
+                selectedShirt.Picture_Id = DatabaseService.GetIdByFilepath(pictureFilepath);
+
             // Update the database
             DatabaseService.UpdateShirt(SelectedShirt);
+
+            //Updates the current shirt if the edited shirt was the "DailyShirt"
+            if (ShirtService.CurrentShirt.Id == selectedShirt.Id) 
+            {
+                ShirtService.CurrentShirt = SelectedShirt;
+            }
 
             // Reload the data to reflect changes
             LoadData();

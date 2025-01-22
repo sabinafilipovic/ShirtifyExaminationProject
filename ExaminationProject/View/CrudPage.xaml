@@ -28,7 +28,7 @@
                     Command="{Binding AddShirtCommand}" />
 
             <!--Picture elements for both adding shirt and edit shirt-->
-            <Image Source="{Binding SelectedShirt.Picture_Filepath}" HeightRequest="100" WidthRequest="100" Aspect="AspectFit" />
+            <Image Source="{Binding PictureFilepath}" HeightRequest="100" WidthRequest="100" Aspect="AspectFit" />
 
             <HorizontalStackLayout Spacing="10">
                 <Button Text="📷 Take Photo"
@@ -50,8 +50,6 @@
                     ItemsSource="{Binding Colors}"
                     ItemDisplayBinding="{Binding Name}"
                     SelectedItem="{Binding SelectedColor}" />
-
-            
 
             <Button Text="Edit Selected Shirt"
                     Command="{Binding EditShirtCommand}" />
