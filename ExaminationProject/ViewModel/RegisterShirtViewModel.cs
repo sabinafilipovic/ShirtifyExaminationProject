@@ -35,12 +35,6 @@ namespace ExaminationProject.ViewModel
         {
             pictureId = await _photoService.CapturePhotoAsync();
 
-            if (string.IsNullOrEmpty(pictureFilepath))
-            {
-                System.Diagnostics.Debug.WriteLine($"No filepath found for Picture ID: {pictureId}");
-                return; // Exit or handle gracefully
-            }
-
             pictureFilepath = DatabaseService.GetFilepathById(pictureId);
 
 
