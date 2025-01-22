@@ -33,10 +33,13 @@ namespace ExaminationProject.ViewModel
         [RelayCommand]
         async void CapturePhoto()
         {
-            
-
             pictureId = await _photoService.CapturePhotoAsync();
 
+            if (string.IsNullOrEmpty(pictureFilepath))
+            {
+                System.Diagnostics.Debug.WriteLine($"No filepath found for Picture ID: {pictureId}");
+                return; // Exit or handle gracefully
+            }
 
             pictureFilepath = DatabaseService.GetFilepathById(pictureId);
 
@@ -49,7 +52,12 @@ namespace ExaminationProject.ViewModel
         async void SelectPhoto()
         {
             var selectedFilePath = await _photoService.SelectPhotoFromGalleryAsync();
-            
+
+            if (selectedFilePath == null) 
+            {
+                System.Diagnostics.Debug.WriteLine("No photo was selected or the operation was canceled.");
+                return; // Exit the method gracefully
+            }
             pictureId = selectedFilePath.Id;
 
             if (!string.IsNullOrEmpty(selectedFilePath.Filepath))

@@ -56,8 +56,6 @@
                         />
                     
                     <VerticalStackLayout 
-                        
-
                         Grid.Row="0"
                         Grid.Column="1"
                         VerticalOptions="End"

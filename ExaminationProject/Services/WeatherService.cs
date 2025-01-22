@@ -25,6 +25,9 @@ namespace ExaminationProject.Services
 
             var location = await GetUserLocationAsync();
 
+            location.Latitude = 59.334591;
+            location.Longitude = 18.063240;
+
             if (location != null)
             {
                 var url = $"{BaseUrl}?lat={location.Latitude}&lon={location.Longitude}&appid={ApiKey}&units=metric";

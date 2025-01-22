@@ -16,6 +16,12 @@ namespace ExaminationProject.Services
                     // Capture the photo
                     FileResult photo = await MediaPicker.Default.CapturePhotoAsync();
 
+                    if (photo == null)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Photo capture was canceled.");
+                        return 0; // Exit gracefully
+                    }
+
                     if (photo != null)
                     {
                         // Platform-independent directory for saving photos
@@ -58,6 +64,12 @@ namespace ExaminationProject.Services
             {
                 // Open the gallery picker
                 FileResult photo = await MediaPicker.Default.PickPhotoAsync();
+
+                if (photo == null)
+                {
+                    System.Diagnostics.Debug.WriteLine("Photo selection was canceled by the user.");
+                    return null; // Exit and return null
+                }
 
                 if (photo != null)
                 {
