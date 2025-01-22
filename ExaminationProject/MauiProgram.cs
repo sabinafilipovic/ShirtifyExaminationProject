@@ -28,6 +28,8 @@ namespace ExaminationProject
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<MainViewModel>();
 
+            builder.Services.AddSingleton<WeatherService>();
+
             builder.Services.AddTransient<Page1>();
             builder.Services.AddTransient<Page1ViewModel>();
 

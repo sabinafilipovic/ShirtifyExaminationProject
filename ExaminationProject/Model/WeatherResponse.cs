@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ExaminationProject.Model
+﻿namespace ExaminationProject.Model
 {
-
     public class WeatherResponse
     {
         public Main Main { get; set; }
@@ -19,9 +12,8 @@ namespace ExaminationProject.Model
         public double Humidity { get; set; }
     }
 
-    public class  Weather
+    public class Weather
     {
         public string Description { get; set; }
     }
-
 }

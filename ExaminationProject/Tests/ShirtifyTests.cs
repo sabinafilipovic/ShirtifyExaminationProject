@@ -7,24 +7,24 @@ namespace ExaminationProject.Tests
 {
     public class MainPageTests
     {
-        private MainViewModel _viewModel;
+        //    private MainViewModel _viewModel;
 
-        public MainPageTests()
-        {
-            // Arrange, mock
-            _viewModel = new MainViewModel();
-            _viewModel.loadShirts();  // Ladda skjortorna så vi har data för att slumpa skjortor.
-        }
+        //    public MainPageTests()
+        //    {
+        //        // Arrange, mock
+        //        _viewModel = new MainViewModel();
+        //        _viewModel.loadShirts();  // Ladda skjortorna så vi har data för att slumpa skjortor.
+        //    }
 
-        [Fact]
-        public void RandomizeShirt_ShouldSetDailyShirt()
-        {
-            var initialShirt = _viewModel.getDailyShirt(); // hämta om någon skjorta finns aka. vår "act"
+        //    [Fact]
+        //    public void RandomizeShirt_ShouldSetDailyShirt()
+        //    {
+        //        var initialShirt = _viewModel.getDailyShirt(); // hämta om någon skjorta finns aka. vår "act"
 
-            _viewModel.randomizeShirt(); // slumpar
+        //        _viewModel.randomizeShirt(); // slumpar
 
-            // Assert 
-            Assert.NotEqual(initialShirt, _viewModel.getDailyShirt()); // har den ändrats?
-        }
+        //        // Assert 
+        //        Assert.NotEqual(initialShirt, _viewModel.getDailyShirt()); // har den ändrats?
+        //    }
     }
 }

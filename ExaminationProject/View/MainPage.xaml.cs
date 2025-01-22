@@ -5,36 +5,38 @@ namespace ExaminationProject
 {
     public partial class MainPage : ContentPage
     {
-        private WeatherService _weatherService = new WeatherService();
+        private WeatherService _weatherService;
 
-        public MainPage(MainViewModel vm)
+        public MainPage(MainViewModel vm, WeatherService weatherService)
         {
             InitializeComponent();
             BindingContext = vm;
+            _weatherService = weatherService;
+
+            GetWeatherAutomatically();
         }
 
-        private async void OnGetWeatherClicked(object sender, EventArgs e)
+        private async void GetWeatherAutomatically()
         {
-            var city = CityEntry.Text;
-
-            if (!string.IsNullOrEmpty(city))
+            try
             {
-                var weather = await _weatherService.GetWeatherAsync(city);
-
+                var weather = await _weatherService.GetWeatherByLocationAsync();
 
                 if (weather != null)
                 {
-                    WeatherLabel.Text = $"Temperatur: {weather.Main.Temp} C\n" +
-                            $"Humidity: {weather.Main.Humidity}%\n" +
-                            $"Conditions: {weather.Weather[0].Description}";
+                    WeatherLabel.Text = $"Temperatur: {weather.Main.Temp}°C\n" +
+                                        $"Luftfuktighet: {weather.Main.Humidity}%\n" +
+                                        $"Väder: {weather.Weather[0].Description}";
                 }
-
                 else
                 {
-                    WeatherLabel.Text = "Väderdata inte hittat.";
+                    WeatherLabel.Text = "Kunde inte hämta väderinformation.";
                 }
             }
-
+            catch (Exception ex)
+            {
+                WeatherLabel.Text = $"Fel vid hämtning av väder: {ex.Message}";
+            }
         }
     }
 }

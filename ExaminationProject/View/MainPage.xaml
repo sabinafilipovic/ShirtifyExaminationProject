@@ -5,24 +5,37 @@
              xmlns:model="clr-namespace:ExaminationProject.Model"
              x:DataType="viewmodel:MainViewModel"
              x:Class="ExaminationProject.MainPage"
-             Title="Shirtify - Homepage"
-             >
+             Title="Shirtify - Homepage">
 
     <ScrollView>
         <VerticalStackLayout
             Padding="30, 0"
             Spacing="25">
 
-            <Entry x:Name="CityEntry" Placeholder="Skriv in stad"/>
-            <Button Text="Få väder" Clicked="OnWeatherClicked"/>
-            <Label x:Name="WeatherLabel" FontSize="18"/>
+            <Frame BackgroundColor="#1e90ff"
+                   CornerRadius="15"
+                   Padding="15"
+                   HasShadow="True"
+                   HorizontalOptions="FillAndExpand">
+                <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Spacing="10">
+                    <Label Text="Väderinformation"
+                           FontSize="23"
+                           TextColor="White"
+                           HorizontalOptions="Center" />
+                    <Label x:Name="WeatherLabel"
+                            FontSize="20"
+                            TextColor="White"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center" />
+                    
+                </StackLayout>
+            </Frame>
 
             <Label
                 Text="Dagens Tröja"
                 HorizontalTextAlignment="Center"
                 FontFamily="Chewy"
-                FontSize="20"
-                />
+                FontSize="20" />
 
             <ImageButton
                 Source="{Binding DailyShirt.Picture_Filepath}"
@@ -30,31 +43,25 @@
                 HeightRequest="200"
                 BackgroundColor="Aquamarine" 
                 Command="{Binding GoToDetailPageCommand}"
-                CommandParameter="{Binding .}"                
-                />
+                CommandParameter="{Binding .}" />
 
-            <Button Text="To Detail Page"
+            <Button Text="Mer information om tröjan"
                     Command="{Binding GoToDetailPageCommand}"
                     Background="#b4d2de"
                     FontFamily="Chewy"
                     FontSize="20"/>
 
-            <Button
-                Command="{Binding GoToAdminPageCommand}" 
-                Text="Gå till Admin vyn"
-                Background="#91b597"
-                FontSize="18" FontFamily="Chewy"/>
+            <Button Command="{Binding GoToAdminPageCommand}" 
+                    Text="Gå till inställningar"
+                    Background="#91b597"
+                    FontSize="18" FontFamily="Chewy"/>
 
-
-            <Button Text="🧺"
+            <Button Text="🧺 Tvättråd"
                     Command="{Binding GoToPage1Command}"
                     Background="#b4d2de"
                     FontFamily="Chewy"
                     FontSize="20"
                     WidthRequest="50"/>
-
-
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>

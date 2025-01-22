@@ -34,5 +34,10 @@
 		<key>NSPhotoLibraryUsageDescription</key>
 		<string>Shirtify behöver åtkomst till ditt album för att välja bilder</string>
 
+		<key>NSLocationWhenInUseUsageDescription</key>
+		<string>Shirtify använder åtkomst till din plats för att visa väderinformation.</string>
+		<key>NSLocationAlwaysUsageDescription</key>
+		<string>Shirtify använder åtkomst till din plats för att visa väderinformation.</string>
+
 	</dict>
 </plist>
