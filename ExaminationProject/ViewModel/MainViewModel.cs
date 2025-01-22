@@ -54,7 +54,6 @@ namespace ExaminationProject.ViewModel
         public MainViewModel()
         {
             // Ensure shirts are loaded and a shirt is randomized on startup
-            ShirtService.LoadShirts();
             dailyShirt = ShirtService.CurrentShirt;
         }
 

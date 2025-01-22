@@ -26,20 +26,12 @@ namespace ExaminationProject.ViewModel
         }
 
         [ObservableProperty]
-        string pictureFilepath;
-
-        
+        string pictureFilepath;        
 
         [RelayCommand]
         async void CapturePhoto()
         {
             pictureId = await _photoService.CapturePhotoAsync();
-
-            if (string.IsNullOrEmpty(pictureFilepath))
-            {
-                System.Diagnostics.Debug.WriteLine($"No filepath found for Picture ID: {pictureId}");
-                return; // Exit or handle gracefully
-            }
 
             pictureFilepath = DatabaseService.GetFilepathById(pictureId);
 

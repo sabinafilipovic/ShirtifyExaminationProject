@@ -15,6 +15,12 @@
             HorizontalOptions="Center" />
 
         <Button
+            Command="{Binding GoToAdminShirtsPageCommand}" 
+            Text="Gå till Tröjor"
+            Background="#91b597"
+            FontSize="18" FontFamily="Chewy"/>
+
+        <Button
             Command="{Binding GoToAdminCategoriesPageCommand}" 
             Text="Gå till Kategorier"
             Background="#91b597"

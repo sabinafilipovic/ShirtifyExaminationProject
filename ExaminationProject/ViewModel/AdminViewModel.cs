@@ -11,6 +11,12 @@ namespace ExaminationProject.ViewModel
 {
     public partial class AdminViewModel : ObservableObject
     {
+
+        [RelayCommand]
+        async void GoToAdminShirtsPage()
+        {
+            await AppShell.Current.GoToAsync(nameof(CrudPage));
+        }
         [RelayCommand]
         async void GoToAdminCategoriesPage()
         {
