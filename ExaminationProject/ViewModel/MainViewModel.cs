@@ -110,7 +110,7 @@ namespace ExaminationProject.ViewModel
         }
 
         [RelayCommand]
-        async void ClickButton()
+        async Task ClickButton()
         {
             if (string.IsNullOrEmpty(Text))
             {
@@ -121,7 +121,7 @@ namespace ExaminationProject.ViewModel
         }
 
         [RelayCommand]
-        async void GoToPage1()
+        async Task GoToPage1()
         {
             await AppShell.Current.GoToAsync("Page1");
         }

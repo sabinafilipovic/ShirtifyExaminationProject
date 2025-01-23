@@ -18,12 +18,12 @@ namespace ExaminationProject.ViewModel
             await AppShell.Current.GoToAsync(nameof(CrudPage));
         }
         [RelayCommand]
-        async void GoToAdminCategoriesPage()
+        async Task GoToAdminCategoriesPage()
         {
             await AppShell.Current.GoToAsync("AdminCategoriesPage");
         }
         [RelayCommand]
-        async void GoToAdminColorsPage()
+        async Task GoToAdminColorsPage()
         {
             await AppShell.Current.GoToAsync(nameof(AdminColorsPage));
         }
