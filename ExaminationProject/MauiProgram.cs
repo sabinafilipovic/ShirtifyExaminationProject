@@ -18,6 +18,10 @@ namespace ExaminationProject
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                     fonts.AddFont("Chewy.ttf", "Chewy");
                     fonts.AddFont("IndieFlower.ttf", "IndieFlower");
+                    fonts.AddFont("PoppinsMedium.ttf", "PoppinsMedium");
+                    fonts.AddFont("PoppinsRegular.ttf", "PoppinsRegular");
+
+
                 });
 
 #if DEBUG

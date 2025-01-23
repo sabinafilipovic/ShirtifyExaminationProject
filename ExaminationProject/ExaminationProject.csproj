@@ -57,10 +57,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="ViewModel\NewFile1.txt" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <None Include="Tests\ExaminationProject.Tests.csproj" />
 	</ItemGroup>
 

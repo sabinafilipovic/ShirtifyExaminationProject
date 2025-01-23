@@ -20,6 +20,7 @@ namespace ExaminationProject.Services
 
             if (status != PermissionStatus.Granted)
             {
+                Debug.WriteLine("⚠️ Åtkomst nekad");
                 return null;
             }
 

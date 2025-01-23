@@ -16,7 +16,7 @@ namespace ExaminationProject
             GetWeatherAutomatically();
         }
 
-        private async void GetWeatherAutomatically()
+        private async Task GetWeatherAutomatically()
         {
             try
             {
@@ -35,7 +35,7 @@ namespace ExaminationProject
             }
             catch (Exception ex)
             {
-                WeatherLabel.Text = $"Fel vid hämtning av väder: {ex.Message}";
+                WeatherLabel.Text = $"⚠️ Fel vid hämtning av väder: {ex.Message}";
             }
         }
     }

@@ -44,7 +44,7 @@ namespace ExaminationProject.ViewModel
         }
 
         [RelayCommand]
-        async void RegisterNewShirt()
+        async Task RegisterNewShirt()
         {
             await AppShell.Current.GoToAsync("RegisterShirtPage");
         }
