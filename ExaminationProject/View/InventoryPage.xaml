@@ -7,93 +7,91 @@
              x:Class="ExaminationProject.View.InventoryPage"
              Title="Garderob">
 
-
     <AbsoluteLayout>
 
         <!-- Rullbart innehåll -->
-        
-        <ScrollView AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+        <ScrollView AbsoluteLayout.LayoutBounds="0, 0, 1, .92"
                     AbsoluteLayout.LayoutFlags="All">
-            
             <StackLayout Padding="0" Spacing="10">
-                
+
                 <Label Text="Garderob" 
                        HorizontalOptions="Center" 
                        FontSize="23"
                        FontFamily="Chewy"
                        Padding="10"/>
 
-                <Grid Padding="10" >
-
+                <Grid Padding="10">
                     <CollectionView 
-                            
-                            ItemsSource="{Binding Shirts}"
-                            SelectionMode="Single"
-                            SelectedItem="{Binding SelectedItem}"
-                            ItemsLayout="Grid, 3">
+                        ItemsSource="{Binding Shirts}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedItem}">
+                        
+                        <!-- Layout för CollectionView -->
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout 
+                                Orientation="Vertical" 
+                                Span="3"/>
+                        </CollectionView.ItemsLayout>
 
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="model:Shirt">
-                                <VerticalStackLayout BackgroundColor="AntiqueWhite" Margin="10">
-                                    <Label Text="{Binding Brand}" FontSize="24" FontAttributes="Bold"
-                                           HorizontalTextAlignment="Center" Margin="10"/>
+                                
+                                <VerticalStackLayout 
+                                    BackgroundColor="AntiqueWhite" 
+                                    Margin="10">
+                                    
+                                    <Label 
+                                        Text="{Binding Brand}" 
+                                        FontSize="14" 
+                                        FontAttributes="Bold"
+                                        HorizontalTextAlignment="Center" 
+                                        Margin="5"/>
 
-                                    <Image Source="{Binding Picture_Filepath}" HeightRequest="200" 
-                                           WidthRequest="200" Aspect="AspectFill"/>
+                                    <Image Source="{Binding Picture_Filepath}" 
+                                           
+                                           Background="Aqua"
+                                           Margin="5" 
+                                            />
 
-                                    <Button Text="Delete" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=DeleteShirtCommand}" 
-                                            CommandParameter="{Binding Id}" BackgroundColor="Red" TextColor="White"
-                                            WidthRequest="100" Margin="5" HorizontalOptions="Center"/>
+                                    
+                                    
+                                    
                                 </VerticalStackLayout>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
-                    
+
                     <!-- fulfix: boxview för att sista tröjan inte ska ligga under dockade knapparna -->
-                    <!--
-                    <BoxView
-                        Grid.Row="2"
-                        Grid.ColumnSpan="2"
-                        HeightRequest="65"
-                        BackgroundColor="Transparent"/>
-                    -->
                     
                     
+                    
+
                 </Grid>
             </StackLayout>
-           
         </ScrollView>
-
+                    
         <!-- Dockade knappar -->
-       
         <StackLayout AbsoluteLayout.LayoutBounds="0, 1, 1, AutoSize"
                      AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
-                     
                      Orientation="Horizontal" 
                      HorizontalOptions="FillAndExpand" 
                      Padding="10" 
                      Spacing="10"
                      BackgroundColor="CadetBlue">
-            
+
             <Button Text="Använd Tröja"
                     HorizontalOptions="Start"
-                   
                     Command="{Binding UseShirtCommand}" 
                     CommandParameter="{Binding SelectedItem}" 
                     BackgroundColor="Green" 
                     TextColor="Black"
-                    FontSize="20" FontFamily="Chewy"
-                    />
+                    FontSize="20" FontFamily="Chewy"/>
             <Button Text="Ny Tröja" Command="{Binding RegisterNewShirtCommand}" 
                     HorizontalOptions="End"
-                    
                     BackgroundColor="Beige" FontSize="20" TextColor="Black" 
-                    FontFamily="Chewy"
-                    />
+                    FontFamily="Chewy"/>
         </StackLayout>
 
     </AbsoluteLayout>
 
 </ContentPage>
-        
-

@@ -43,7 +43,7 @@
                 HeightRequest="200"
                 BackgroundColor="Aquamarine" 
                 Command="{Binding GoToDetailPageCommand}"
-                CommandParameter="{Binding .}" />
+                />
 
             <Button Text="Mer information om tröjan"
                     Command="{Binding GoToDetailPageCommand}"

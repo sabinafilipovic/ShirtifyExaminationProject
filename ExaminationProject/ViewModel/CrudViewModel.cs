@@ -10,11 +10,13 @@ namespace ExaminationProject.ViewModel
 {
     public partial class CrudViewModel : ObservableObject
     {
+        public ShirtService ShirtService => ShirtService.Instance;
+
         [ObservableProperty]
         public int pictureId = 0;
 
         [ObservableProperty]
-         ObservableCollection<Shirt> shirts = new ObservableCollection<Shirt>();
+        ObservableCollection<Shirt> shirts = new ObservableCollection<Shirt>();
 
         [ObservableProperty]
         ObservableCollection<Category> categories = new();
@@ -25,10 +27,19 @@ namespace ExaminationProject.ViewModel
         [ObservableProperty]
         string shirtBrand;
 
+        [ObservableProperty]
+        string pictureFilepath;
+
         private readonly PhotoService _photoService;
 
         [ObservableProperty]
         int shirtColor;
+
+        [ObservableProperty]
+        Shirt selectedShirt;
+
+        [ObservableProperty]
+        string selectedShirtBrand;
 
         [ObservableProperty]
         Category selectedCategory;
@@ -44,18 +55,62 @@ namespace ExaminationProject.ViewModel
 
         private void LoadData()
         {
+            // Load Shirts
             Shirts.Clear();
             foreach (var shirt in DatabaseService.GetShirts())
                 Shirts.Add(shirt);
 
+            // Load Categories
             Categories.Clear();
             foreach (var category in DatabaseService.GetCategories())
                 Categories.Add(category);
 
+            // Load Colors
             Colors.Clear();
             foreach (var color in DatabaseService.GetColors())
                 Colors.Add(color);
         }
+
+        [RelayCommand]
+        async Task CapturePhoto()
+        {
+            pictureId = await _photoService.CapturePhotoAsync();
+            pictureFilepath = DatabaseService.GetFilepathById(pictureId);
+            OnPropertyChanged(nameof(PictureFilepath));
+        }
+
+        [RelayCommand]
+        async Task SelectPhoto()
+        {
+            var selectedFilePath = await _photoService.SelectPhotoFromGalleryAsync();
+
+            if (selectedFilePath == null)
+            {
+                System.Diagnostics.Debug.WriteLine("No photo was selected or the operation was canceled.");
+                return;
+            }
+
+            pictureId = selectedFilePath.Id;
+
+            if (!string.IsNullOrEmpty(selectedFilePath.Filepath))
+            {
+                PictureFilepath = selectedFilePath.Filepath;
+                OnPropertyChanged(nameof(PictureFilepath));
+            }
+        }
+
+        partial void OnSelectedShirtChanged(Shirt value)
+        {
+            if (value != null)
+            {
+                // Update related elements when a shirt is selected
+                SelectedShirtBrand = value.Brand;
+                SelectedCategory = Categories.FirstOrDefault(c => c.Id == value.Category_Id);
+                SelectedColor = Colors.FirstOrDefault(c => c.Id == value.Color_Id);
+                PictureFilepath = value.Picture_Filepath;
+            }
+        }
+
 
         [RelayCommand]
         async public Task AddShirt()
@@ -125,50 +180,58 @@ namespace ExaminationProject.ViewModel
         }
 
         [RelayCommand]
-        public async Task AddCategory(string categoryName)
+        public void EditShirt()
         {
-            if (!string.IsNullOrWhiteSpace(categoryName))
-            {
-                var newCategory = new Category { Name = categoryName };
-                DatabaseService.AddCategory(newCategory);
-                Categories.Add(newCategory);
-            }
-        }
-
-        [RelayCommand]
-        public async Task AddColor(string colorName)
-        {
-            if (!string.IsNullOrWhiteSpace(colorName))
-            {
-                var newColor = new Model.Color { Name = colorName };
-                DatabaseService.AddColor(newColor);
-                Colors.Add(newColor);
-            }
-        }
-
-        [RelayCommand]
-        public void EditShirt(int shirtId)
-        {
-            var shirtToEdit = DatabaseService.GetShirtById(shirtId);
-            if (shirtToEdit != null)
-            {
-                shirtToEdit.Brand = ShirtBrand;
-                shirtToEdit.Color_Id = ShirtColor;
-
-                DatabaseService.UpdateShirt(shirtToEdit);
-                LoadData();
-            }
-        }
-
-        [RelayCommand]
-        public void DeleteShirt(int shirtId)
-        {
-            if (shirtId == 0)
-            {
+            if (SelectedShirt == null)
                 return;
+
+            // Update the selected shirt's properties
+            if (!string.IsNullOrWhiteSpace(SelectedShirtBrand))
+                SelectedShirt.Brand = SelectedShirtBrand;
+
+            if (SelectedCategory != null)
+                SelectedShirt.Category_Id = SelectedCategory.Id;
+
+            if (SelectedColor != null)
+                SelectedShirt.Color_Id = SelectedColor.Id;
+
+            if (pictureFilepath != null)
+                selectedShirt.Picture_Id = DatabaseService.GetIdByFilepath(pictureFilepath);
+
+            // Update the database
+            DatabaseService.UpdateShirt(SelectedShirt);
+
+            //Updates the current shirt if the edited shirt was the "DailyShirt"
+            if (ShirtService.CurrentShirt.Id == selectedShirt.Id) 
+            {
+                ShirtService.CurrentShirt = SelectedShirt;
             }
-            DatabaseService.RemoveShirt(shirtId);
+
+            // Reload the data to reflect changes
             LoadData();
+
+
+            //Commented out the lines so that when the edit changes button is pressed it empties the entrys
+            /*// Update the selected shirt references to reflect changes in the UI
+            SelectedCategory = Categories.FirstOrDefault(c => c.Id == SelectedShirt.Category_Id);
+            SelectedColor = Colors.FirstOrDefault(c => c.Id == SelectedShirt.Color_Id);
+            ShirtBrand = SelectedShirt.Brand;*/
+        }
+
+        [RelayCommand]
+        public void DeleteShirt()
+        {
+            if (SelectedShirt == null)
+                return;
+
+            DatabaseService.RemoveShirt(SelectedShirt.Id);
+            Shirts.Remove(SelectedShirt);
+        }
+
+        [RelayCommand]
+        async Task GoBack()
+        {
+            await AppShell.Current.GoToAsync("///MainPage");
         }
     }
 }

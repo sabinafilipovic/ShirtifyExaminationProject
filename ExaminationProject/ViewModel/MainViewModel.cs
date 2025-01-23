@@ -13,7 +13,11 @@ namespace ExaminationProject.ViewModel
 {
     public partial class MainViewModel : ObservableObject
     {
+        private readonly ShirtService _shirtService;
         public ShirtService ShirtService => ShirtService.Instance;
+
+        [ObservableProperty]
+        private Shirt _dailyShirt;
 
         [ObservableProperty]
         ObservableCollection<string> items = new ObservableCollection<string>();
@@ -24,8 +28,9 @@ namespace ExaminationProject.ViewModel
         [ObservableProperty]
         string text;
 
-        [ObservableProperty]
-        Shirt dailyShirt;
+        // Removed duplicate property
+        // [ObservableProperty]
+        // Shirt dailyShirt;
 
         [ObservableProperty]
         string shirtName;
@@ -48,22 +53,52 @@ namespace ExaminationProject.ViewModel
             {
                 ShirtService.SetCurrentShirt(value);
                 OnPropertyChanged(nameof(CurrentShirt));
+
             }
         }
 
+        
+
         public MainViewModel()
         {
-            // Ensure shirts are loaded and a shirt is randomized on startup
-            ShirtService.LoadShirts();
-            dailyShirt = ShirtService.CurrentShirt;
-        }
+            _shirtService = ShirtService.Instance;
+            _shirtService.CurrentShirtChanged += OnCurrentShirtChanged;
+            DailyShirt = _shirtService.CurrentShirt;
 
-        public Shirt getDailyShirt() 
+            if (DailyShirt == null)
+            {
+                _shirtService.LoadShirts();
+
+                if (_shirtService.Shirts.Count > 0)
+                {
+                    _shirtService.RandomizeShirt();
+                }
+
+                return;
+            }
+            
+
+        }
+        private void OnCurrentShirtChanged(object sender, EventArgs e)
         {
-            return dailyShirt;
+            DailyShirt = _shirtService.CurrentShirt;
         }
 
-        public void loadShirts() 
+        [RelayCommand]
+        async Task GoToDetailPageAsync(Shirt selectedShirt)
+        {
+            await Shell.Current.GoToAsync(nameof(DetailPage), true, new Dictionary<string, object>
+            {
+                { "SelectedShirt", selectedShirt }
+            });
+        }
+
+        public Shirt getDailyShirt()
+        {
+            return _dailyShirt;
+        }
+
+        public void loadShirts()
         {
             Shirts.Clear();
 
@@ -81,17 +116,7 @@ namespace ExaminationProject.ViewModel
             {
                 return;
             }
-            /*Shirt newShirt = new Shirt()
-           {
-               Name = shirtName,
-               Color = "White"
-           };
 
-           //add our item
-           DatabaseService.AddShirt(newShirt);
-           Shirts.Add(newShirt);*/
-
-            //add our item
             Items.Add(Text);
         }
 
@@ -108,15 +133,16 @@ namespace ExaminationProject.ViewModel
         }
 
         [RelayCommand]
-        async Task GoToCrudPage()
-            {
-                await AppShell.Current.GoToAsync(nameof(CrudPage));
-            }
-
-        [RelayCommand]
-        async Task GoToDetailPage()
+        async void GoToCrudPage()
         {
-            await AppShell.Current.GoToAsync("DetailPage");
+            await AppShell.Current.GoToAsync(nameof(CrudPage));
         }
+
+        // Har en ny metod som heter GoToDetailPageAsync
+        //[RelayCommand]
+        //async void GoToDetailPage()
+        //{
+        //    AppShell.Current.GoToAsync("DetailPage");
+        //}
     }
 }

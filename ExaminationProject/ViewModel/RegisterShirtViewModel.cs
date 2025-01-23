@@ -14,57 +14,6 @@ namespace ExaminationProject.ViewModel
         public RegisterShirtViewModel(PhotoService photoService) : base(photoService)
         {
             _photoService = photoService;
-        }
-
-        [RelayCommand]
-        async void GoBack()
-        {
-            if (Shell.Current.Navigation.NavigationStack.Count > 1)
-            {
-                await Shell.Current.Navigation.PopAsync();
-            }
-        }
-
-        [ObservableProperty]
-        string pictureFilepath;
-
-        
-
-        [RelayCommand]
-        async void CapturePhoto()
-        {
-            pictureId = await _photoService.CapturePhotoAsync();
-
-            if (string.IsNullOrEmpty(pictureFilepath))
-            {
-                System.Diagnostics.Debug.WriteLine($"No filepath found for Picture ID: {pictureId}");
-                return; // Exit or handle gracefully
-            }
-
-            pictureFilepath = DatabaseService.GetFilepathById(pictureId);
-
-
-            // Update the page
-            OnPropertyChanged(nameof(PictureFilepath));
-        }
-
-        [RelayCommand]
-        async void SelectPhoto()
-        {
-            var selectedFilePath = await _photoService.SelectPhotoFromGalleryAsync();
-
-            if (selectedFilePath == null) 
-            {
-                System.Diagnostics.Debug.WriteLine("No photo was selected or the operation was canceled.");
-                return; // Exit the method gracefully
-            }
-            pictureId = selectedFilePath.Id;
-
-            if (!string.IsNullOrEmpty(selectedFilePath.Filepath))
-            {
-                pictureFilepath = selectedFilePath.Filepath;
-                OnPropertyChanged(nameof(PictureFilepath));
-            }
-        }
+        }  
     }
 }
