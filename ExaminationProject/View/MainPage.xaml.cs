@@ -24,9 +24,7 @@ namespace ExaminationProject
 
                 if (weather != null)
                 {
-                    WeatherLabel.Text = $"Temperatur: {weather.Main.Temp}°C\n" +
-                                        $"Luftfuktighet: {weather.Main.Humidity}%\n" +
-                                        $"Väder: {weather.Weather[0].Description}";
+                    WeatherLabel.Text = $"Temperatur: {weather.Main.Temp} °C | Väder: {weather.Weather[0].Description}";
                 }
                 else
                 {

@@ -49,7 +49,7 @@
 
                                     <Image Source="{Binding Picture_Filepath}" 
                                            
-                                           Background="Aqua"
+                                           Background="Transparent"
                                            Margin="5" 
                                             />
 

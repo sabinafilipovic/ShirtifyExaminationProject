@@ -7,61 +7,84 @@
              x:Class="ExaminationProject.MainPage"
              Title="Shirtify - Homepage">
 
-    <ScrollView>
-        <VerticalStackLayout
-            Padding="30, 0"
-            Spacing="25">
+        <ScrollView>
+        <VerticalStackLayout Padding="30, 0" Spacing="25">
 
-            <Frame BackgroundColor="#1e90ff"
-                   CornerRadius="15"
-                   Padding="15"
-                   HasShadow="True"
+            <!-- Vädersinformation Frame -->
+            <Frame BackgroundColor="#e3f9ff" CornerRadius="5"
+                   Padding="5" HasShadow="True"
                    HorizontalOptions="FillAndExpand">
-                <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Spacing="10">
-                    <Label Text="Väderinformation"
-                           FontSize="23"
-                           TextColor="White"
-                           HorizontalOptions="Center" />
-                    <Label x:Name="WeatherLabel"
-                            FontSize="20"
-                            TextColor="White"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center" />
                     
+                <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                    <Label Text="🌥️ Väderinformation"
+                           FontSize="21"
+                           TextColor="#69b3c9"
+                           HorizontalOptions="Center"
+                           FontFamily="PoppinsMedium"
+                           CharacterSpacing="1"/>
+                    <Label x:Name="WeatherLabel"
+                            FontSize="15"
+                            TextColor="#69b3c9"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            FontFamily="PoppinsMedium"
+                            CharacterSpacing="2"/>
                 </StackLayout>
             </Frame>
 
-            <Label
-                Text="Dagens Tröja"
-                HorizontalTextAlignment="Center"
-                FontFamily="Chewy"
-                FontSize="20" />
+            <!-- Frame runt "Dagens Tröja" och bilden -->
+            <Frame BackgroundColor="#f5fdff"
+                   CornerRadius="10"
+                   Padding="15"
+                   HasShadow="True"
+                   HorizontalOptions="FillAndExpand">
+                <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Spacing="5">
 
-            <ImageButton
-                Source="{Binding DailyShirt.Picture_Filepath}"
-                WidthRequest="200"
-                HeightRequest="200"
-                BackgroundColor="Aquamarine" 
-                Command="{Binding GoToDetailPageCommand}"
-                />
+                    <Label Text="DAGENS TRÖJA"
+                           HorizontalTextAlignment="Center"
+                           FontFamily="PoppinsMedium"
+                           FontSize="30" CharacterSpacing="1"/>
 
-            <Button Text="Mer information om tröjan"
-                    Command="{Binding GoToDetailPageCommand}"
-                    Background="#b4d2de"
-                    FontFamily="Chewy"
-                    FontSize="20"/>
+                    <ImageButton Source="{Binding DailyShirt.Picture_Filepath}"
+                                 WidthRequest="350" HeightRequest="350"
+                                 BackgroundColor="transparent"
+                                 Command="{Binding GoToDetailPageCommand}" />
 
-            <Button Command="{Binding GoToAdminPageCommand}" 
-                    Text="Gå till inställningar"
-                    Background="#91b597"
-                    FontSize="18" FontFamily="Chewy"/>
+                    <Label Text="Tryck på bilden för mer information"
+                           FontSize="13" FontFamily="PoppinsMedium"
+                           HorizontalTextAlignment="Center"
+                           CharacterSpacing="1"
+                           TextColor="#a9aaab"/>
+                </StackLayout>
+            </Frame>
 
+            <!-- Knappar bredvid varandra -->
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="CenterAndExpand">
+                <Button Text="Mer information om tröjan"
+                        Command="{Binding GoToDetailPageCommand}"
+                        Background="#b4d2de"
+                        FontFamily="Chewy"
+                        FontSize="20"
+                        HorizontalOptions="Center"
+                        WidthRequest="160"/>
+
+                <Button Command="{Binding GoToAdminPageCommand}"
+                        Text="Gå till inställningar"
+                        Background="#91b597"
+                        FontSize="18"
+                        FontFamily="Chewy"
+                        HorizontalOptions="Center"
+                        WidthRequest="180"/>
+            </HorizontalStackLayout>
+
+            <!-- Tvättråd-knapp -->
             <Button Text="🧺 Tvättråd"
                     Command="{Binding GoToPage1Command}"
                     Background="#b4d2de"
                     FontFamily="Chewy"
-                    FontSize="20"
-                    WidthRequest="50"/>
+                    FontSize="15"
+                    WidthRequest="96"
+                    Padding="3"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
