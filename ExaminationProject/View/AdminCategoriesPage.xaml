@@ -5,7 +5,7 @@
              xmlns:model="clr-namespace:ExaminationProject.Model"
              x:Class="ExaminationProject.View.AdminCategoriesPage"
              x:DataType="viewmodel:AdminCategoriesViewModel"
-             Title="Admin Categories">
+             Title="Kategorier">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="25">
@@ -18,18 +18,20 @@
                    BackgroundColor="{AppThemeBinding Light=#E6F7FF, Dark=#1E1E1E}">
                 <VerticalStackLayout Spacing="15">
 
-                    <Label Text="Add New Category"
+                    <Label Text="Lägg till en ny kategori"
                            FontSize="18"
                            FontAttributes="Bold" />
 
                     <!-- Add New Category Entry -->
-                    <Entry Placeholder="New Category Name"
-                           Text="{Binding NewCategoryName}" />
+                    <Entry Placeholder="Nytt kategorinamn.."
+                           Text="{Binding NewCategoryName}"
+                           FontSize="17"/>
 
                     <!-- Add Category Button -->
-                    <Button Text="Add Category"
+                    <Button Text="Godkänn"
                             Command="{Binding AddCategoryCommand}"
-                            HorizontalOptions="FillAndExpand" />
+                            HorizontalOptions="FillAndExpand" 
+                            BackgroundColor="#91bda0"/>
                 </VerticalStackLayout>
             </Frame>
 
@@ -41,18 +43,19 @@
                    BackgroundColor="{AppThemeBinding Light=#FFFBE6, Dark=#2B2B2B}">
                 <VerticalStackLayout Spacing="15">
 
-                    <Label Text="Edit Selected Category"
-                           FontSize="18"
-                           FontAttributes="Bold" />
+                    <Label Text="Redigera vald kategori"
+                           FontSize="18" FontAttributes="Bold" />
 
                     <!-- Edit Selected Category Entry -->
-                    <Entry Placeholder="Edit Selected Category Name"
-                           Text="{Binding EditCategoryName}" />
+                    <Entry Placeholder="Nytt namn.."
+                           Text="{Binding EditCategoryName}"
+                           FontSize="17"/>
 
                     <!-- Edit Category Button -->
-                    <Button Text="Edit Selected Category"
+                    <Button Text="Godkänn"
                             Command="{Binding EditCategoryCommand}"
-                            HorizontalOptions="FillAndExpand" />
+                            HorizontalOptions="FillAndExpand" 
+                            BackgroundColor="#91bda0"/>
                 </VerticalStackLayout>
             </Frame>
 
@@ -76,11 +79,13 @@
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="model:Category">
                                 <HorizontalStackLayout Padding="10" Spacing="10">
-                                    <Label Text="{Binding Name}"
-                                           VerticalOptions="Center" />
-                                    <Button Text="Delete"
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:AdminCategoriesViewModel}}, Path=DeleteCategoryCommand}"
-                                            CommandParameter="{Binding .}" />
+                                    <Label Text="{Binding Name}" VerticalOptions="Center"
+                                           FontSize="18"/>
+                                    
+                                    <Button Text="Radera"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:AdminCategoriesViewModel}}, Path=DeleteCategoryCommand}" CommandParameter="{Binding .}" 
+                                            FontFamily="PoppinsMedium"/>
+                                    
                                 </HorizontalStackLayout>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
@@ -91,9 +96,10 @@
             <!-- ================================
                  4) GO BACK BUTTON
                  ================================ -->
-            <Button Text="Go to Home"
+            <Button Text="Tillbaka till huvudsidan"
                     Command="{Binding GoBackCommand}"
-                    HorizontalOptions="FillAndExpand" />
+                    HorizontalOptions="FillAndExpand"
+                    FontSize="16" FontFamily="PoppinsMedium"/>
 
         </VerticalStackLayout>
     </ScrollView>

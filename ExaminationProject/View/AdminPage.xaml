@@ -5,31 +5,36 @@
              xmlns:model="clr-namespace:ExaminationProject.Model"
              x:Class="ExaminationProject.View.AdminPage"
              x:DataType="viewmodel:AdminViewModel"
-             Title="AdminPage">
-    <VerticalStackLayout
-        Padding="30, 0"
-        Spacing="25">
-        <Label 
-            Text="Välj en modul att gå in i"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+             Title="Inställningar">
+    
+    <VerticalStackLayout Padding="30, 0" Spacing="20">
 
-        <Button
-            Command="{Binding GoToAdminShirtsPageCommand}" 
-            Text="Gå till Tröjor"
-            Background="#91b597"
-            FontSize="18" FontFamily="Chewy"/>
+        <Frame BackgroundColor="#edf2f5" CornerRadius="10" Padding="10"
+               HasShadow="True" HorizontalOptions="FillAndExpand" Margin="10">
+            
+            <Label Text="Välj en modul att gå in i 🛠️"
+               VerticalOptions="Center" HorizontalOptions="Center"
+               FontSize="20" FontFamily="PoppinsRegular"/>
 
-        <Button
-            Command="{Binding GoToAdminCategoriesPageCommand}" 
-            Text="Gå till Kategorier"
-            Background="#91b597"
-            FontSize="18" FontFamily="Chewy"/>
+        </Frame>
 
-        <Button
-            Command="{Binding GoToAdminColorsPageCommand}" 
-            Text="Gå till Färger"
-            Background="#91b597"
-            FontSize="18" FontFamily="Chewy"/>
+        <Button Command="{Binding GoToAdminShirtsPageCommand}" 
+                Text="Gå till Tröjor"
+                Background="#91b597"
+                FontSize="18" FontFamily="PoppinsMedium" FontAttributes="Bold"
+                CharacterSpacing="1"/>
+
+        <Button Command="{Binding GoToAdminCategoriesPageCommand}" 
+                Text="Gå till Kategorier"
+                Background="#91b597"
+                FontSize="18" FontFamily="PoppinsMedium" FontAttributes="Bold"
+                CharacterSpacing="1"/>
+
+        <Button Command="{Binding GoToAdminColorsPageCommand}" 
+                Text="Gå till Färger"
+                Background="#91b597"
+                FontSize="18" FontFamily="PoppinsMedium" FontAttributes="Bold"
+                CharacterSpacing="1"/>
+        
     </VerticalStackLayout>
 </ContentPage>

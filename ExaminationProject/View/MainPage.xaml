@@ -50,11 +50,20 @@
                                  BackgroundColor="transparent"
                                  Command="{Binding GoToDetailPageCommand}" />
 
+                    <HorizontalStackLayout HorizontalOptions="Center" Margin="5">
+                        <Label Text="Namn: "
+                               FontAttributes="Bold" FontSize="15" FontFamily="PoppinsRegular"/>
+                        
+                        <Label Text="{Binding DailyShirt.Brand}" 
+                               FontSize="15" FontFamily="PoppinsRegular"/>
+                    </HorizontalStackLayout>
+                    
                     <Label Text="Tryck på bilden för mer information"
                            FontSize="13" FontFamily="PoppinsMedium"
                            HorizontalTextAlignment="Center"
                            CharacterSpacing="1"
                            TextColor="#a9aaab"/>
+                        
                 </StackLayout>
             </Frame>
 

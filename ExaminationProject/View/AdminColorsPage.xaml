@@ -5,7 +5,7 @@
              xmlns:model="clr-namespace:ExaminationProject.Model"
              x:Class="ExaminationProject.View.AdminColorsPage"
              x:DataType="viewmodel:AdminColorsViewModel"
-             Title="Admin Colors">
+             Title="Färger">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="25">
@@ -18,18 +18,17 @@
                    BackgroundColor="{AppThemeBinding Light=#E6F7FF, Dark=#1E1E1E}">
                 <VerticalStackLayout Spacing="15">
 
-                    <Label Text="Add New Color"
-                           FontSize="18"
-                           FontAttributes="Bold" />
+                    <Label Text="Lägg till en ny färg"
+                           FontSize="20" FontAttributes="Bold" />
 
                     <!-- Add New Color Entry -->
-                    <Entry Placeholder="New Color Name"
-                           Text="{Binding NewColorName}" />
+                    <Entry Placeholder="Ny färg.." Text="{Binding NewColorName}"
+                           FontSize="17"/>
 
                     <!-- Add Color Button -->
-                    <Button Text="Add Color"
-                            Command="{Binding AddColorCommand}"
-                            HorizontalOptions="FillAndExpand" />
+                    <Button Text="Godkänn" Command="{Binding AddColorCommand}"
+                            HorizontalOptions="FillAndExpand"
+                            BackgroundColor="#91bda0"/>
                 </VerticalStackLayout>
             </Frame>
 
@@ -41,50 +40,47 @@
                    BackgroundColor="{AppThemeBinding Light=#FFFBE6, Dark=#2B2B2B}">
                 <VerticalStackLayout Spacing="15">
 
-                    <Label Text="Edit Selected Color"
-                           FontSize="18"
-                           FontAttributes="Bold" />
+                    <Label Text="Redigera existerande färg"
+                           FontSize="20" FontAttributes="Bold" />
 
                     <!-- Edit Selected Color Entry -->
-                    <Entry Placeholder="Edit Selected Color Name"
-                           Text="{Binding EditColorName}" />
+                    <Entry Placeholder="Nytt namn.."
+                           Text="{Binding EditColorName}" 
+                           FontSize="17"/>
 
                     <!-- Edit Color Button -->
-                    <Button Text="Edit Selected Color"
+                    <Button Text="Godkänn"
                             Command="{Binding EditColorCommand}"
-                            HorizontalOptions="FillAndExpand" />
+                            HorizontalOptions="FillAndExpand" 
+                            BackgroundColor="#91bda0"/>
                 </VerticalStackLayout>
             </Frame>
 
             <!-- ================================
                  3) COLORS LIST SECTION
                  ================================ -->
-            <Frame CornerRadius="8"
-                   Padding="15"
+            <Frame CornerRadius="8" Padding="15"
                    BackgroundColor="#D7FAFF">
                 <VerticalStackLayout Spacing="10">
-                    
-                    
 
-                    <Label Text="Colors"
-                           FontSize="20"
-                           FontAttributes="Bold" />
-                    
-                    
+                    <Label Text="Nuvarande färger" 
+                           FontSize="20" FontAttributes="Bold" />
 
                     <CollectionView ItemsSource="{Binding Colors}"
                                     SelectionMode="Single"
                                     SelectedItem="{Binding SelectedColor}">
                         <CollectionView.ItemTemplate>
+                            
                             <DataTemplate x:DataType="model:Color">
                                 <HorizontalStackLayout Padding="10" Spacing="10">
                                     <Label Text="{Binding Name}"
                                            Margin="10"
                                            FontSize="18"
                                            VerticalOptions="Center" />
-                                    <Button Text="Delete"
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:AdminColorsViewModel}}, Path=DeleteColorCommand}"
-                                            CommandParameter="{Binding .}" />
+                                    
+                                    <Button Text="Radera" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:AdminColorsViewModel}}, Path=DeleteColorCommand}" CommandParameter="{Binding .}" 
+                                            HorizontalOptions="End"
+                                            BackgroundColor="#e3020a"/>
                                 </HorizontalStackLayout>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
@@ -95,9 +91,9 @@
             <!-- ================================
                  4) GO BACK BUTTON
                  ================================ -->
-            <Button Text="Go to Home"
-                    Command="{Binding GoBackCommand}"
-                    HorizontalOptions="FillAndExpand" />
+            <Button Text="Tillbaka till huvudsidan" Command="{Binding GoBackCommand}"
+                    HorizontalOptions="FillAndExpand"
+                    FontSize="17"/>
 
         </VerticalStackLayout>
     </ScrollView>

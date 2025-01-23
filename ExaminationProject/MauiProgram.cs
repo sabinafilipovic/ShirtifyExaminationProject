@@ -20,8 +20,7 @@ namespace ExaminationProject
                     fonts.AddFont("IndieFlower.ttf", "IndieFlower");
                     fonts.AddFont("PoppinsMedium.ttf", "PoppinsMedium");
                     fonts.AddFont("PoppinsRegular.ttf", "PoppinsRegular");
-
-
+                    fonts.AddFont("PoppinsBold.tff", "PoppinsBold");
                 });
 
 #if DEBUG

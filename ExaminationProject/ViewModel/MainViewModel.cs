@@ -57,8 +57,6 @@ namespace ExaminationProject.ViewModel
             }
         }
 
-        
-
         public MainViewModel()
         {
             _shirtService = ShirtService.Instance;

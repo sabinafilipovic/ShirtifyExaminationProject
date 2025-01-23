@@ -2,158 +2,101 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ExaminationProject.View.DetailPage"
-             Title="Info om Tröja">
+             Title="Information">
     <ScrollView>
         <StackLayout Padding="0" Spacing="10">
 
-            <Grid Padding="10" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, 1*">
-
-                <StackLayout  Grid.ColumnSpan="2" VerticalOptions="Center"  Padding="10,0,0,0">
-
-
-                    <Label Text="Info om Tröja" 
-                           HorizontalOptions="Center" 
-                           FontSize="23"
-                           
-                           FontFamily="Chewy"
-                           Padding="10"/>
-
-                    <ImageButton 
-                        Command="{Binding GoToInventoryCommand}" 
-                        Margin="20"
-                         
-                        HeightRequest="200" 
-                        WidthRequest="200" 
-                        
-                        Source="{Binding DailyShirt.Picture_Filepath}"/>
-
-                    <Label 
-                            Text="{Binding DailyShirt.Brand}"
-                            FontSize="24" 
-                            FontAttributes="Bold"
-                            HorizontalOptions="Center"/>
-
-
-
-                </StackLayout>
-
-
-            </Grid>
-
-            <Grid Padding="10" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, 1*"
-                  BackgroundColor="LightGray">
+            <!-- Frame för detaljer och bild -->
+            <Frame BackgroundColor="#f5fdff"
+                   CornerRadius="15" Padding="10"
+                   HasShadow="True" HorizontalOptions="FillAndExpand">
                 
+                <StackLayout VerticalOptions="Center" Padding="10,0,0,0">
+                    <Label Text="DETALJER" HorizontalOptions="Center" 
+                           FontSize="23" FontFamily="PoppinsMedium"
+                           Padding="2"/>
 
-                <Label 
-                           Text="Färg:" 
-                           HorizontalOptions="Center" 
-                           FontSize="23"
-                           
-                           FontFamily="Chewy"
-                           Padding="10"/>
+                    <ImageButton Command="{Binding GoToInventoryCommand}" 
+                                 Margin="20" HeightRequest="300" WidthRequest="300" 
+                                 Source="{Binding DailyShirt.Picture_Filepath}"/>
+
+                    <Label Text="{Binding DailyShirt.Brand}"
+                           FontSize="20" FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+                </StackLayout>
+            </Frame>
+
+            <!-- Färg Grid -->
+            <Grid Padding="10" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, 1*"
+                  BackgroundColor="#b4d9e0">
+                <Label Text="Färg:" HorizontalOptions="Center" 
+                       FontSize="23" FontFamily="PoppinsMedium" Padding="10"/>
 
                 <Label Grid.Column="1"
-                           Text="{Binding DailyShirt.Color_Name}" 
-                           HorizontalOptions="Start" 
-                           FontSize="23"
-                           FontFamily="Chewy"
-                           Padding="10"/>
+                       Text="{Binding DailyShirt.Color_Name}" 
+                       HorizontalOptions="Start" 
+                       FontSize="23" FontFamily="PoppinsMedium" Padding="10"/>
             </Grid>
 
+            <!-- Kategori Grid -->
             <Grid Padding="10" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, 1*"
-                  BackgroundColor="DarkGray">
+                  BackgroundColor="#c6edf5">
+                <Label Text="Kategori:" HorizontalOptions="Center" 
+                       FontSize="23" FontFamily="PoppinsMedium" Padding="10"/>
 
-                <Label 
-                           Text="Kategori:" 
-                           HorizontalOptions="Center" 
-                           FontSize="23"
-                            
-                           FontFamily="Chewy"
-                           Padding="10"/>
-
-                <Label     Grid.Column="1"
-                           Text="{Binding DailyShirt.Category_Name}" 
-                           HorizontalOptions="Start" 
-                           FontSize="23"
-                           
-                           FontFamily="Chewy"
-                           Padding="10"/>
+                <Label Grid.Column="1"
+                       Text="{Binding DailyShirt.Category_Name}" 
+                       HorizontalOptions="Start" 
+                       FontSize="23" FontFamily="PoppinsMedium" Padding="10"/>
             </Grid>
 
+            <!-- Senast använd Grid -->
             <Grid Padding="10" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, 1*"
-                  BackgroundColor="LightGray">
+                  BackgroundColor="#b4d9e0">
+                <Label Text="Senast använd:" 
+                       HorizontalOptions="Center" 
+                       FontSize="23" FontFamily="PoppinsMedium"
+                       Padding="10"/>
 
-                <Label 
-                   Text="Senast använd:" 
-                   HorizontalOptions="Center" 
-                   FontSize="23"
-                   
-                   FontFamily="Chewy"
-                   Padding="10"/>
-
-                <Label     
-                   Grid.Column="1"
-                   Text="{Binding LastTimeUsed}"
-                   HorizontalOptions="Start" 
-                   FontSize="23"
-                   
-                   FontFamily="Chewy"
-                   Padding="10"/>
+                <Label Grid.Column="1"
+                       Text="{Binding LastTimeUsed}"
+                       HorizontalOptions="Start" 
+                       FontSize="23"
+                       FontFamily="PoppinsMedium"
+                       Padding="10"/>
             </Grid>
 
+            <!-- Använd Grid -->
             <Grid Padding="10" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, auto,1*"
-                  BackgroundColor="DarkGray">
+                  BackgroundColor="#c6edf5">
+                <Label Text="Använd:" HorizontalOptions="Start" 
+                       FontSize="23" FontFamily="PoppinsMedium" Padding="10"/>
 
-                <Label 
-                   
-                   Text="Använd:" 
-                   HorizontalOptions="Start" 
-                   FontSize="23"
-                   
-                   FontFamily="Chewy"
-                   Padding="10"/>
+                <Label Grid.Column="1"
+                       Text="{Binding AmountUsed}" 
+                       HorizontalOptions="Start" 
+                       FontSize="23" FontFamily="PoppinsMedium" Padding="10"/>
 
-                <Label     
-                   Grid.Column="1"
-                   Text="{Binding AmountUsed}" 
-                   HorizontalOptions="Start" 
-                   FontSize="23" 
-                   FontFamily="Chewy"
-                   Padding="10"/>
-                <Label 
-                   Grid.Column="2"
-                   Text="gånger" 
-                   HorizontalOptions="Start" 
-                   FontSize="23"
-                  
-                   FontFamily="Chewy"
-                   Padding="10"/>
+                <Label Grid.Column="2" Text="gånger" 
+                       HorizontalOptions="Start" 
+                       FontSize="23" FontFamily="PoppinsMedium" Padding="10"/>
             </Grid>
 
-
-
+            <!-- BoxView och knappar -->
             <Grid Padding="0" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, 1*">
+                <BoxView Grid.ColumnSpan="2" Color="#b4cfde"/>
 
-                <BoxView Grid.ColumnSpan="2" Color="DarkBlue">
+                <Button WidthRequest="250" Command="{Binding UseShirtCommand}"
+                        Text="Använd Tröja" Margin="5" 
+                        BackgroundColor="#c1d6c3" 
+                        FontSize="20" FontFamily="Chewy"/>
 
-                </BoxView>
-
-                <Button WidthRequest="250"
-                        Text="Använd Tröja"
-                        Command="{Binding UseShirtCommand}"
-                        Margin="5" 
+                <Button Grid.Row="0" Grid.Column="1" Command="{Binding GoToInventoryCommand}" 
+                        Text="Garderob" FontSize="20" FontFamily="Chewy"
                         BackgroundColor="#b4d2de" 
-                    FontSize="20" FontFamily="Chewy"/>
-
-                <Button Grid.Row="0" Grid.Column="1" Text="Garderob" Command="{Binding GoToInventoryCommand}" 
-                    Margin="5" BackgroundColor="#b4d2de" 
-                    FontSize="20" FontFamily="Chewy"/>
-
+                        Margin="5" />
             </Grid>
-                
 
         </StackLayout>
     </ScrollView>
-
-
 </ContentPage>

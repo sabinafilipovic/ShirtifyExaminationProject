@@ -5,7 +5,7 @@
              xmlns:model="clr-namespace:ExaminationProject.Model"
              x:Class="ExaminationProject.CrudPage"
              x:DataType="viewmodel:CrudViewModel"
-             Title="Manage Shirts">
+             Title="Hantera tröjor">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="25">
@@ -19,8 +19,10 @@
                 <VerticalStackLayout Spacing="10">
 
                     <!-- EXPLANATORY LABEL -->
-                    <Label Text="Shirt Preview "
-                           FontAttributes="Bold" />
+                    <Label Text="Förhandsvisning"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           FontFamily="PoppinsRegular" FontSize="18"/>
 
                     <!-- IMAGE PREVIEW -->
                     <Image Source="{Binding PictureFilepath}"
@@ -30,10 +32,12 @@
 
                     <!-- TAKE / SELECT PHOTO BUTTONS -->
                     <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
-                        <Button Text="📷 Take Photo"
-                                Command="{Binding CapturePhotoCommand}" />
-                        <Button Text="📂 Choose from Gallery"
-                                Command="{Binding SelectPhotoCommand}" />
+                        <Button Text="📷 Ta foto "
+                                Command="{Binding CapturePhotoCommand}" 
+                                Padding="7"/>
+                        <Button Text="📂 Välj från album"
+                                Command="{Binding SelectPhotoCommand}"
+                                Padding="7"/>
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
             </Frame>
@@ -46,24 +50,24 @@
                    BackgroundColor="{AppThemeBinding Light=#E6F7FF, Dark=#1E1E1E}">
                 <VerticalStackLayout Spacing="15">
 
-                    <Label Text="Edit Selected Shirt"
+                    <Label Text="Redigera vald tröja"
                            FontSize="18"
                            FontAttributes="Bold" />
 
-                    <Entry Placeholder="Edit Selected Shirt Name"
+                    <Entry Placeholder="Ändra tröjans namn"
                            Text="{Binding SelectedShirtBrand}" />
 
-                    <Picker Title="Edit Category"
+                    <Picker Title="Ändra kategori"
                             ItemsSource="{Binding Categories}"
                             ItemDisplayBinding="{Binding Name}"
                             SelectedItem="{Binding SelectedCategory}" />
 
-                    <Picker Title="Edit Color"
+                    <Picker Title="Ändra färg"
                             ItemsSource="{Binding Colors}"
                             ItemDisplayBinding="{Binding Name}"
                             SelectedItem="{Binding SelectedColor}" />
 
-                    <Button Text="Edit Selected Shirt"
+                    <Button Text="Godkänn"
                             Command="{Binding EditShirtCommand}"
                             HorizontalOptions="FillAndExpand" />
                 </VerticalStackLayout>
@@ -78,7 +82,7 @@
 
                 <VerticalStackLayout Spacing="10">
 
-                    <Label Text="Shirts"
+                    <Label Text="Tröjor"
                            FontSize="20"
                            FontAttributes="Bold" />
 
@@ -95,7 +99,7 @@
                                            VerticalOptions="Center" />
                                     <Label Text="{Binding Color_Name}"
                                            VerticalOptions="Center" />
-                                    <Button Text="Delete"
+                                    <Button Text="Radera"
                                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CrudViewModel}}, Path=DeleteShirtCommand}"
                                             CommandParameter="{Binding .}" />
                                 </HorizontalStackLayout>
@@ -108,7 +112,7 @@
             <!-- ===============================
                  5) GO BACK BUTTON
                  =============================== -->
-            <Button Text="Go to Home"
+            <Button Text="Tillbaka till hemskärm"
                     Command="{Binding GoBackCommand}"
                     HorizontalOptions="FillAndExpand" />
 
