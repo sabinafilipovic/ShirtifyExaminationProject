@@ -14,12 +14,6 @@ namespace ExaminationProject.ViewModel
         public RegisterShirtViewModel(PhotoService photoService) : base(photoService)
         {
             _photoService = photoService;
-        }
-
-
-        [ObservableProperty]
-        string pictureFilepath;        
-
-        
+        }  
     }
 }

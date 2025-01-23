@@ -39,7 +39,7 @@
 
             <!-- Edit Selected Shirt -->
             <Entry Placeholder="Edit Selected Shirt Name"
-                   Text="{Binding SelectedShirt.Brand}" />
+                   Text="{Binding SelectedShirtBrand}" />
 
             <Picker Title="Edit Category"
                     ItemsSource="{Binding Categories}"

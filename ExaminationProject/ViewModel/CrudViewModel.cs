@@ -39,6 +39,9 @@ namespace ExaminationProject.ViewModel
         Shirt selectedShirt;
 
         [ObservableProperty]
+        string selectedShirtBrand;
+
+        [ObservableProperty]
         Category selectedCategory;
 
         [ObservableProperty]
@@ -101,7 +104,7 @@ namespace ExaminationProject.ViewModel
             if (value != null)
             {
                 // Update related elements when a shirt is selected
-                ShirtBrand = value.Brand;
+                SelectedShirtBrand = value.Brand;
                 SelectedCategory = Categories.FirstOrDefault(c => c.Id == value.Category_Id);
                 SelectedColor = Colors.FirstOrDefault(c => c.Id == value.Color_Id);
                 PictureFilepath = value.Picture_Filepath;
@@ -183,8 +186,8 @@ namespace ExaminationProject.ViewModel
                 return;
 
             // Update the selected shirt's properties
-            if (!string.IsNullOrWhiteSpace(ShirtBrand))
-                SelectedShirt.Brand = ShirtBrand;
+            if (!string.IsNullOrWhiteSpace(SelectedShirtBrand))
+                SelectedShirt.Brand = SelectedShirtBrand;
 
             if (SelectedCategory != null)
                 SelectedShirt.Category_Id = SelectedCategory.Id;
