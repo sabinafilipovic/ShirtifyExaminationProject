@@ -7,38 +7,98 @@
              x:DataType="viewmodel:AdminColorsViewModel"
              Title="Admin Colors">
 
-    <VerticalStackLayout Padding="20" Spacing="15">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="25">
 
-        <!-- Add New Color -->
-        <Entry Placeholder="New Color Name"
-               Text="{Binding NewColorName}" />
-        <Button Text="Add Color"
-                Command="{Binding AddColorCommand}" />
+            <!-- ================================
+                 1) ADD NEW COLOR SECTION
+                 ================================ -->
+            <Frame CornerRadius="8"
+                   Padding="15"
+                   BackgroundColor="{AppThemeBinding Light=#E6F7FF, Dark=#1E1E1E}">
+                <VerticalStackLayout Spacing="15">
 
-        <!-- Edit Selected Color -->
-        <Entry Placeholder="Edit Selected Color Name"
-               Text="{Binding EditColorName}" />
-        <Button Text="Edit Selected Color"
-                Command="{Binding EditColorCommand}" />
+                    <Label Text="Add New Color"
+                           FontSize="18"
+                           FontAttributes="Bold" />
 
-        <!-- Colors List -->
-        <Label Text="Colors" FontSize="20" />
-        <CollectionView ItemsSource="{Binding Colors}"
-                        SelectionMode="Single"
-                        SelectedItem="{Binding SelectedColor}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="model:Color">
-                    <HorizontalStackLayout Padding="10" Spacing="10">
-                        <Label Text="{Binding Name}" VerticalOptions="Center" />
-                        <Button Text="Delete"
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:AdminColorsViewModel}}, Path=DeleteColorCommand}"
-                                CommandParameter="{Binding .}" />
-                    </HorizontalStackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-        <!-- Go Back -->
-        <Button Text="Go to Home"
-        Command="{Binding GoBackCommand}" />
-    </VerticalStackLayout>
+                    <!-- Add New Color Entry -->
+                    <Entry Placeholder="New Color Name"
+                           Text="{Binding NewColorName}" />
+
+                    <!-- Add Color Button -->
+                    <Button Text="Add Color"
+                            Command="{Binding AddColorCommand}"
+                            HorizontalOptions="FillAndExpand" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- ================================
+                 2) EDIT SELECTED COLOR SECTION
+                 ================================ -->
+            <Frame CornerRadius="8"
+                   Padding="15"
+                   BackgroundColor="{AppThemeBinding Light=#FFFBE6, Dark=#2B2B2B}">
+                <VerticalStackLayout Spacing="15">
+
+                    <Label Text="Edit Selected Color"
+                           FontSize="18"
+                           FontAttributes="Bold" />
+
+                    <!-- Edit Selected Color Entry -->
+                    <Entry Placeholder="Edit Selected Color Name"
+                           Text="{Binding EditColorName}" />
+
+                    <!-- Edit Color Button -->
+                    <Button Text="Edit Selected Color"
+                            Command="{Binding EditColorCommand}"
+                            HorizontalOptions="FillAndExpand" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- ================================
+                 3) COLORS LIST SECTION
+                 ================================ -->
+            <Frame CornerRadius="8"
+                   Padding="15"
+                   BackgroundColor="#D7FAFF">
+                <VerticalStackLayout Spacing="10">
+                    
+                    
+
+                    <Label Text="Colors"
+                           FontSize="20"
+                           FontAttributes="Bold" />
+                    
+                    
+
+                    <CollectionView ItemsSource="{Binding Colors}"
+                                    SelectionMode="Single"
+                                    SelectedItem="{Binding SelectedColor}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:Color">
+                                <HorizontalStackLayout Padding="10" Spacing="10">
+                                    <Label Text="{Binding Name}"
+                                           Margin="10"
+                                           FontSize="18"
+                                           VerticalOptions="Center" />
+                                    <Button Text="Delete"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:AdminColorsViewModel}}, Path=DeleteColorCommand}"
+                                            CommandParameter="{Binding .}" />
+                                </HorizontalStackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- ================================
+                 4) GO BACK BUTTON
+                 ================================ -->
+            <Button Text="Go to Home"
+                    Command="{Binding GoBackCommand}"
+                    HorizontalOptions="FillAndExpand" />
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
