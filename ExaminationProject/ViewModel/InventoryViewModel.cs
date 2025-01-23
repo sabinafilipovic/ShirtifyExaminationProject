@@ -39,6 +39,8 @@ namespace ExaminationProject.ViewModel
                 return;
 
             ShirtService.CurrentShirt = selectedShirt;
+            ShirtService.AmountOfTimesUsed = 0;
+            ShirtService.LastTimeUsed = DateTime.UtcNow;
 
             await AppShell.Current.GoToAsync("DetailPage");
         }

@@ -93,7 +93,7 @@
 
                 <Label     
                    Grid.Column="1"
-                   Text="12/1 - 2025"
+                   Text="{Binding LastTimeUsed}"
                    HorizontalOptions="Start" 
                    FontSize="23"
                    
@@ -115,7 +115,7 @@
 
                 <Label     
                    Grid.Column="1"
-                   Text="10" 
+                   Text="{Binding AmountUsed}" 
                    HorizontalOptions="Start" 
                    FontSize="23" 
                    FontFamily="Chewy"

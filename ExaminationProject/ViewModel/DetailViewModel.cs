@@ -25,7 +25,7 @@ namespace ExaminationProject.ViewModel
         public string category;
 
         [ObservableProperty]
-        public string history;
+        public string lastTimeUsed;
 
         [ObservableProperty]
         public int amountUsed;
@@ -36,6 +36,8 @@ namespace ExaminationProject.ViewModel
         public DetailViewModel()
         {
             dailyShirt = ShirtService.CurrentShirt;
+            amountUsed = ShirtService.AmountOfTimesUsed;
+            lastTimeUsed = ShirtService.LastTimeUsed.ToString("dd MMM yyyy");
         }
 
         [RelayCommand]
@@ -48,6 +50,7 @@ namespace ExaminationProject.ViewModel
         async Task UseShirt()
         {
             ShirtService.SetCurrentShirt(dailyShirt);
+            ShirtService.AmountOfTimesUsed++;
             await AppShell.Current.GoToAsync("///MainPage");
         }
     }

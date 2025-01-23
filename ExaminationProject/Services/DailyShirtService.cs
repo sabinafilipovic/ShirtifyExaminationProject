@@ -12,6 +12,10 @@ namespace ExaminationProject.Services
 
         private ShirtService() { }
 
+        public DateTime LastTimeUsed = new DateTime(2025, 1, 12);
+
+        public int AmountOfTimesUsed = 10;
+
         public ObservableCollection<Shirt> Shirts { get; private set; } = new ObservableCollection<Shirt>();
         private Shirt _currentShirt;
         public Shirt CurrentShirt
