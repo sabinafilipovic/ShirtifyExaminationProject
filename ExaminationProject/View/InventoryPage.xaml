@@ -37,7 +37,7 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:Shirt">
 
-                            <VerticalStackLayout BackgroundColor="#daf1f5" Margin="7">
+                            <VerticalStackLayout BackgroundColor="#e6f4ff" Margin="7">
                                 <Label Text="{Binding Brand}" 
                                        FontSize="16" FontAttributes="Bold" FontFamily="PoppinsRegular"
                                        HorizontalTextAlignment="Center" Margin="3"/>

@@ -26,18 +26,18 @@
 
                     <!-- IMAGE PREVIEW -->
                     <Image Source="{Binding PictureFilepath}"
-                           HeightRequest="100"
-                           WidthRequest="100"
+                           HeightRequest="200"
+                           WidthRequest="200"
                            Aspect="AspectFit" />
 
                     <!-- TAKE / SELECT PHOTO BUTTONS -->
                     <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
                         <Button Text="📷 Ta foto "
                                 Command="{Binding CapturePhotoCommand}" 
-                                Padding="7"/>
+                                Padding="7" BackgroundColor="#a7c9db"/>
                         <Button Text="📂 Välj från album"
                                 Command="{Binding SelectPhotoCommand}"
-                                Padding="7"/>
+                                Padding="7" BackgroundColor="#a7c9db"/>
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
             </Frame>
@@ -69,7 +69,8 @@
 
                     <Button Text="Godkänn"
                             Command="{Binding EditShirtCommand}"
-                            HorizontalOptions="FillAndExpand" />
+                            HorizontalOptions="FillAndExpand"
+                            BackgroundColor="#8fba95"/>
                 </VerticalStackLayout>
             </Frame>
 
@@ -114,7 +115,9 @@
                  =============================== -->
             <Button Text="Tillbaka till hemskärm"
                     Command="{Binding GoBackCommand}"
-                    HorizontalOptions="FillAndExpand" />
+                    HorizontalOptions="FillAndExpand"
+                    BackgroundColor="#a7c9db"
+                    FontFamily="PoppinsMedium" FontSize="17"/>
 
         </VerticalStackLayout>
     </ScrollView>

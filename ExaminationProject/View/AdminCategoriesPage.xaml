@@ -68,7 +68,7 @@
                 <VerticalStackLayout Spacing="10">
 
                     <!-- Categories Label -->
-                    <Label Text="Categories"
+                    <Label Text="Kategorier"
                            FontSize="20"
                            FontAttributes="Bold" />
 
@@ -78,15 +78,19 @@
                                     SelectedItem="{Binding SelectedCategory}">
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="model:Category">
-                                <HorizontalStackLayout Padding="10" Spacing="10">
+                                <Grid Padding="7" ColumnDefinitions="*, Auto">
                                     <Label Text="{Binding Name}" VerticalOptions="Center"
-                                           FontSize="18"/>
-                                    
+                                           FontSize="18" Grid.Column="0"/>
+
+                                    <!-- Radera Button, adjusted for correct placement inside a Grid -->
                                     <Button Text="Radera"
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:AdminCategoriesViewModel}}, Path=DeleteCategoryCommand}" CommandParameter="{Binding .}" 
-                                            FontFamily="PoppinsMedium"/>
-                                    
-                                </HorizontalStackLayout>
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:AdminCategoriesViewModel}}, Path=DeleteCategoryCommand}"
+                                            CommandParameter="{Binding .}"
+                                            FontFamily="PoppinsMedium"
+                                            HorizontalOptions="End"
+                                            BackgroundColor="#e3020a"
+                                            Grid.Column="1"/>
+                                </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
@@ -99,7 +103,7 @@
             <Button Text="Tillbaka till huvudsidan"
                     Command="{Binding GoBackCommand}"
                     HorizontalOptions="FillAndExpand"
-                    FontSize="16" FontFamily="PoppinsMedium"/>
+                    FontSize="18" FontFamily="PoppinsMedium"/>
 
         </VerticalStackLayout>
     </ScrollView>

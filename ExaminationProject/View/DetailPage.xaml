@@ -28,7 +28,7 @@
 
             <!-- Färg Grid -->
             <Grid Padding="10" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, 1*"
-                  BackgroundColor="#b4d9e0">
+                  BackgroundColor="#d4e4ff">
                 <Label Text="Färg:" HorizontalOptions="Center" 
                        FontSize="23" FontFamily="PoppinsMedium" Padding="10"/>
 
@@ -40,7 +40,7 @@
 
             <!-- Kategori Grid -->
             <Grid Padding="10" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, 1*"
-                  BackgroundColor="#c6edf5">
+                  BackgroundColor="#d4e4ff">
                 <Label Text="Kategori:" HorizontalOptions="Center" 
                        FontSize="23" FontFamily="PoppinsMedium" Padding="10"/>
 
@@ -52,7 +52,7 @@
 
             <!-- Senast använd Grid -->
             <Grid Padding="10" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, 1*"
-                  BackgroundColor="#b4d9e0">
+                  BackgroundColor="#d4e4ff">
                 <Label Text="Senast använd:" 
                        HorizontalOptions="Center" 
                        FontSize="23" FontFamily="PoppinsMedium"
@@ -68,7 +68,7 @@
 
             <!-- Använd Grid -->
             <Grid Padding="10" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, auto,1*"
-                  BackgroundColor="#c6edf5">
+                  BackgroundColor="#d4e4ff">
                 <Label Text="Använd:" HorizontalOptions="Start" 
                        FontSize="23" FontFamily="PoppinsMedium" Padding="10"/>
 
@@ -84,16 +84,16 @@
 
             <!-- BoxView och knappar -->
             <Grid Padding="0" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, 1*">
-                <BoxView Grid.ColumnSpan="2" Color="#b4cfde"/>
+                <BoxView Grid.ColumnSpan="2" Color="#d4e4ff"/>
 
                 <Button WidthRequest="250" Command="{Binding UseShirtCommand}"
                         Text="Använd Tröja" Margin="5" 
-                        BackgroundColor="#c1d6c3" 
-                        FontSize="20" FontFamily="Chewy"/>
+                        BackgroundColor="#8db892" 
+                        FontSize="20" FontFamily="PoppinsMedium"/>
 
                 <Button Grid.Row="0" Grid.Column="1" Command="{Binding GoToInventoryCommand}" 
-                        Text="Garderob" FontSize="20" FontFamily="Chewy"
-                        BackgroundColor="#b4d2de" 
+                        Text="Garderob" FontSize="20" FontFamily="PoppinsMedium"
+                        BackgroundColor="#8bacc4" 
                         Margin="5" />
             </Grid>
 

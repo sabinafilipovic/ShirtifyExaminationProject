@@ -136,6 +136,12 @@ namespace ExaminationProject.ViewModel
             await AppShell.Current.GoToAsync(nameof(CrudPage));
         }
 
+        [RelayCommand]
+        async void GoToInventory()
+        {
+            await AppShell.Current.GoToAsync(nameof(InventoryPage));
+        }
+
         // Har en ny metod som heter GoToDetailPageAsync
         //[RelayCommand]
         //async void GoToDetailPage()

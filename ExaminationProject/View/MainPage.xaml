@@ -42,7 +42,7 @@
 
                     <Label Text="DAGENS TRÖJA"
                            HorizontalTextAlignment="Center"
-                           FontFamily="PoppinsMedium"
+                           FontFamily="PoppinsMedium" 
                            FontSize="30" CharacterSpacing="1"/>
 
                     <ImageButton Source="{Binding DailyShirt.Picture_Filepath}"
@@ -51,8 +51,7 @@
                                  Command="{Binding GoToDetailPageCommand}" />
 
                     <HorizontalStackLayout HorizontalOptions="Center" Margin="5">
-                        <Label Text="Namn: "
-                               FontAttributes="Bold" FontSize="15" FontFamily="PoppinsRegular"/>
+                        <Label Text="Namn: " FontAttributes="Bold" FontSize="15" FontFamily="PoppinsRegular"/>
                         
                         <Label Text="{Binding DailyShirt.Brand}" 
                                FontSize="15" FontFamily="PoppinsRegular"/>
@@ -72,26 +71,25 @@
                 <Button Text="Mer information om tröjan"
                         Command="{Binding GoToDetailPageCommand}"
                         Background="#b4d2de"
-                        FontFamily="Chewy"
-                        FontSize="20"
+                        FontFamily="PoppinsMedium"
+                        FontSize="18" FontAttributes="Bold"
                         HorizontalOptions="Center"
-                        WidthRequest="160"/>
+                        WidthRequest="180"/>
 
                 <Button Command="{Binding GoToAdminPageCommand}"
                         Text="Gå till inställningar"
                         Background="#91b597"
-                        FontSize="18"
-                        FontFamily="Chewy"
+                        FontSize="16" FontAttributes="Bold"
+                        FontFamily="PoppinsMedium"
                         HorizontalOptions="Center"
                         WidthRequest="180"/>
             </HorizontalStackLayout>
 
-            <!-- Tvättråd-knapp -->
-            <Button Text="🧺 Tvättråd"
-                    Command="{Binding GoToPage1Command}"
+            <Button Text="🧺 Garderob"
+                    Command="{Binding GoToInventoryCommand}"
                     Background="#b4d2de"
-                    FontFamily="Chewy"
-                    FontSize="15"
+                    FontFamily="´PoppinsMedium"
+                    FontSize="15" FontAttributes="Bold"
                     WidthRequest="96"
                     Padding="3"/>
         </VerticalStackLayout>
