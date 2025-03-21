@@ -1,24 +1,23 @@
-Shirtify - Garderob på din telefon
-Shirtify är en mobilapp utvecklad med .NET MAUI som hjälper användare att hantera och organisera sin garderob direkt i telefonen. Appen gör det möjligt att fotografera och ladda upp kläder för att skapa en digital garderob och ger även användaren aktuell väderprognos för att kunna välja kläder baserat på vädret.
+## Shirtify - Garderob pÃ¥ din telefon
 
-Funktioner
-Digital garderob: Ladda upp bilder på dina kläder och organisera dem direkt i appen.
-Väderprognos: Integration av väder-API för att visa aktuell väderprognos, så att du kan välja kläder baserat på vädret.
-Kamerafunktion: Ta bilder på kläder direkt i appen och ladda upp dem till din garderob.
-Teknisk Stack
-.NET MAUI: Multi-platform app-utveckling med .NET MAUI, vilket gör det möjligt att skapa en app som fungerar på både Android och iOS.
-C#: Programmeringsspråket som används för all logik i appen.
-XAML: Används för att skapa och definiera användargränssnittet (UI). XAML-filer gör det enkelt att beskriva strukturen och layouten av appens sidor, kontroller och element.
-SQLite: Används för att lagra information om bilder, som filvägar och metadata, i en lokal databas.
-Visual Studio: Huvudverktyget för utveckling och debugging av appen.
+Shirtify Ã¤r en mobilapp utvecklad med .NET MAUI som hjÃ¤lper anvÃ¤ndare att hantera och organisera sin garderob direkt i telefonen. Appen gÃ¶r det mÃ¶jligt att fotografera och ladda upp klÃ¤der fÃ¶r att skapa en digital garderob och ger Ã¤ven anvÃ¤ndaren aktuell vÃ¤derprognos fÃ¶r att kunna vÃ¤lja klÃ¤der baserat pÃ¥ vÃ¤dret.
 
-API:er
-Projektet använder ett väder-API för att hämta aktuell väderinformation. För att kunna använda väder-API:t, skapa ett konto på OpenWeatherMap och använd din API-nyckel.
+### Funktioner
+- **Digital garderob**: Ladda upp bilder pÃ¥ dina klÃ¤der och organisera dem direkt i appen.
+- **VÃ¤derprognos**: Integration av vÃ¤der-API fÃ¶r att visa aktuell vÃ¤derprognos, sÃ¥ att du kan vÃ¤lja klÃ¤der baserat pÃ¥ vÃ¤dret.
+- **Kamerafunktion**: Ta bilder pÃ¥ klÃ¤der direkt i appen och ladda upp dem till din garderob.
 
-Lägg till API-nyckeln i appens inställningar:
+### Teknisk Stack
+- **.NET MAUI**: Multi-platform app-utveckling med .NET MAUI
+- **C#**: ProgrammeringssprÃ¥ket som anvÃ¤nds fÃ¶r all logik i appen.
+- **XAML**: AnvÃ¤nds fÃ¶r att skapa och definiera anvÃ¤ndargrÃ¤nssnittet (UI). XAML-filer gÃ¶r det enkelt att beskriva strukturen och layouten av appens sidor, kontroller och element.
+- **SQLite**: AnvÃ¤nds fÃ¶r att lagra information om bilder, som filvÃ¤gar och metadata, i en lokal databas.
+- **Visual Studio**: Huvudverktyget fÃ¶r utveckling och debugging av appen.
+
+### API:er
+Projektet anvÃ¤nder ett vÃ¤der-API fÃ¶r att hÃ¤mta aktuell vÃ¤derinformation. FÃ¶r att kunna anvÃ¤nda vÃ¤der-API:t, skapa ett konto pÃ¥ OpenWeatherMap och anvÃ¤nd din API-nyckel.
+
+LÃ¤gg till API-nyckeln i appens instÃ¤llningar:
+
+```csharp
 private const string ApiKey = "x";
-
-Förbättringar & Framtida Funktioner
-Kategorisering av kläder: Lägga till möjlighet att kategorisera kläder, till exempel "Tröjor", "Byxor", "Jackor" etc.
-Sparade outfitförslag: Baserat på väderprognos och användarens val, skapa outfitförslag.
-Integration med sociala medier: Dela dina outfits med vänner direkt från appen.
