@@ -11,7 +11,7 @@ namespace ExaminationProject.Services
 {
     public class WeatherService
     {
-        private const string ApiKey = "f05c784b0657f4b6aa1e45180499db82";
+        private const string ApiKey = "x"; // Placeholder för API nyckel för att använda sig av vädertjänsten på api.openweathermap.org
         private const string BaseUrl = "https://api.openweathermap.org/data/2.5/weather";
 
         public async Task<WeatherResponse> GetWeatherByLocationAsync()

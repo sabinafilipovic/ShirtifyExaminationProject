@@ -20,7 +20,7 @@ namespace ExaminationProject.ViewModel
         [RelayCommand]
         async Task GoToAdminCategoriesPage()
         {
-            await AppShell.Current.GoToAsync("AdminCategoriesPage");
+            await AppShell.Current.GoToAsync(nameof(AdminCategoriesPage));
         }
         [RelayCommand]
         async Task GoToAdminColorsPage()
